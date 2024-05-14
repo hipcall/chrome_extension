@@ -1,0 +1,10 @@
+{
+	"closed": {
+		"message": "Hipcall web telefonu kapatıldı. Unutmayın web telefonu kapalıyken çağrı alamazsınız",
+		"description": ""
+	},
+	"warning": {
+		"message": "Uyarı",
+		"description": ""
+	}
+}

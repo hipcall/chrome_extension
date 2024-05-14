@@ -1,0 +1,10 @@
+{
+	"closed": {
+		"message": "Hipcall web phone window closed, be aware that you can't receive calls when popup window closed.",
+		"description": ""
+	},
+	"warning": {
+		"message": "Warning",
+		"description": ""
+	}
+}
