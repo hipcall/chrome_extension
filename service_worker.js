@@ -1,4 +1,4 @@
-let webUrl = 'https://phone.hipcall.com.tr/#/'
+let webUrl = 'http://use.hipcall.com.tr/phone/dialpad/'
 
 class HipcallPopup {
     popup = null
@@ -50,15 +50,8 @@ let hipcallPopup = new HipcallPopup()
 
 chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
     if (request.type === 'call') {
-        hipcallPopup.open(`${webUrl}dial/${request.call}`)
-    }
-    if (request.type === 'ringing') {
-        chrome.notifications.create({
-            "type": "basic",
-            "iconUrl": 'icons/logo.png',
-            "title": 'Incoming call',
-            "message": `${request.number} is calling click here to switch hipcall popup.`
-        });
+        let encodedNumber = encodeURIComponent(request.call);
+        hipcallPopup.open(`${webUrl}?remote_number=${encodedNumber}`)
     }
 });
 
@@ -75,8 +68,4 @@ chrome.webNavigation.onHistoryStateUpdated.addListener(details => {
     currentUrl = details.url;
     chrome.tabs.sendMessage(tabId, {type: MessageType.PAGE_RENDERED});
 });
-
-chrome.notifications.onClicked.addListener((callId) => {
-    hipcallPopup.open(`${webUrl}ringing`)
-})
 
