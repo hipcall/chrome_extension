@@ -1,10 +1,317 @@
 {
-	"closed": {
-		"message": "Hipcall web telefonu kapatıldı. Unutmayın web telefonu kapalıyken çağrı alamazsınız",
-		"description": ""
-	},
-	"warning": {
-		"message": "Uyarı",
-		"description": ""
-	}
+  "extName": {
+    "message": "Hipcall Webphone",
+    "description": "Extension name"
+  },
+  "extDescription": {
+    "message": "Hipcall web telefonunuzu açar, sayfalardaki numaraları tek tıkla aramanızı (CTI) sağlar ve gelen çağrılar için uyarır.",
+    "description": "Extension description (max 132 chars)"
+  },
+  "actionTitle": {
+    "message": "Hipcall — numaraları bul ve ara",
+    "description": "Toolbar button tooltip"
+  },
+  "warning": {
+    "message": "Uyarı",
+    "description": "Notification title"
+  },
+  "closed": {
+    "message": "Hipcall web telefonu kapatıldı. Unutmayın web telefonu kapalıyken çağrı alamazsınız",
+    "description": "Notification when the web phone window is closed"
+  },
+  "openWebphone": {
+    "message": "Web telefonunu aç",
+    "description": ""
+  },
+  "tabNumbers": {
+    "message": "Keşfet",
+    "description": "Popup tab listing the phones and e-mails found on the current page"
+  },
+  "tabSettings": {
+    "message": "Ayarlar",
+    "description": ""
+  },
+  "rescan": {
+    "message": "Tekrar tara",
+    "description": ""
+  },
+  "scanContactPages": {
+    "message": "İletişim / Hakkımızda sayfalarını da tara",
+    "description": ""
+  },
+  "phones": {
+    "message": "Bulunan telefonlar",
+    "description": ""
+  },
+  "emails": {
+    "message": "Bulunan e-postalar",
+    "description": ""
+  },
+  "manualPlaceholder": {
+    "message": "Numarayı elle yaz",
+    "description": ""
+  },
+  "call": {
+    "message": "Ara",
+    "description": ""
+  },
+  "callWithHipcall": {
+    "message": "Hipcall ile ara: $NUMBER$",
+    "description": "",
+    "placeholders": {
+      "number": {
+        "content": "$1",
+        "example": "0532 123 45 67"
+      }
+    }
+  },
+  "writeEmail": {
+    "message": "E-posta yaz: $EMAIL$",
+    "description": "",
+    "placeholders": {
+      "email": {
+        "content": "$1",
+        "example": "info@example.com"
+      }
+    }
+  },
+  "copy": {
+    "message": "Kopyala",
+    "description": ""
+  },
+  "copied": {
+    "message": "Kopyalandı",
+    "description": ""
+  },
+  "scanning": {
+    "message": "Taranıyor...",
+    "description": ""
+  },
+  "scanningContactPages": {
+    "message": "İletişim sayfaları taranıyor...",
+    "description": ""
+  },
+  "nothingFound": {
+    "message": "Bu sayfada telefon veya e-posta bulunamadı.",
+    "description": ""
+  },
+  "scanError": {
+    "message": "Tarama hatası: $ERROR$",
+    "description": "",
+    "placeholders": {
+      "error": {
+        "content": "$1"
+      }
+    }
+  },
+  "noPhones": {
+    "message": "Telefon bulunamadı",
+    "description": ""
+  },
+  "noEmails": {
+    "message": "E-posta bulunamadı",
+    "description": ""
+  },
+  "toastCalling": {
+    "message": "Hipcall'a aktarılıyor: $NUMBER$",
+    "description": "",
+    "placeholders": {
+      "number": {
+        "content": "$1",
+        "example": "0532 123 45 67"
+      }
+    }
+  },
+  "toastCallFailed": {
+    "message": "Hipcall: arama iletilemedi. $REASON$",
+    "description": "",
+    "placeholders": {
+      "reason": {
+        "content": "$1"
+      }
+    }
+  },
+  "toastReloadPage": {
+    "message": "Hipcall eklentisi güncellendi. Lütfen bu sayfayı yenileyin (F5).",
+    "description": ""
+  },
+  "autoDial": {
+    "message": "Aramayı otomatik başlat",
+    "description": ""
+  },
+  "autoDialHint": {
+    "message": "Kapalıysa numara sadece tuş takımına yazılır, aramayı siz başlatırsınız.",
+    "description": ""
+  },
+  "iconsOnSite": {
+    "message": "Bu sitede arama ikonları",
+    "description": ""
+  },
+  "modeSelected": {
+    "message": "Seçili sayfalar",
+    "description": ""
+  },
+  "modeSelectedHint": {
+    "message": "İkonlar sadece listedeki sayfalarda görünür. Varsayılan: ana sayfa.",
+    "description": ""
+  },
+  "modeAll": {
+    "message": "Tüm sayfalar",
+    "description": ""
+  },
+  "modeAllHint": {
+    "message": "İkonlar sitenin her sayfasında görünür; istemediklerini hariç tut.",
+    "description": ""
+  },
+  "homePage": {
+    "message": "Ana sayfa",
+    "description": ""
+  },
+  "includedPages": {
+    "message": "İkonun görüneceği sayfalar",
+    "description": ""
+  },
+  "excludedPages": {
+    "message": "Hariç tutulan sayfalar",
+    "description": ""
+  },
+  "includePlaceholder": {
+    "message": "Ekle: /iletisim  veya  /blog/*",
+    "description": ""
+  },
+  "excludePlaceholder": {
+    "message": "Hariç tut: /sepet  veya  /hesabim/*",
+    "description": ""
+  },
+  "add": {
+    "message": "Ekle",
+    "description": ""
+  },
+  "remove": {
+    "message": "Kaldır",
+    "description": ""
+  },
+  "noIncludedPages": {
+    "message": "Hiçbir sayfa seçili değil — ikonlar bu sitede kapalı.",
+    "description": ""
+  },
+  "noExcludedPages": {
+    "message": "Hiçbir sayfa hariç değil — ikonlar sitenin her sayfasında.",
+    "description": ""
+  },
+  "patternHint": {
+    "message": "İpucu: /blog/* yazarsan /blog ve altındaki tüm sayfalar dahil olur.",
+    "description": ""
+  },
+  "resetSite": {
+    "message": "Bu site için varsayılana dön",
+    "description": ""
+  },
+  "regionTitle": {
+    "message": "Hesap bölgesi",
+    "description": ""
+  },
+  "regionSub": {
+    "message": "Hesabınızın ait olduğu bölgeyi seçin.",
+    "description": ""
+  },
+  "regionTR": {
+    "message": "Türkiye",
+    "description": ""
+  },
+  "regionEU": {
+    "message": "Avrupa Birliği",
+    "description": ""
+  },
+  "regionUK": {
+    "message": "Birleşik Krallık",
+    "description": ""
+  },
+  "regionUS": {
+    "message": "Amerika Birleşik Devletleri",
+    "description": ""
+  },
+  "languageTitle": {
+    "message": "Dil",
+    "description": ""
+  },
+  "langAuto": {
+    "message": "Otomatik (tarayıcı dili)",
+    "description": ""
+  },
+  "callTitle": {
+    "message": "Arama",
+    "description": ""
+  },
+  "showOnThisPage": {
+    "message": "Bu sayfada ikonları göster",
+    "description": ""
+  },
+  "byPattern": {
+    "message": "$PAGE$ · $PATTERN$ kuralıyla belirleniyor",
+    "description": "",
+    "placeholders": {
+      "page": {
+        "content": "$1",
+        "example": "/blog/post"
+      },
+      "pattern": {
+        "content": "$2",
+        "example": "/blog/*"
+      }
+    }
+  },
+  "emptyTitle": {
+    "message": "Bu sayfa taranamıyor",
+    "description": ""
+  },
+  "emptyText": {
+    "message": "Numaraları ve e-postaları bulmak için bir web sitesi açıp eklentiye tekrar tıklayın.",
+    "description": ""
+  },
+  "callFailedTitle": {
+    "message": "Arama aktarılamadı",
+    "description": ""
+  },
+  "callFailedText": {
+    "message": "$NUMBER$ Hipcall'a yazılamadı. Hipcall'da oturumunuzun açık olduğundan emin olup tekrar deneyin.",
+    "description": "",
+    "placeholders": {
+      "number": {
+        "content": "$1",
+        "example": "05321234567"
+      }
+    }
+  },
+  "menuCallSelection": {
+    "message": "Hipcall ile ara: “$TEXT$”",
+    "description": "Right-click menu on selected text; Chrome replaces %s with the selection",
+    "placeholders": {
+      "text": {
+        "content": "$1",
+        "example": "0532 123 45 67"
+      }
+    }
+  },
+  "menuNoNumberTitle": {
+    "message": "Numara bulunamadı",
+    "description": "Notification title"
+  },
+  "menuNoNumberText": {
+    "message": "Seçilen metinde aranabilecek bir numara yok: “$TEXT$”",
+    "description": "Notification text",
+    "placeholders": {
+      "text": {
+        "content": "$1"
+      }
+    }
+  },
+  "menuCallHere": {
+    "message": "Hipcall ile ara",
+    "description": "Right-click menu on a link or the page (number under the cursor)"
+  },
+  "menuNoNumberHere": {
+    "message": "Sağ tıkladığınız yerde aranabilecek bir numara bulunamadı. Numarayı seçip tekrar deneyin.",
+    "description": "Notification text"
+  }
 }
