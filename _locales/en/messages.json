@@ -1,10 +1,317 @@
 {
-	"closed": {
-		"message": "Hipcall web phone window closed, be aware that you can't receive calls when popup window closed.",
-		"description": ""
-	},
-	"warning": {
-		"message": "Warning",
-		"description": ""
-	}
+  "extName": {
+    "message": "Hipcall Webphone",
+    "description": "Extension name"
+  },
+  "extDescription": {
+    "message": "Opens your Hipcall web phone, lets you call numbers on any web page with one click (CTI) and keeps you reachable for calls.",
+    "description": "Extension description (max 132 chars)"
+  },
+  "actionTitle": {
+    "message": "Hipcall — find and call numbers",
+    "description": "Toolbar button tooltip"
+  },
+  "warning": {
+    "message": "Warning",
+    "description": "Notification title"
+  },
+  "closed": {
+    "message": "Hipcall web phone window closed, be aware that you can't receive calls when popup window closed.",
+    "description": "Notification when the web phone window is closed"
+  },
+  "openWebphone": {
+    "message": "Open web phone",
+    "description": ""
+  },
+  "tabNumbers": {
+    "message": "Discover",
+    "description": "Popup tab listing the phones and e-mails found on the current page"
+  },
+  "tabSettings": {
+    "message": "Settings",
+    "description": ""
+  },
+  "rescan": {
+    "message": "Scan again",
+    "description": ""
+  },
+  "scanContactPages": {
+    "message": "Also scan contact / about pages",
+    "description": ""
+  },
+  "phones": {
+    "message": "Phones found",
+    "description": ""
+  },
+  "emails": {
+    "message": "E-mails found",
+    "description": ""
+  },
+  "manualPlaceholder": {
+    "message": "Type a number",
+    "description": ""
+  },
+  "call": {
+    "message": "Call",
+    "description": ""
+  },
+  "callWithHipcall": {
+    "message": "Call with Hipcall: $NUMBER$",
+    "description": "",
+    "placeholders": {
+      "number": {
+        "content": "$1",
+        "example": "0532 123 45 67"
+      }
+    }
+  },
+  "writeEmail": {
+    "message": "Write an e-mail: $EMAIL$",
+    "description": "",
+    "placeholders": {
+      "email": {
+        "content": "$1",
+        "example": "info@example.com"
+      }
+    }
+  },
+  "copy": {
+    "message": "Copy",
+    "description": ""
+  },
+  "copied": {
+    "message": "Copied",
+    "description": ""
+  },
+  "scanning": {
+    "message": "Scanning...",
+    "description": ""
+  },
+  "scanningContactPages": {
+    "message": "Scanning contact pages...",
+    "description": ""
+  },
+  "nothingFound": {
+    "message": "No phone numbers or e-mails found on this page.",
+    "description": ""
+  },
+  "scanError": {
+    "message": "Scan error: $ERROR$",
+    "description": "",
+    "placeholders": {
+      "error": {
+        "content": "$1"
+      }
+    }
+  },
+  "noPhones": {
+    "message": "No phone numbers found",
+    "description": ""
+  },
+  "noEmails": {
+    "message": "No e-mails found",
+    "description": ""
+  },
+  "toastCalling": {
+    "message": "Sending to Hipcall: $NUMBER$",
+    "description": "",
+    "placeholders": {
+      "number": {
+        "content": "$1",
+        "example": "0532 123 45 67"
+      }
+    }
+  },
+  "toastCallFailed": {
+    "message": "Hipcall: the call could not be sent. $REASON$",
+    "description": "",
+    "placeholders": {
+      "reason": {
+        "content": "$1"
+      }
+    }
+  },
+  "toastReloadPage": {
+    "message": "The Hipcall extension was updated. Please reload this page (F5).",
+    "description": ""
+  },
+  "autoDial": {
+    "message": "Start the call automatically",
+    "description": ""
+  },
+  "autoDialHint": {
+    "message": "When off, the number is only typed into the dial pad and you start the call.",
+    "description": ""
+  },
+  "iconsOnSite": {
+    "message": "Call icons on this site",
+    "description": ""
+  },
+  "modeSelected": {
+    "message": "Selected pages",
+    "description": ""
+  },
+  "modeSelectedHint": {
+    "message": "Icons appear only on the listed pages. Default: home page.",
+    "description": ""
+  },
+  "modeAll": {
+    "message": "All pages",
+    "description": ""
+  },
+  "modeAllHint": {
+    "message": "Icons appear on every page of the site; exclude the ones you don't want.",
+    "description": ""
+  },
+  "homePage": {
+    "message": "Home page",
+    "description": ""
+  },
+  "includedPages": {
+    "message": "Pages with call icons",
+    "description": ""
+  },
+  "excludedPages": {
+    "message": "Excluded pages",
+    "description": ""
+  },
+  "includePlaceholder": {
+    "message": "Add: /contact  or  /blog/*",
+    "description": ""
+  },
+  "excludePlaceholder": {
+    "message": "Exclude: /cart  or  /account/*",
+    "description": ""
+  },
+  "add": {
+    "message": "Add",
+    "description": ""
+  },
+  "remove": {
+    "message": "Remove",
+    "description": ""
+  },
+  "noIncludedPages": {
+    "message": "No pages selected — icons are off on this site.",
+    "description": ""
+  },
+  "noExcludedPages": {
+    "message": "No pages excluded — icons are on every page of this site.",
+    "description": ""
+  },
+  "patternHint": {
+    "message": "Tip: /blog/* matches /blog and every page below it.",
+    "description": ""
+  },
+  "resetSite": {
+    "message": "Reset this site to default",
+    "description": ""
+  },
+  "regionTitle": {
+    "message": "Account region",
+    "description": ""
+  },
+  "regionSub": {
+    "message": "Choose the region your account belongs to.",
+    "description": ""
+  },
+  "regionTR": {
+    "message": "Türkiye",
+    "description": ""
+  },
+  "regionEU": {
+    "message": "European Union",
+    "description": ""
+  },
+  "regionUK": {
+    "message": "United Kingdom",
+    "description": ""
+  },
+  "regionUS": {
+    "message": "United States",
+    "description": ""
+  },
+  "languageTitle": {
+    "message": "Language",
+    "description": ""
+  },
+  "langAuto": {
+    "message": "Automatic (browser language)",
+    "description": ""
+  },
+  "callTitle": {
+    "message": "Calling",
+    "description": ""
+  },
+  "showOnThisPage": {
+    "message": "Show icons on this page",
+    "description": ""
+  },
+  "byPattern": {
+    "message": "$PAGE$ · set by the $PATTERN$ rule",
+    "description": "",
+    "placeholders": {
+      "page": {
+        "content": "$1",
+        "example": "/blog/post"
+      },
+      "pattern": {
+        "content": "$2",
+        "example": "/blog/*"
+      }
+    }
+  },
+  "emptyTitle": {
+    "message": "This page can't be scanned",
+    "description": ""
+  },
+  "emptyText": {
+    "message": "Open a website and click the extension again to find its numbers and e-mails.",
+    "description": ""
+  },
+  "callFailedTitle": {
+    "message": "Call could not be started",
+    "description": ""
+  },
+  "callFailedText": {
+    "message": "$NUMBER$ could not be sent to Hipcall. Make sure you are signed in to Hipcall and try again.",
+    "description": "",
+    "placeholders": {
+      "number": {
+        "content": "$1",
+        "example": "05321234567"
+      }
+    }
+  },
+  "menuCallSelection": {
+    "message": "Call with Hipcall: “$TEXT$”",
+    "description": "Right-click menu on selected text; Chrome replaces %s with the selection",
+    "placeholders": {
+      "text": {
+        "content": "$1",
+        "example": "0532 123 45 67"
+      }
+    }
+  },
+  "menuNoNumberTitle": {
+    "message": "No number found",
+    "description": "Notification title"
+  },
+  "menuNoNumberText": {
+    "message": "The selected text has no number to call: “$TEXT$”",
+    "description": "Notification text",
+    "placeholders": {
+      "text": {
+        "content": "$1"
+      }
+    }
+  },
+  "menuCallHere": {
+    "message": "Call with Hipcall",
+    "description": "Right-click menu on a link or the page (number under the cursor)"
+  },
+  "menuNoNumberHere": {
+    "message": "No number found where you right-clicked. Select the number and try again.",
+    "description": "Notification text"
+  }
 }
