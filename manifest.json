@@ -1,11 +1,12 @@
 {
-  "name": "Hipcall Development",
-  "version": "1.2.0",
+  "name": "__MSG_extName__",
+  "version": "2.0.0",
   "manifest_version": 3,
-  "description": "Bu eklenti Hipcall web telefonunuzu açmanızı, tıklayarak arama yapmanızı (CTI) ve gelen çağrıda bildirim almanızı sağlar.",
-  "homepage_url": "https://www.hipcall.com/tr-tr/",
+  "description": "__MSG_extDescription__",
+  "homepage_url": "https://www.hipcall.com/",
   "icons": {
     "16": "icons/icon16.png",
+    "32": "icons/icon32.png",
     "48": "icons/icon48.png",
     "128": "icons/icon128.png"
   },
@@ -19,16 +20,71 @@
         "http://*/*",
         "https://*/*"
       ],
+      "exclude_matches": [
+        "*://desktop.hipcall.com.tr/*",
+        "*://use.hipcall.com.tr/phone/*",
+        "*://phone.hipcall.com.tr/*",
+        "*://desktop.hipcall.com/*",
+        "*://use.hipcall.com/phone/*",
+        "*://phone.hipcall.com/*"
+      ],
       "js": [
+        "js/i18n.js",
+        "js/config.js",
+        "js/phone.js",
+        "js/site_rules.js",
         "js/content_script.js"
       ],
-      "run_at": "document_end"
+      "run_at": "document_end",
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "*://desktop.hipcall.com.tr/*",
+        "*://use.hipcall.com.tr/phone/*",
+        "*://phone.hipcall.com.tr/*",
+        "*://desktop.hipcall.com/*",
+        "*://use.hipcall.com/phone/*",
+        "*://phone.hipcall.com/*"
+      ],
+      "js": [
+        "js/hipcall_bridge.js"
+      ],
+      "run_at": "document_idle"
     }
   ],
   "permissions": [
+    "contextMenus",
     "notifications",
-    "webNavigation"
+    "webNavigation",
+    "tabs",
+    "storage",
+    "scripting",
+    "debugger"
   ],
-  "action": {},
-  "content_security_policy": {}
+  "host_permissions": [
+    "http://*/*",
+    "https://*/*"
+  ],
+  "action": {
+    "default_title": "__MSG_actionTitle__",
+    "default_popup": "src/browser_action/browser_action.html",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "19": "icons/icon19.png",
+      "32": "icons/icon32.png",
+      "48": "icons/icon48.png"
+    }
+  },
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "icons/hipcall-icon.svg"
+      ],
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ]
+    }
+  ]
 }
