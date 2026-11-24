@@ -47,7 +47,7 @@ var HC_CONFIG = (() => {
   const DEFAULTS = {
     region: null,   // resolved on first run by defaultRegion()
     autoDial: true,  // press the call button after the number is entered
-    language: 'auto' // 'auto' (browser language), 'tr' or 'en'
+    language: 'auto' // 'auto' (browser language, English fallback) or a code from HC_I18N.SUPPORTED
   };
 
   /** First-install guess from the browser language; the user can change it. */

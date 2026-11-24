@@ -13,7 +13,8 @@
 var HC_I18N = (() => {
   'use strict';
 
-  const SUPPORTED = ['tr', 'en'];
+  const SUPPORTED = ['de', 'en', 'es', 'fr', 'it', 'nl', 'tr'];
+  const FALLBACK = 'en';
   let language = 'auto';
   let messages = null; // null → fall back to chrome.i18n
 
@@ -51,10 +52,11 @@ var HC_I18N = (() => {
     return res.json();
   }
 
-  /** Effective language code ('tr' or 'en'). */
+  /** Effective language code: the chosen one, else the browser's, else English. */
   function current() {
     if (SUPPORTED.includes(language)) return language;
-    return (chrome.i18n.getUILanguage() || '').toLowerCase().startsWith('tr') ? 'tr' : 'en';
+    const browser = (chrome.i18n.getUILanguage() || '').toLowerCase().split('-')[0];
+    return SUPPORTED.includes(browser) ? browser : FALLBACK;
   }
 
   /** Same contract as chrome.i18n.getMessage (named placeholders, $1..$9). */

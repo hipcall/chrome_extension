@@ -1,0 +1,317 @@
+{
+  "extName": {
+    "message": "Hipcall Webphone",
+    "description": "Extension name"
+  },
+  "extDescription": {
+    "message": "Öffnet Ihr Hipcall-Webphone, ruft Nummern auf jeder Webseite mit einem Klick an (CTI) und hält Sie für Anrufe erreichbar.",
+    "description": "Extension description (max 132 chars)"
+  },
+  "actionTitle": {
+    "message": "Hipcall – Nummern finden und anrufen",
+    "description": "Toolbar button tooltip"
+  },
+  "warning": {
+    "message": "Warnung",
+    "description": "Notification title"
+  },
+  "closed": {
+    "message": "Das Hipcall-Webphone-Fenster wurde geschlossen. Beachten Sie, dass Sie keine Anrufe empfangen können, solange das Fenster geschlossen ist.",
+    "description": "Notification when the web phone window is closed"
+  },
+  "openWebphone": {
+    "message": "Webphone öffnen",
+    "description": ""
+  },
+  "tabNumbers": {
+    "message": "Entdecken",
+    "description": "Popup tab listing the phones and e-mails found on the current page"
+  },
+  "tabSettings": {
+    "message": "Einstellungen",
+    "description": ""
+  },
+  "rescan": {
+    "message": "Erneut scannen",
+    "description": ""
+  },
+  "scanContactPages": {
+    "message": "Auch Kontakt- / Über-uns-Seiten scannen",
+    "description": ""
+  },
+  "phones": {
+    "message": "Gefundene Telefonnummern",
+    "description": ""
+  },
+  "emails": {
+    "message": "Gefundene E-Mail-Adressen",
+    "description": ""
+  },
+  "manualPlaceholder": {
+    "message": "Nummer eingeben",
+    "description": ""
+  },
+  "call": {
+    "message": "Anrufen",
+    "description": ""
+  },
+  "callWithHipcall": {
+    "message": "Mit Hipcall anrufen: $NUMBER$",
+    "description": "",
+    "placeholders": {
+      "number": {
+        "content": "$1",
+        "example": "0532 123 45 67"
+      }
+    }
+  },
+  "writeEmail": {
+    "message": "E-Mail schreiben: $EMAIL$",
+    "description": "",
+    "placeholders": {
+      "email": {
+        "content": "$1",
+        "example": "info@example.com"
+      }
+    }
+  },
+  "copy": {
+    "message": "Kopieren",
+    "description": ""
+  },
+  "copied": {
+    "message": "Kopiert",
+    "description": ""
+  },
+  "scanning": {
+    "message": "Wird gescannt...",
+    "description": ""
+  },
+  "scanningContactPages": {
+    "message": "Kontaktseiten werden gescannt...",
+    "description": ""
+  },
+  "nothingFound": {
+    "message": "Auf dieser Seite wurden keine Telefonnummern oder E-Mail-Adressen gefunden.",
+    "description": ""
+  },
+  "scanError": {
+    "message": "Scanfehler: $ERROR$",
+    "description": "",
+    "placeholders": {
+      "error": {
+        "content": "$1"
+      }
+    }
+  },
+  "noPhones": {
+    "message": "Keine Telefonnummern gefunden",
+    "description": ""
+  },
+  "noEmails": {
+    "message": "Keine E-Mail-Adressen gefunden",
+    "description": ""
+  },
+  "toastCalling": {
+    "message": "Wird an Hipcall gesendet: $NUMBER$",
+    "description": "",
+    "placeholders": {
+      "number": {
+        "content": "$1",
+        "example": "0532 123 45 67"
+      }
+    }
+  },
+  "toastCallFailed": {
+    "message": "Hipcall: Der Anruf konnte nicht gesendet werden. $REASON$",
+    "description": "",
+    "placeholders": {
+      "reason": {
+        "content": "$1"
+      }
+    }
+  },
+  "toastReloadPage": {
+    "message": "Die Hipcall-Erweiterung wurde aktualisiert. Bitte laden Sie diese Seite neu (F5).",
+    "description": ""
+  },
+  "autoDial": {
+    "message": "Anruf automatisch starten",
+    "description": ""
+  },
+  "autoDialHint": {
+    "message": "Wenn deaktiviert, wird die Nummer nur in das Wählfeld eingegeben und Sie starten den Anruf selbst.",
+    "description": ""
+  },
+  "iconsOnSite": {
+    "message": "Anrufsymbole auf dieser Website",
+    "description": ""
+  },
+  "modeSelected": {
+    "message": "Ausgewählte Seiten",
+    "description": ""
+  },
+  "modeSelectedHint": {
+    "message": "Symbole erscheinen nur auf den aufgeführten Seiten. Standard: Startseite.",
+    "description": ""
+  },
+  "modeAll": {
+    "message": "Alle Seiten",
+    "description": ""
+  },
+  "modeAllHint": {
+    "message": "Symbole erscheinen auf jeder Seite der Website; schließen Sie unerwünschte Seiten aus.",
+    "description": ""
+  },
+  "homePage": {
+    "message": "Startseite",
+    "description": ""
+  },
+  "includedPages": {
+    "message": "Seiten mit Anrufsymbolen",
+    "description": ""
+  },
+  "excludedPages": {
+    "message": "Ausgeschlossene Seiten",
+    "description": ""
+  },
+  "includePlaceholder": {
+    "message": "Hinzufügen: /kontakt  oder  /blog/*",
+    "description": ""
+  },
+  "excludePlaceholder": {
+    "message": "Ausschließen: /warenkorb  oder  /konto/*",
+    "description": ""
+  },
+  "add": {
+    "message": "Hinzufügen",
+    "description": ""
+  },
+  "remove": {
+    "message": "Entfernen",
+    "description": ""
+  },
+  "noIncludedPages": {
+    "message": "Keine Seiten ausgewählt – Symbole sind auf dieser Website deaktiviert.",
+    "description": ""
+  },
+  "noExcludedPages": {
+    "message": "Keine Seiten ausgeschlossen – Symbole erscheinen auf jeder Seite dieser Website.",
+    "description": ""
+  },
+  "patternHint": {
+    "message": "Tipp: /blog/* passt auf /blog und alle Seiten darunter.",
+    "description": ""
+  },
+  "resetSite": {
+    "message": "Diese Website auf Standard zurücksetzen",
+    "description": ""
+  },
+  "regionTitle": {
+    "message": "Kontoregion",
+    "description": ""
+  },
+  "regionSub": {
+    "message": "Wählen Sie die Region, zu der Ihr Konto gehört.",
+    "description": ""
+  },
+  "regionTR": {
+    "message": "Türkiye",
+    "description": ""
+  },
+  "regionEU": {
+    "message": "Europäische Union",
+    "description": ""
+  },
+  "regionUK": {
+    "message": "Vereinigtes Königreich",
+    "description": ""
+  },
+  "regionUS": {
+    "message": "Vereinigte Staaten",
+    "description": ""
+  },
+  "languageTitle": {
+    "message": "Sprache",
+    "description": ""
+  },
+  "langAuto": {
+    "message": "Automatisch (Browsersprache)",
+    "description": ""
+  },
+  "callTitle": {
+    "message": "Anrufe",
+    "description": ""
+  },
+  "showOnThisPage": {
+    "message": "Symbole auf dieser Seite anzeigen",
+    "description": ""
+  },
+  "byPattern": {
+    "message": "$PAGE$ · festgelegt durch die Regel $PATTERN$",
+    "description": "",
+    "placeholders": {
+      "page": {
+        "content": "$1",
+        "example": "/blog/post"
+      },
+      "pattern": {
+        "content": "$2",
+        "example": "/blog/*"
+      }
+    }
+  },
+  "emptyTitle": {
+    "message": "Diese Seite kann nicht gescannt werden",
+    "description": ""
+  },
+  "emptyText": {
+    "message": "Öffnen Sie eine Website und klicken Sie erneut auf die Erweiterung, um deren Nummern und E-Mail-Adressen zu finden.",
+    "description": ""
+  },
+  "callFailedTitle": {
+    "message": "Anruf konnte nicht gestartet werden",
+    "description": ""
+  },
+  "callFailedText": {
+    "message": "$NUMBER$ konnte nicht an Hipcall gesendet werden. Stellen Sie sicher, dass Sie bei Hipcall angemeldet sind, und versuchen Sie es erneut.",
+    "description": "",
+    "placeholders": {
+      "number": {
+        "content": "$1",
+        "example": "05321234567"
+      }
+    }
+  },
+  "menuCallSelection": {
+    "message": "Mit Hipcall anrufen: „$TEXT$“",
+    "description": "Right-click menu on selected text; Chrome replaces %s with the selection",
+    "placeholders": {
+      "text": {
+        "content": "$1",
+        "example": "0532 123 45 67"
+      }
+    }
+  },
+  "menuNoNumberTitle": {
+    "message": "Keine Nummer gefunden",
+    "description": "Notification title"
+  },
+  "menuNoNumberText": {
+    "message": "Der ausgewählte Text enthält keine anrufbare Nummer: „$TEXT$“",
+    "description": "Notification text",
+    "placeholders": {
+      "text": {
+        "content": "$1"
+      }
+    }
+  },
+  "menuCallHere": {
+    "message": "Mit Hipcall anrufen",
+    "description": "Right-click menu on a link or the page (number under the cursor)"
+  },
+  "menuNoNumberHere": {
+    "message": "An der Stelle des Rechtsklicks wurde keine Nummer gefunden. Markieren Sie die Nummer und versuchen Sie es erneut.",
+    "description": "Notification text"
+  }
+}

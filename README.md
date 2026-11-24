@@ -1,6 +1,6 @@
 # Hipcall Webphone — Chrome extension
 
-One extension for every Hipcall account region — **Türkiye** (hipcall.com.tr), **European Union**, **United Kingdom** and **United States** (hipcall.com) — in Turkish and English.
+One extension for every Hipcall account region — **Türkiye** (hipcall.com.tr), **European Union**, **United Kingdom** and **United States** (hipcall.com) — in English, German, Spanish, French, Italian, Dutch and Turkish.
 
 ## Features
 
@@ -12,7 +12,7 @@ One extension for every Hipcall account region — **Türkiye** (hipcall.com.tr)
 - **Call icons** — phone numbers on web pages (links and plain text) get a Hipcall icon; one click calls the number. Per site you choose where icons appear: only selected pages (default: home page) or all pages except excluded ones (`/blog/*` patterns supported).
 - **Discover** — the popup scans the current page as soon as it opens (header, footer, menus, hidden elements, `tel:`/`mailto:`/WhatsApp links, schema.org data, Cloudflare-protected e-mails) and optionally the site's contact/about pages. Call or copy any result.
 - **Account region** — Türkiye, EU, UK or US, like the Hipcall apps. Guessed from the browser language on install and changeable in *Settings*; the web phone server (hipcall.com.tr / hipcall.com) follows the region automatically.
-- **Language** — Automatic (browser language), Türkçe or English, selectable in *Settings* (`_locales/tr`, `_locales/en`, loaded by `js/i18n.js`).
+- **Language** — Automatic (browser language, English if it is not supported), Deutsch, English, Español, Français, Italiano, Nederlands or Türkçe, selectable in *Settings* (`_locales/<code>`, loaded by `js/i18n.js`).
 - **Auto-dial** — optionally press the call button automatically after the number is entered.
 
 ## How a call reaches the web phone
@@ -49,7 +49,7 @@ with DOM events.
 | `js/site_rules.js` | Per-site icon rules (shared by content script and popup) |
 | `js/hipcall_bridge.js` | Runs in the web phone; types the number and starts the call |
 | `src/browser_action/*` | Toolbar popup: numbers/e-mails and settings |
-| `_locales/{tr,en}/messages.json` | Translations — add a folder to add a language |
+| `_locales/{de,en,es,fr,it,nl,tr}/messages.json` | Translations — add a folder, an `<option>` in the popup and the code in `HC_I18N.SUPPORTED` to add a language |
 | `icons/hipcall-*.svg`, `fonts/` | Brand assets from the [Hipcall brand guide](https://www.hipcall.com/brand-guide/); fonts are OFL-1.1 (licenses in `fonts/`) |
 
 ## Development
