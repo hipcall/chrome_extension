@@ -11,7 +11,9 @@
 # 'chrome-web-store' environment, can get a token.
 set -euo pipefail
 
-PROJECT_ID="${1:?usage: setup-google.sh <gcp-project-id>}"
+PROJECT="${1:?usage: setup-google.sh <gcp-project-id>}"
+# Accept the project number too; gcloud needs the ID for service accounts.
+PROJECT_ID="$(gcloud projects describe "$PROJECT" --format='value(projectId)')"
 
 GITHUB_REPO="hipcall/chrome_extension"
 GITHUB_REPO_ID="800341476"   # gh api repos/hipcall/chrome_extension --jq .id
