@@ -50,6 +50,7 @@ with DOM events.
 | `js/hipcall_bridge.js` | Runs in the web phone; types the number and starts the call |
 | `src/browser_action/*` | Toolbar popup: numbers/e-mails and settings |
 | `_locales/{de,en,es,fr,it,nl,tr}/messages.json` | Translations — add a folder, an `<option>` in the popup and the code in `HC_I18N.SUPPORTED` to add a language |
+| `scripts/*.sh`, `.github/workflows/release.yml` | Packaging and release (see *Release*) |
 | `icons/hipcall-*.svg`, `fonts/` | Brand assets from the [Hipcall brand guide](https://www.hipcall.com/brand-guide/); fonts are OFL-1.1 (licenses in `fonts/`) |
 
 ## Development
@@ -57,3 +58,33 @@ with DOM events.
 1. `chrome://extensions` → enable *Developer mode* → *Load unpacked* → select this folder.
 2. After changing files click *Reload* on the extension and refresh open pages.
 3. Web phone URLs per region are in `js/config.js`.
+4. `scripts/package.sh` checks the JSON files and builds `dist/hipcall-webphone-<version>.zip` (needs `jq`).
+
+## Release
+
+```
+git checkout main && git pull
+scripts/release.sh
+```
+
+The script asks for the next version (patch/minor/major), writes it to `manifest.json`, commits, tags
+`vX.Y.Z` and pushes. The tag starts [`.github/workflows/release.yml`](.github/workflows/release.yml):
+
+1. **build** — checks that the tag matches `manifest.json`, builds the ZIP and creates a GitHub release with it.
+2. **publish** — waits for approval of the `chrome-web-store` environment (Actions → the run → *Review deployments*),
+   then uploads the ZIP to the Chrome Web Store and submits it for review (`scripts/publish-cws.sh`, Chrome Web Store API v2).
+   Google's review usually takes from a few hours to a few days; the status is in the developer dashboard.
+
+The publish job signs in to Google with GitHub OIDC (Workload Identity Federation), so no key or token is stored in GitHub.
+It is skipped until the setup below is done; until then, upload the ZIP from the GitHub release in the dashboard by hand.
+
+### One-time setup
+
+1. **Google Cloud** — in [Cloud Shell](https://shell.cloud.google.com), as a user who can create service accounts in the project, upload `scripts/setup-google.sh` and run
+   `bash setup-google.sh <gcp-project-id>`. It enables the Chrome Web Store API and creates a service account and a
+   workload identity provider that only accepts `v*` tags of this repository running in the `chrome-web-store` environment.
+2. **Chrome Web Store** — [developer dashboard](https://chrome.google.com/webstore/devconsole) → *Account*: add the service account e-mail printed by the script (one per publisher). Note the publisher ID and the item ID (32 letters, item → *Package*).
+3. **GitHub** — *Settings → Environments*: create `chrome-web-store`, add required reviewers and allow only tags `v*`.
+   *Settings → Secrets and variables → Actions → Variables*: `CWS_WIF_PROVIDER`, `CWS_SERVICE_ACCOUNT` (printed by the script), `CWS_PUBLISHER_ID`, `CWS_ITEM_ID`.
+
+To check the credentials without uploading, run `CWS_DRY_RUN=1 scripts/publish-cws.sh <zip>` with a `CWS_ACCESS_TOKEN`.
