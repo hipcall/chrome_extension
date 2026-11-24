@@ -1,0 +1,317 @@
+{
+  "extName": {
+    "message": "Hipcall Webphone",
+    "description": "Extension name"
+  },
+  "extDescription": {
+    "message": "Apre il webphone Hipcall, chiama con un clic i numeri di qualsiasi pagina web (CTI) e ti mantiene raggiungibile.",
+    "description": "Extension description (max 132 chars)"
+  },
+  "actionTitle": {
+    "message": "Hipcall – trova e chiama numeri",
+    "description": "Toolbar button tooltip"
+  },
+  "warning": {
+    "message": "Attenzione",
+    "description": "Notification title"
+  },
+  "closed": {
+    "message": "La finestra del webphone Hipcall è stata chiusa. Tieni presente che non puoi ricevere chiamate mentre la finestra è chiusa.",
+    "description": "Notification when the web phone window is closed"
+  },
+  "openWebphone": {
+    "message": "Apri webphone",
+    "description": ""
+  },
+  "tabNumbers": {
+    "message": "Scopri",
+    "description": "Popup tab listing the phones and e-mails found on the current page"
+  },
+  "tabSettings": {
+    "message": "Impostazioni",
+    "description": ""
+  },
+  "rescan": {
+    "message": "Scansiona di nuovo",
+    "description": ""
+  },
+  "scanContactPages": {
+    "message": "Scansiona anche le pagine contatti / chi siamo",
+    "description": ""
+  },
+  "phones": {
+    "message": "Telefoni trovati",
+    "description": ""
+  },
+  "emails": {
+    "message": "E-mail trovate",
+    "description": ""
+  },
+  "manualPlaceholder": {
+    "message": "Digita un numero",
+    "description": ""
+  },
+  "call": {
+    "message": "Chiama",
+    "description": ""
+  },
+  "callWithHipcall": {
+    "message": "Chiama con Hipcall: $NUMBER$",
+    "description": "",
+    "placeholders": {
+      "number": {
+        "content": "$1",
+        "example": "0532 123 45 67"
+      }
+    }
+  },
+  "writeEmail": {
+    "message": "Scrivi un'e-mail: $EMAIL$",
+    "description": "",
+    "placeholders": {
+      "email": {
+        "content": "$1",
+        "example": "info@example.com"
+      }
+    }
+  },
+  "copy": {
+    "message": "Copia",
+    "description": ""
+  },
+  "copied": {
+    "message": "Copiato",
+    "description": ""
+  },
+  "scanning": {
+    "message": "Scansione in corso...",
+    "description": ""
+  },
+  "scanningContactPages": {
+    "message": "Scansione delle pagine contatti...",
+    "description": ""
+  },
+  "nothingFound": {
+    "message": "Nessun numero di telefono o e-mail trovato in questa pagina.",
+    "description": ""
+  },
+  "scanError": {
+    "message": "Errore di scansione: $ERROR$",
+    "description": "",
+    "placeholders": {
+      "error": {
+        "content": "$1"
+      }
+    }
+  },
+  "noPhones": {
+    "message": "Nessun numero di telefono trovato",
+    "description": ""
+  },
+  "noEmails": {
+    "message": "Nessuna e-mail trovata",
+    "description": ""
+  },
+  "toastCalling": {
+    "message": "Invio a Hipcall: $NUMBER$",
+    "description": "",
+    "placeholders": {
+      "number": {
+        "content": "$1",
+        "example": "0532 123 45 67"
+      }
+    }
+  },
+  "toastCallFailed": {
+    "message": "Hipcall: impossibile inviare la chiamata. $REASON$",
+    "description": "",
+    "placeholders": {
+      "reason": {
+        "content": "$1"
+      }
+    }
+  },
+  "toastReloadPage": {
+    "message": "L'estensione Hipcall è stata aggiornata. Ricarica questa pagina (F5).",
+    "description": ""
+  },
+  "autoDial": {
+    "message": "Avvia la chiamata automaticamente",
+    "description": ""
+  },
+  "autoDialHint": {
+    "message": "Se disattivato, il numero viene solo inserito nel tastierino e sei tu ad avviare la chiamata.",
+    "description": ""
+  },
+  "iconsOnSite": {
+    "message": "Icone di chiamata su questo sito",
+    "description": ""
+  },
+  "modeSelected": {
+    "message": "Pagine selezionate",
+    "description": ""
+  },
+  "modeSelectedHint": {
+    "message": "Le icone appaiono solo nelle pagine elencate. Predefinito: home page.",
+    "description": ""
+  },
+  "modeAll": {
+    "message": "Tutte le pagine",
+    "description": ""
+  },
+  "modeAllHint": {
+    "message": "Le icone appaiono in ogni pagina del sito; escludi quelle che non vuoi.",
+    "description": ""
+  },
+  "homePage": {
+    "message": "Home page",
+    "description": ""
+  },
+  "includedPages": {
+    "message": "Pagine con icone di chiamata",
+    "description": ""
+  },
+  "excludedPages": {
+    "message": "Pagine escluse",
+    "description": ""
+  },
+  "includePlaceholder": {
+    "message": "Aggiungi: /contatti  o  /blog/*",
+    "description": ""
+  },
+  "excludePlaceholder": {
+    "message": "Escludi: /carrello  o  /account/*",
+    "description": ""
+  },
+  "add": {
+    "message": "Aggiungi",
+    "description": ""
+  },
+  "remove": {
+    "message": "Rimuovi",
+    "description": ""
+  },
+  "noIncludedPages": {
+    "message": "Nessuna pagina selezionata: le icone sono disattivate su questo sito.",
+    "description": ""
+  },
+  "noExcludedPages": {
+    "message": "Nessuna pagina esclusa: le icone appaiono in ogni pagina di questo sito.",
+    "description": ""
+  },
+  "patternHint": {
+    "message": "Suggerimento: /blog/* corrisponde a /blog e a tutte le pagine al suo interno.",
+    "description": ""
+  },
+  "resetSite": {
+    "message": "Ripristina le impostazioni predefinite per questo sito",
+    "description": ""
+  },
+  "regionTitle": {
+    "message": "Regione dell'account",
+    "description": ""
+  },
+  "regionSub": {
+    "message": "Scegli la regione a cui appartiene il tuo account.",
+    "description": ""
+  },
+  "regionTR": {
+    "message": "Türkiye",
+    "description": ""
+  },
+  "regionEU": {
+    "message": "Unione Europea",
+    "description": ""
+  },
+  "regionUK": {
+    "message": "Regno Unito",
+    "description": ""
+  },
+  "regionUS": {
+    "message": "Stati Uniti",
+    "description": ""
+  },
+  "languageTitle": {
+    "message": "Lingua",
+    "description": ""
+  },
+  "langAuto": {
+    "message": "Automatica (lingua del browser)",
+    "description": ""
+  },
+  "callTitle": {
+    "message": "Chiamate",
+    "description": ""
+  },
+  "showOnThisPage": {
+    "message": "Mostra le icone in questa pagina",
+    "description": ""
+  },
+  "byPattern": {
+    "message": "$PAGE$ · impostato dalla regola $PATTERN$",
+    "description": "",
+    "placeholders": {
+      "page": {
+        "content": "$1",
+        "example": "/blog/post"
+      },
+      "pattern": {
+        "content": "$2",
+        "example": "/blog/*"
+      }
+    }
+  },
+  "emptyTitle": {
+    "message": "Impossibile scansionare questa pagina",
+    "description": ""
+  },
+  "emptyText": {
+    "message": "Apri un sito web e fai di nuovo clic sull'estensione per trovarne numeri ed e-mail.",
+    "description": ""
+  },
+  "callFailedTitle": {
+    "message": "Impossibile avviare la chiamata",
+    "description": ""
+  },
+  "callFailedText": {
+    "message": "Impossibile inviare $NUMBER$ a Hipcall. Assicurati di aver effettuato l'accesso a Hipcall e riprova.",
+    "description": "",
+    "placeholders": {
+      "number": {
+        "content": "$1",
+        "example": "05321234567"
+      }
+    }
+  },
+  "menuCallSelection": {
+    "message": "Chiama con Hipcall: «$TEXT$»",
+    "description": "Right-click menu on selected text; Chrome replaces %s with the selection",
+    "placeholders": {
+      "text": {
+        "content": "$1",
+        "example": "0532 123 45 67"
+      }
+    }
+  },
+  "menuNoNumberTitle": {
+    "message": "Nessun numero trovato",
+    "description": "Notification title"
+  },
+  "menuNoNumberText": {
+    "message": "Il testo selezionato non contiene numeri da chiamare: «$TEXT$»",
+    "description": "Notification text",
+    "placeholders": {
+      "text": {
+        "content": "$1"
+      }
+    }
+  },
+  "menuCallHere": {
+    "message": "Chiama con Hipcall",
+    "description": "Right-click menu on a link or the page (number under the cursor)"
+  },
+  "menuNoNumberHere": {
+    "message": "Nessun numero trovato nel punto del clic destro. Seleziona il numero e riprova.",
+    "description": "Notification text"
+  }
+}

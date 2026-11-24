@@ -1,0 +1,317 @@
+{
+  "extName": {
+    "message": "Hipcall Webphone",
+    "description": "Extension name"
+  },
+  "extDescription": {
+    "message": "Opent je Hipcall-webphone, belt nummers op elke webpagina met één klik (CTI) en houdt je bereikbaar voor oproepen.",
+    "description": "Extension description (max 132 chars)"
+  },
+  "actionTitle": {
+    "message": "Hipcall – nummers vinden en bellen",
+    "description": "Toolbar button tooltip"
+  },
+  "warning": {
+    "message": "Waarschuwing",
+    "description": "Notification title"
+  },
+  "closed": {
+    "message": "Het Hipcall-webphonevenster is gesloten. Let op: je kunt geen oproepen ontvangen zolang het venster gesloten is.",
+    "description": "Notification when the web phone window is closed"
+  },
+  "openWebphone": {
+    "message": "Webphone openen",
+    "description": ""
+  },
+  "tabNumbers": {
+    "message": "Ontdekken",
+    "description": "Popup tab listing the phones and e-mails found on the current page"
+  },
+  "tabSettings": {
+    "message": "Instellingen",
+    "description": ""
+  },
+  "rescan": {
+    "message": "Opnieuw scannen",
+    "description": ""
+  },
+  "scanContactPages": {
+    "message": "Ook contact- / over-ons-pagina's scannen",
+    "description": ""
+  },
+  "phones": {
+    "message": "Gevonden telefoonnummers",
+    "description": ""
+  },
+  "emails": {
+    "message": "Gevonden e-mailadressen",
+    "description": ""
+  },
+  "manualPlaceholder": {
+    "message": "Typ een nummer",
+    "description": ""
+  },
+  "call": {
+    "message": "Bellen",
+    "description": ""
+  },
+  "callWithHipcall": {
+    "message": "Bellen met Hipcall: $NUMBER$",
+    "description": "",
+    "placeholders": {
+      "number": {
+        "content": "$1",
+        "example": "0532 123 45 67"
+      }
+    }
+  },
+  "writeEmail": {
+    "message": "E-mail schrijven: $EMAIL$",
+    "description": "",
+    "placeholders": {
+      "email": {
+        "content": "$1",
+        "example": "info@example.com"
+      }
+    }
+  },
+  "copy": {
+    "message": "Kopiëren",
+    "description": ""
+  },
+  "copied": {
+    "message": "Gekopieerd",
+    "description": ""
+  },
+  "scanning": {
+    "message": "Bezig met scannen...",
+    "description": ""
+  },
+  "scanningContactPages": {
+    "message": "Contactpagina's scannen...",
+    "description": ""
+  },
+  "nothingFound": {
+    "message": "Geen telefoonnummers of e-mailadressen gevonden op deze pagina.",
+    "description": ""
+  },
+  "scanError": {
+    "message": "Scanfout: $ERROR$",
+    "description": "",
+    "placeholders": {
+      "error": {
+        "content": "$1"
+      }
+    }
+  },
+  "noPhones": {
+    "message": "Geen telefoonnummers gevonden",
+    "description": ""
+  },
+  "noEmails": {
+    "message": "Geen e-mailadressen gevonden",
+    "description": ""
+  },
+  "toastCalling": {
+    "message": "Verzenden naar Hipcall: $NUMBER$",
+    "description": "",
+    "placeholders": {
+      "number": {
+        "content": "$1",
+        "example": "0532 123 45 67"
+      }
+    }
+  },
+  "toastCallFailed": {
+    "message": "Hipcall: de oproep kon niet worden verzonden. $REASON$",
+    "description": "",
+    "placeholders": {
+      "reason": {
+        "content": "$1"
+      }
+    }
+  },
+  "toastReloadPage": {
+    "message": "De Hipcall-extensie is bijgewerkt. Laad deze pagina opnieuw (F5).",
+    "description": ""
+  },
+  "autoDial": {
+    "message": "Oproep automatisch starten",
+    "description": ""
+  },
+  "autoDialHint": {
+    "message": "Als dit uit staat, wordt het nummer alleen in het kiesscherm ingevoerd en start je de oproep zelf.",
+    "description": ""
+  },
+  "iconsOnSite": {
+    "message": "Belpictogrammen op deze site",
+    "description": ""
+  },
+  "modeSelected": {
+    "message": "Geselecteerde pagina's",
+    "description": ""
+  },
+  "modeSelectedHint": {
+    "message": "Pictogrammen verschijnen alleen op de vermelde pagina's. Standaard: startpagina.",
+    "description": ""
+  },
+  "modeAll": {
+    "message": "Alle pagina's",
+    "description": ""
+  },
+  "modeAllHint": {
+    "message": "Pictogrammen verschijnen op elke pagina van de site; sluit de pagina's uit die je niet wilt.",
+    "description": ""
+  },
+  "homePage": {
+    "message": "Startpagina",
+    "description": ""
+  },
+  "includedPages": {
+    "message": "Pagina's met belpictogrammen",
+    "description": ""
+  },
+  "excludedPages": {
+    "message": "Uitgesloten pagina's",
+    "description": ""
+  },
+  "includePlaceholder": {
+    "message": "Toevoegen: /contact  of  /blog/*",
+    "description": ""
+  },
+  "excludePlaceholder": {
+    "message": "Uitsluiten: /winkelwagen  of  /account/*",
+    "description": ""
+  },
+  "add": {
+    "message": "Toevoegen",
+    "description": ""
+  },
+  "remove": {
+    "message": "Verwijderen",
+    "description": ""
+  },
+  "noIncludedPages": {
+    "message": "Geen pagina's geselecteerd — pictogrammen staan uit op deze site.",
+    "description": ""
+  },
+  "noExcludedPages": {
+    "message": "Geen pagina's uitgesloten — pictogrammen staan op elke pagina van deze site.",
+    "description": ""
+  },
+  "patternHint": {
+    "message": "Tip: /blog/* komt overeen met /blog en elke pagina daaronder.",
+    "description": ""
+  },
+  "resetSite": {
+    "message": "Deze site terugzetten naar standaard",
+    "description": ""
+  },
+  "regionTitle": {
+    "message": "Accountregio",
+    "description": ""
+  },
+  "regionSub": {
+    "message": "Kies de regio waartoe je account behoort.",
+    "description": ""
+  },
+  "regionTR": {
+    "message": "Türkiye",
+    "description": ""
+  },
+  "regionEU": {
+    "message": "Europese Unie",
+    "description": ""
+  },
+  "regionUK": {
+    "message": "Verenigd Koninkrijk",
+    "description": ""
+  },
+  "regionUS": {
+    "message": "Verenigde Staten",
+    "description": ""
+  },
+  "languageTitle": {
+    "message": "Taal",
+    "description": ""
+  },
+  "langAuto": {
+    "message": "Automatisch (browsertaal)",
+    "description": ""
+  },
+  "callTitle": {
+    "message": "Oproepen",
+    "description": ""
+  },
+  "showOnThisPage": {
+    "message": "Pictogrammen op deze pagina tonen",
+    "description": ""
+  },
+  "byPattern": {
+    "message": "$PAGE$ · ingesteld door de regel $PATTERN$",
+    "description": "",
+    "placeholders": {
+      "page": {
+        "content": "$1",
+        "example": "/blog/post"
+      },
+      "pattern": {
+        "content": "$2",
+        "example": "/blog/*"
+      }
+    }
+  },
+  "emptyTitle": {
+    "message": "Deze pagina kan niet worden gescand",
+    "description": ""
+  },
+  "emptyText": {
+    "message": "Open een website en klik opnieuw op de extensie om de nummers en e-mailadressen ervan te vinden.",
+    "description": ""
+  },
+  "callFailedTitle": {
+    "message": "Oproep kon niet worden gestart",
+    "description": ""
+  },
+  "callFailedText": {
+    "message": "$NUMBER$ kon niet naar Hipcall worden verzonden. Controleer of je bij Hipcall bent ingelogd en probeer het opnieuw.",
+    "description": "",
+    "placeholders": {
+      "number": {
+        "content": "$1",
+        "example": "05321234567"
+      }
+    }
+  },
+  "menuCallSelection": {
+    "message": "Bellen met Hipcall: ‘$TEXT$’",
+    "description": "Right-click menu on selected text; Chrome replaces %s with the selection",
+    "placeholders": {
+      "text": {
+        "content": "$1",
+        "example": "0532 123 45 67"
+      }
+    }
+  },
+  "menuNoNumberTitle": {
+    "message": "Geen nummer gevonden",
+    "description": "Notification title"
+  },
+  "menuNoNumberText": {
+    "message": "De geselecteerde tekst bevat geen nummer om te bellen: ‘$TEXT$’",
+    "description": "Notification text",
+    "placeholders": {
+      "text": {
+        "content": "$1"
+      }
+    }
+  },
+  "menuCallHere": {
+    "message": "Bellen met Hipcall",
+    "description": "Right-click menu on a link or the page (number under the cursor)"
+  },
+  "menuNoNumberHere": {
+    "message": "Geen nummer gevonden op de plek waar je met rechts klikte. Selecteer het nummer en probeer het opnieuw.",
+    "description": "Notification text"
+  }
+}

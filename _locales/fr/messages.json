@@ -1,0 +1,317 @@
+{
+  "extName": {
+    "message": "Hipcall Webphone",
+    "description": "Extension name"
+  },
+  "extDescription": {
+    "message": "Ouvre votre webphone Hipcall, appelle en un clic les numéros de toute page web (CTI) et vous garde joignable.",
+    "description": "Extension description (max 132 chars)"
+  },
+  "actionTitle": {
+    "message": "Hipcall – trouver et appeler des numéros",
+    "description": "Toolbar button tooltip"
+  },
+  "warning": {
+    "message": "Avertissement",
+    "description": "Notification title"
+  },
+  "closed": {
+    "message": "La fenêtre du webphone Hipcall a été fermée. Notez que vous ne pouvez pas recevoir d'appels tant que la fenêtre est fermée.",
+    "description": "Notification when the web phone window is closed"
+  },
+  "openWebphone": {
+    "message": "Ouvrir le webphone",
+    "description": ""
+  },
+  "tabNumbers": {
+    "message": "Découvrir",
+    "description": "Popup tab listing the phones and e-mails found on the current page"
+  },
+  "tabSettings": {
+    "message": "Paramètres",
+    "description": ""
+  },
+  "rescan": {
+    "message": "Analyser à nouveau",
+    "description": ""
+  },
+  "scanContactPages": {
+    "message": "Analyser aussi les pages contact / à propos",
+    "description": ""
+  },
+  "phones": {
+    "message": "Téléphones trouvés",
+    "description": ""
+  },
+  "emails": {
+    "message": "E-mails trouvés",
+    "description": ""
+  },
+  "manualPlaceholder": {
+    "message": "Saisissez un numéro",
+    "description": ""
+  },
+  "call": {
+    "message": "Appeler",
+    "description": ""
+  },
+  "callWithHipcall": {
+    "message": "Appeler avec Hipcall : $NUMBER$",
+    "description": "",
+    "placeholders": {
+      "number": {
+        "content": "$1",
+        "example": "0532 123 45 67"
+      }
+    }
+  },
+  "writeEmail": {
+    "message": "Écrire un e-mail : $EMAIL$",
+    "description": "",
+    "placeholders": {
+      "email": {
+        "content": "$1",
+        "example": "info@example.com"
+      }
+    }
+  },
+  "copy": {
+    "message": "Copier",
+    "description": ""
+  },
+  "copied": {
+    "message": "Copié",
+    "description": ""
+  },
+  "scanning": {
+    "message": "Analyse en cours...",
+    "description": ""
+  },
+  "scanningContactPages": {
+    "message": "Analyse des pages contact...",
+    "description": ""
+  },
+  "nothingFound": {
+    "message": "Aucun numéro de téléphone ni e-mail trouvé sur cette page.",
+    "description": ""
+  },
+  "scanError": {
+    "message": "Erreur d'analyse : $ERROR$",
+    "description": "",
+    "placeholders": {
+      "error": {
+        "content": "$1"
+      }
+    }
+  },
+  "noPhones": {
+    "message": "Aucun numéro de téléphone trouvé",
+    "description": ""
+  },
+  "noEmails": {
+    "message": "Aucun e-mail trouvé",
+    "description": ""
+  },
+  "toastCalling": {
+    "message": "Envoi à Hipcall : $NUMBER$",
+    "description": "",
+    "placeholders": {
+      "number": {
+        "content": "$1",
+        "example": "0532 123 45 67"
+      }
+    }
+  },
+  "toastCallFailed": {
+    "message": "Hipcall : l'appel n'a pas pu être envoyé. $REASON$",
+    "description": "",
+    "placeholders": {
+      "reason": {
+        "content": "$1"
+      }
+    }
+  },
+  "toastReloadPage": {
+    "message": "L'extension Hipcall a été mise à jour. Veuillez recharger cette page (F5).",
+    "description": ""
+  },
+  "autoDial": {
+    "message": "Lancer l'appel automatiquement",
+    "description": ""
+  },
+  "autoDialHint": {
+    "message": "Si désactivé, le numéro est seulement saisi dans le clavier et c'est vous qui lancez l'appel.",
+    "description": ""
+  },
+  "iconsOnSite": {
+    "message": "Icônes d'appel sur ce site",
+    "description": ""
+  },
+  "modeSelected": {
+    "message": "Pages sélectionnées",
+    "description": ""
+  },
+  "modeSelectedHint": {
+    "message": "Les icônes n'apparaissent que sur les pages listées. Par défaut : page d'accueil.",
+    "description": ""
+  },
+  "modeAll": {
+    "message": "Toutes les pages",
+    "description": ""
+  },
+  "modeAllHint": {
+    "message": "Les icônes apparaissent sur toutes les pages du site ; excluez celles dont vous ne voulez pas.",
+    "description": ""
+  },
+  "homePage": {
+    "message": "Page d'accueil",
+    "description": ""
+  },
+  "includedPages": {
+    "message": "Pages avec icônes d'appel",
+    "description": ""
+  },
+  "excludedPages": {
+    "message": "Pages exclues",
+    "description": ""
+  },
+  "includePlaceholder": {
+    "message": "Ajouter : /contact  ou  /blog/*",
+    "description": ""
+  },
+  "excludePlaceholder": {
+    "message": "Exclure : /panier  ou  /compte/*",
+    "description": ""
+  },
+  "add": {
+    "message": "Ajouter",
+    "description": ""
+  },
+  "remove": {
+    "message": "Supprimer",
+    "description": ""
+  },
+  "noIncludedPages": {
+    "message": "Aucune page sélectionnée — les icônes sont désactivées sur ce site.",
+    "description": ""
+  },
+  "noExcludedPages": {
+    "message": "Aucune page exclue — les icônes apparaissent sur toutes les pages de ce site.",
+    "description": ""
+  },
+  "patternHint": {
+    "message": "Astuce : /blog/* correspond à /blog et à toutes les pages en dessous.",
+    "description": ""
+  },
+  "resetSite": {
+    "message": "Rétablir les paramètres par défaut pour ce site",
+    "description": ""
+  },
+  "regionTitle": {
+    "message": "Région du compte",
+    "description": ""
+  },
+  "regionSub": {
+    "message": "Choisissez la région à laquelle appartient votre compte.",
+    "description": ""
+  },
+  "regionTR": {
+    "message": "Türkiye",
+    "description": ""
+  },
+  "regionEU": {
+    "message": "Union européenne",
+    "description": ""
+  },
+  "regionUK": {
+    "message": "Royaume-Uni",
+    "description": ""
+  },
+  "regionUS": {
+    "message": "États-Unis",
+    "description": ""
+  },
+  "languageTitle": {
+    "message": "Langue",
+    "description": ""
+  },
+  "langAuto": {
+    "message": "Automatique (langue du navigateur)",
+    "description": ""
+  },
+  "callTitle": {
+    "message": "Appels",
+    "description": ""
+  },
+  "showOnThisPage": {
+    "message": "Afficher les icônes sur cette page",
+    "description": ""
+  },
+  "byPattern": {
+    "message": "$PAGE$ · défini par la règle $PATTERN$",
+    "description": "",
+    "placeholders": {
+      "page": {
+        "content": "$1",
+        "example": "/blog/post"
+      },
+      "pattern": {
+        "content": "$2",
+        "example": "/blog/*"
+      }
+    }
+  },
+  "emptyTitle": {
+    "message": "Cette page ne peut pas être analysée",
+    "description": ""
+  },
+  "emptyText": {
+    "message": "Ouvrez un site web et cliquez à nouveau sur l'extension pour trouver ses numéros et e-mails.",
+    "description": ""
+  },
+  "callFailedTitle": {
+    "message": "Impossible de lancer l'appel",
+    "description": ""
+  },
+  "callFailedText": {
+    "message": "$NUMBER$ n'a pas pu être envoyé à Hipcall. Vérifiez que vous êtes connecté à Hipcall et réessayez.",
+    "description": "",
+    "placeholders": {
+      "number": {
+        "content": "$1",
+        "example": "05321234567"
+      }
+    }
+  },
+  "menuCallSelection": {
+    "message": "Appeler avec Hipcall : « $TEXT$ »",
+    "description": "Right-click menu on selected text; Chrome replaces %s with the selection",
+    "placeholders": {
+      "text": {
+        "content": "$1",
+        "example": "0532 123 45 67"
+      }
+    }
+  },
+  "menuNoNumberTitle": {
+    "message": "Aucun numéro trouvé",
+    "description": "Notification title"
+  },
+  "menuNoNumberText": {
+    "message": "Le texte sélectionné ne contient aucun numéro à appeler : « $TEXT$ »",
+    "description": "Notification text",
+    "placeholders": {
+      "text": {
+        "content": "$1"
+      }
+    }
+  },
+  "menuCallHere": {
+    "message": "Appeler avec Hipcall",
+    "description": "Right-click menu on a link or the page (number under the cursor)"
+  },
+  "menuNoNumberHere": {
+    "message": "Aucun numéro trouvé à l'endroit du clic droit. Sélectionnez le numéro et réessayez.",
+    "description": "Notification text"
+  }
+}
