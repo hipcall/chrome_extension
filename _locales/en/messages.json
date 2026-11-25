@@ -313,5 +313,13 @@
   "menuNoNumberHere": {
     "message": "No number found where you right-clicked. Select the number and try again.",
     "description": "Notification text"
+  },
+  "regionLocal": {
+    "message": "Local development (localhost:19823)",
+    "description": "Only in unpacked builds: the desktop web app run locally"
+  },
+  "desktopOutdated": {
+    "message": "Reload the Hipcall tab, then try again. This version of Hipcall cannot receive numbers from the extension.",
+    "description": "Notification when the open desktop tab predates the link API"
   }
 }

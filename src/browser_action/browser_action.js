@@ -300,7 +300,11 @@ const FLAGS = {
     for (let r = 0; r < 4; r++) for (let c = 0; c < 5; c++) dots += `<circle cx="${1.3 + c * 2.4 + (r % 2) * 1.2}" cy="${1.4 + r * 2.4}" r=".45" fill="#fff"/>`;
     return `<svg viewBox="0 0 30 20"><rect width="30" height="20" fill="#fff"/>${stripes}
       <rect width="13" height="${(20 * 7 / 13).toFixed(2)}" fill="#3C3B6E"/>${dots}</svg>`;
-  }
+  },
+  // Unpacked builds only (HC_CONFIG.IS_DEV): the desktop on localhost.
+  local: () => `<svg viewBox="0 0 30 20"><rect width="30" height="20" rx="2" fill="#37474F"/>
+    <path d="M11 6 7 10l4 4M19 6l4 4-4 4" stroke="#fff" stroke-width="1.8" fill="none"
+      stroke-linecap="round" stroke-linejoin="round"/></svg>`
 };
 
 async function initGeneralSettings() {
@@ -314,7 +318,7 @@ async function initGeneralSettings() {
     btn.className = 'region';
     btn.setAttribute('role', 'radio');
     btn.dataset.value = id;
-    btn.innerHTML = `<span class="flag">${FLAGS[id]()}</span>
+    btn.innerHTML = `<span class="flag">${FLAGS[id] ? FLAGS[id]() : ''}</span>
       <span class="name"></span>${ICON.check.replace('<svg', '<svg class="check"')}`;
     btn.querySelector('.name').textContent = t(region.nameKey);
     // The server (hipcall.com.tr / hipcall.com) follows the region automatically.

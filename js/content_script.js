@@ -24,6 +24,11 @@
 
   if (!document.body) return;
 
+  // The manifest keeps this script off the Hipcall desktop; the local
+  // development server (unpacked builds, see js/config.js) can only be
+  // recognised here.
+  if (HC_CONFIG.isWebphoneUrl(location.href)) return;
+
   const t = (key, subs) => HC_I18N.t(key, subs);
 
   const PREFIX = 'hc-c2c';
@@ -205,6 +210,10 @@
   // later and clicks on elements *inside* a link (icon, <span>...).
   document.addEventListener('click', (e) => {
     if (e.defaultPrevented || e.button !== 0) return;
+    // Only a real click by the user. A page can fire `link.click()` or
+    // dispatch a synthetic event on a tel: link; with auto-dial on, that
+    // would place a call on the user's line without them knowing.
+    if (!e.isTrusted) return;
     const link = e.target instanceof Element ? e.target.closest(TEL_LINK) : null;
     if (!link) return;
     const number = numberFromTelHref(link.getAttribute('href'));
@@ -235,6 +244,8 @@
     // Do not trigger the surrounding link/form.
     event.preventDefault();
     event.stopPropagation();
+    // The page can reach our button too (`.click()`); only the user may call.
+    if (!event.isTrusted) return;
     const btn = event.currentTarget;
     const number = btn.dataset.number;
     if (number) call(number, btn);

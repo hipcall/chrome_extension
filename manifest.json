@@ -59,8 +59,7 @@
     "webNavigation",
     "tabs",
     "storage",
-    "scripting",
-    "debugger"
+    "scripting"
   ],
   "host_permissions": [
     "http://*/*",

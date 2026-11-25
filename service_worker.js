@@ -4,24 +4,21 @@
  * - Click to call goes through the Hipcall desktop (desktop.hipcall.com(.tr),
  *   as a browser tab or installed app). If it is not open, the web phone is
  *   opened in the extension's popup window instead (region → server, see
- *   js/config.js). If the number cannot be typed (e.g. not signed in), a
- *   notification tells the user.
+ *   js/config.js). If the number cannot be handed over, a notification tells
+ *   the user.
  * - Click to call: receives { type: 'call', call: <number> } from content
- *   scripts / popup, brings the web phone to front and types the number into it.
+ *   scripts / popup / context menu — always after a real user action — and
+ *   hands `/dial?number=…` to the desktop.
  * - Shows a notification when the web phone window is closed (no incoming calls).
  *
- * Typing into the web phone: the web phone is a Flutter (canvas) app that
- * ignores synthetic DOM events. The bridge script (js/hipcall_bridge.js) finds
- * the number field / keypad, and this worker performs *trusted* clicks and
- * text input on it through chrome.debugger. If the debugger cannot attach
- * (e.g. DevTools is open on that tab) the bridge falls back to DOM events.
+ * Handing the number over (hipcall/hq#5397): an open desktop tab gets it as a
+ * message through the bridge script (js/hipcall_bridge.js → window.postMessage),
+ * so the page is not reloaded and an active call is not dropped. With auto-dial
+ * on, the message asks the desktop to place the call. With no desktop open, the
+ * window opens on `/dial?number=…`, which puts the number on the dialpad and
+ * survives the sign-in redirect.
  */
 importScripts('js/config.js', 'js/i18n.js', 'js/phone.js');
-
-const DEBUGGER_VERSION = '1.3';
-// Keep the debugger attached for a while after a call so consecutive calls are
-// instant (no re-attach, no infobar flicker). 0 = detach right after each call.
-const KEEP_ATTACHED_MS = 15000;
 
 const t = (key, subs) => HC_I18N.t(key, subs);
 const log = (...a) => console.log('[Hipcall]', ...a);
@@ -128,8 +125,7 @@ async function onMenuClicked(info, tab) {
     });
     return;
   }
-  const { tabId, created } = await openWebphone();
-  runFill(tabId, number, created);
+  dial(number);
 }
 
 /* ------------------------------------------------------------------ */
@@ -146,16 +142,10 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
       sendResponse({ ok: false, error: 'invalid number' });
       return false;
     }
-    openWebphone()
-      .then(({ tabId, created }) => {
-        sendResponse({ ok: true });
-        return runFill(tabId, number, created);
-      })
-      .catch((err) => {
-        console.error('[Hipcall] call failed:', err);
-        sendResponse({ ok: false, error: errText(err) });
-      });
-    return true;
+    // Failures after this point arrive as a notification (see dial()).
+    sendResponse({ ok: true });
+    dial(number);
+    return false;
   }
 
   // Content script inside an iframe asks for the tab's URL (site rules apply
@@ -188,23 +178,6 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     return false;
   }
 
-  // From js/hipcall_bridge.js: trusted input on the web phone tab.
-  if (request.type === 'trustedTap' || request.type === 'trustedInput') {
-    // Only the bridge running inside a Hipcall web phone page may ask for it.
-    if (!sender.tab || !HC_CONFIG.isWebphoneUrl(sender.tab.url || '')) {
-      sendResponse({ ok: false, error: 'not a web phone tab' });
-      return false;
-    }
-    const tabId = sender.tab.id;
-    const job = request.type === 'trustedTap'
-      ? trustedClick(tabId, request.x, request.y)
-      : trustedInput(tabId, request);
-    job
-      .then(() => sendResponse({ ok: true }))
-      .catch((err) => sendResponse({ ok: false, error: errText(err) }));
-    return true;
-  }
-
   return false;
 });
 
@@ -233,7 +206,8 @@ async function clearPopupWindow() {
  * popup window; the popup is only used when the desktop is not open.
  */
 async function findWebphoneTab(region) {
-  const tabs = await chrome.tabs.query({ url: region.patterns });
+  const tabs = (await chrome.tabs.query({ url: region.patterns }))
+    .filter((tab) => HC_CONFIG.isWebphoneUrl(tab.url || tab.pendingUrl || '', region));
   if (!tabs.length) return null;
 
   const popupId = await getPopupWindowId();
@@ -244,9 +218,10 @@ async function findWebphoneTab(region) {
 
 /**
  * Opens the extension's web phone window (like the original extension's
- * toolbar button), or focuses it if it is already open.
+ * toolbar button), or focuses it if it is already open. [url] is where a
+ * newly created window starts (default: the region's dialer).
  */
-async function openPopupWindow() {
+async function openPopupWindow(url) {
   const settings = await HC_CONFIG.getSettings();
   const region = HC_CONFIG.region(settings.region);
 
@@ -268,7 +243,7 @@ async function openPopupWindow() {
   }
 
   const win = await chrome.windows.create({
-    url: region.webphoneUrl,
+    url: url || region.webphoneUrl,
     type: 'popup',
     width: HC_CONFIG.POPUP_WINDOW.width,
     height: HC_CONFIG.POPUP_WINDOW.height,
@@ -276,21 +251,6 @@ async function openPopupWindow() {
   });
   await setPopupWindowId(win.id);
   return { tabId: win.tabs[0].id, created: true };
-}
-
-/** Click to call: the Hipcall desktop if open, otherwise the extension's window. */
-async function openWebphone() {
-  const settings = await HC_CONFIG.getSettings();
-  const region = HC_CONFIG.region(settings.region);
-
-  const tab = await findWebphoneTab(region);
-  if (tab) {
-    await chrome.windows.update(tab.windowId, { focused: true });
-    await chrome.tabs.update(tab.id, { active: true });
-    return { tabId: tab.id, created: false };
-  }
-
-  return openPopupWindow();
 }
 
 chrome.windows.onRemoved.addListener(async (windowId) => {
@@ -340,149 +300,73 @@ async function ensureBridge(tabId) {
 }
 
 /* ------------------------------------------------------------------ */
-/* Typing the number                                                   */
+/* Handing the number to the desktop                                   */
 /* ------------------------------------------------------------------ */
 
-let fillQueue = Promise.resolve();
+let dialQueue = Promise.resolve();
 
-function runFill(tabId, number, created) {
-  const run = () => doRunFill(tabId, number, created).catch(async (err) => {
-    console.warn('[Hipcall] could not type the number:', err);
-    // Most common cause: the web phone is not signed in (no dial pad on screen).
+/**
+ * Click to call. Every caller acts on a real user action (a trusted click,
+ * the context menu, the popup), which is what lets auto-dial place the call
+ * without asking again (hipcall/hq#5397).
+ */
+function dial(number) {
+  const run = () => doDial(number).catch(async (err) => {
+    console.warn('[Hipcall] could not hand the number over:', err);
     await HC_I18N.init();
+    const outdated = /UNSUPPORTED/.test(errText(err));
     chrome.notifications.create({
       type: 'basic',
       iconUrl: 'icons/logo.png',
       title: t('callFailedTitle'),
-      message: t('callFailedText', [number])
+      message: outdated ? t('desktopOutdated') : t('callFailedText', [number])
     });
   });
-  fillQueue = fillQueue.then(run, run);
-  return fillQueue;
+  dialQueue = dialQueue.then(run, run);
+  return dialQueue;
 }
 
-async function doRunFill(tabId, number, created) {
-  const t0 = Date.now();
-  if (created) await waitForTabComplete(tabId);
+async function doDial(number) {
+  const settings = await HC_CONFIG.getSettings();
+  const region = HC_CONFIG.region(settings.region);
+  const path = '/dial?number=' + encodeURIComponent(number);
 
-  // Never attach the debugger to / type into anything but the web phone
-  // (e.g. the user followed a link inside the web phone window).
+  // Desktop already open (tab, installed app or our window): hand the link to
+  // the running app. Never navigate it — a reload would drop an active call.
+  const tab = await findWebphoneTab(region);
+  if (tab) {
+    await chrome.windows.update(tab.windowId, { focused: true });
+    await chrome.tabs.update(tab.id, { active: true });
+    return sendLink(tab.id, path, settings.autoDial);
+  }
+
+  // Nothing open. Without auto-dial the URL alone does it: /dial puts the
+  // number on the dialpad and keeps it through sign-in. With auto-dial the
+  // window opens on the dialer and the call request goes in as a message,
+  // because a URL never places a call by itself.
+  const origin = new URL(region.webphoneUrl).origin;
+  if (!settings.autoDial) {
+    await openPopupWindow(origin + path);
+    return;
+  }
+  const { tabId } = await openPopupWindow();
+  await waitForTabComplete(tabId);
+  return sendLink(tabId, path, true);
+}
+
+async function sendLink(tabId, path, call) {
+  // Only ever talk to the desktop (e.g. not a page the user followed a link
+  // to inside the web phone window).
   const tab = await chrome.tabs.get(tabId);
   const url = tab.url || tab.pendingUrl || '';
   if (!HC_CONFIG.isWebphoneUrl(url)) {
-    throw new Error('tab is not a Hipcall web phone: ' + url.split('?')[0]);
-  }
-  // On another screen (Home, Chats...)? Open the dialer first.
-  if (!/^\/(calls|phone\/dialpad)(\/|$)/.test(new URL(url).pathname)) {
-    const dialerUrl = new URL('/calls', url).href;
-    log('Opening the dialer:', dialerUrl);
-    // Navigate from inside the page: an installed Hipcall app could otherwise
-    // "capture" an extension-initiated navigation into its own window.
-    try {
-      await chrome.scripting.executeScript({
-        target: { tabId },
-        func: (target) => { location.assign(target); },
-        args: [dialerUrl]
-      });
-    } catch (_) {
-      await chrome.tabs.update(tabId, { url: dialerUrl });
-    }
-    await sleep(300);
-    await waitForTabComplete(tabId);
+    throw new Error('tab is not the Hipcall desktop: ' + url.split('?')[0]);
   }
   await ensureBridge(tabId);
-
-  const { autoDial } = await HC_CONFIG.getSettings();
-
-  cancelDetach(tabId);
-  const { trusted, attachedAt } = await attachDebugger(tabId);
-  try {
-    const send = (attached) => chrome.tabs.sendMessage(tabId, {
-      type: 'fillDialer',
-      data: { number, trusted, attachedAt: attached, autoDial }
-    });
-    let res = await send(attachedAt);
-
-    // The web phone was on another screen and the side menu did not work:
-    // load the dialer URL in the same tab, then type the number again.
-    if (res && !res.ok && /NAVIGATE_TO_DIALER/.test(res.error || '')) {
-      const current = await chrome.tabs.get(tabId);
-      const dialerUrl = new URL('/calls', current.url).href;
-      log('Loading the dialer:', dialerUrl);
-      await chrome.tabs.update(tabId, { url: dialerUrl });
-      await sleep(300);
-      await waitForTabComplete(tabId);
-      await ensureBridge(tabId);
-      res = await send(null);
-    }
-    if (!res || !res.ok) throw new Error((res && res.error) || 'unknown error');
-    log(`Done in ${Date.now() - t0} ms:`, res);
-  } finally {
-    if (trusted) scheduleDetach(tabId);
-  }
+  const res = await chrome.tabs.sendMessage(tabId, { type: 'dialLink', path, call: !!call });
+  if (!res || !res.ok) throw new Error((res && res.error) || 'no answer from the desktop');
+  log('Handed over:', path, call ? '(call)' : '(dialpad)');
 }
-
-/* ------------------------------------------------------------------ */
-/* Trusted input through chrome.debugger                               */
-/* ------------------------------------------------------------------ */
-
-const attachedTabs = new Set();
-const detachTimers = new Map();
-
-/** @returns {{trusted: boolean, attachedAt: number|null}} attachedAt is set when freshly attached. */
-async function attachDebugger(tabId) {
-  await startupCleanup; // must not detach the session we are about to create
-  if (attachedTabs.has(tabId)) return { trusted: true, attachedAt: null };
-  try {
-    await chrome.debugger.attach({ tabId }, DEBUGGER_VERSION);
-    attachedTabs.add(tabId);
-    return { trusted: true, attachedAt: Date.now() };
-  } catch (err) {
-    console.warn('[Hipcall] debugger not available, using fallback input:', errText(err));
-    return { trusted: false, attachedAt: null };
-  }
-}
-
-function cancelDetach(tabId) {
-  clearTimeout(detachTimers.get(tabId));
-  detachTimers.delete(tabId);
-}
-
-function scheduleDetach(tabId) {
-  cancelDetach(tabId);
-  if (KEEP_ATTACHED_MS <= 0) return void detachDebugger(tabId);
-  detachTimers.set(tabId, setTimeout(() => {
-    detachTimers.delete(tabId);
-    detachDebugger(tabId);
-  }, KEEP_ATTACHED_MS));
-}
-
-async function detachDebugger(tabId) {
-  if (!attachedTabs.has(tabId)) return;
-  attachedTabs.delete(tabId);
-  try { await chrome.debugger.detach({ tabId }); } catch (_) { /* already detached */ }
-}
-
-// If the service worker was stopped while attached (timers are lost), the
-// "is debugging this browser" bar would stay. Detach leftovers on startup;
-// detach() only succeeds for sessions this extension owns.
-const startupCleanup = (async () => {
-  const tabs = await chrome.tabs.query({ url: HC_CONFIG.ALL_PATTERNS });
-  for (const tab of tabs) {
-    try { await chrome.debugger.detach({ tabId: tab.id }); } catch (_) { /* not ours / not attached */ }
-  }
-})().catch(() => {});
-
-chrome.debugger.onDetach.addListener((source) => {
-  if (source.tabId == null) return;
-  attachedTabs.delete(source.tabId);
-  cancelDetach(source.tabId);
-});
-
-chrome.tabs.onRemoved.addListener((tabId) => {
-  attachedTabs.delete(tabId);
-  cancelDetach(tabId);
-});
 
 /**
  * Accepts digits with an optional leading "+" and * # (extensions / codes);
@@ -495,41 +379,6 @@ function sanitizeNumber(raw) {
   const digits = cleaned.replace(/\D/g, '').length;
   if (digits < 3 || digits > 16 || cleaned.length > 20) return null;
   return (plus ? '+' : '') + cleaned;
-}
-
-async function trustedClick(tabId, x, y) {
-  if (tabId == null || !attachedTabs.has(tabId)) throw new Error('debugger not attached');
-  const target = { tabId };
-  const send = (params) => chrome.debugger.sendCommand(target, 'Input.dispatchMouseEvent', params);
-
-  await send({ type: 'mouseMoved', x, y, button: 'none', buttons: 0 });
-  await send({ type: 'mousePressed', x, y, button: 'left', buttons: 1, clickCount: 1 });
-  await sleep(15);
-  await send({ type: 'mouseReleased', x, y, button: 'left', buttons: 0, clickCount: 1 });
-}
-
-async function trustedInput(tabId, msg) {
-  if (tabId == null || !attachedTabs.has(tabId)) throw new Error('debugger not attached');
-  const target = { tabId };
-  const key = (params) => chrome.debugger.sendCommand(target, 'Input.dispatchKeyEvent', params);
-
-  if (msg.op === 'selectAllDelete') {
-    const a = { key: 'a', code: 'KeyA', windowsVirtualKeyCode: 65, nativeVirtualKeyCode: 65, modifiers: 2 };
-    await key({ type: 'rawKeyDown', ...a, commands: ['selectAll'] });
-    await key({ type: 'keyUp', ...a });
-    const bs = { key: 'Backspace', code: 'Backspace', windowsVirtualKeyCode: 8, nativeVirtualKeyCode: 8 };
-    await key({ type: 'rawKeyDown', ...bs });
-    await key({ type: 'keyUp', ...bs });
-    return;
-  }
-
-  if (msg.op === 'insertText') {
-    // Same effect as typing or pasting with Ctrl+V.
-    await chrome.debugger.sendCommand(target, 'Input.insertText', { text: String(msg.text || '') });
-    return;
-  }
-
-  throw new Error('unknown op: ' + msg.op);
 }
 
 /* ------------------------------------------------------------------ */
@@ -547,10 +396,6 @@ chrome.webNavigation.onHistoryStateUpdated.addListener((details) => {
 });
 
 /* ------------------------------------------------------------------ */
-
-function sleep(ms) {
-  return new Promise((resolve) => setTimeout(resolve, ms));
-}
 
 function errText(err) {
   return String(err && err.message ? err.message : err);

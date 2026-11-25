@@ -313,5 +313,13 @@
   "menuNoNumberHere": {
     "message": "Geen nummer gevonden op de plek waar je met rechts klikte. Selecteer het nummer en probeer het opnieuw.",
     "description": "Notification text"
+  },
+  "regionLocal": {
+    "message": "Lokale ontwikkeling (localhost:19823)",
+    "description": ""
+  },
+  "desktopOutdated": {
+    "message": "Laad het Hipcall-tabblad opnieuw en probeer het nog eens. Deze versie van Hipcall kan geen nummers van de extensie ontvangen.",
+    "description": ""
   }
 }
