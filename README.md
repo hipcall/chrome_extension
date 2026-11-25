@@ -31,6 +31,8 @@ to place the call. The desktop marks support with `<html data-hipcall-links="1">
 "reload the Hipcall tab" notification.
 
 - **Desktop open** (tab, installed app or the extension's window): the link goes in as a message.
+Full walkthrough with code references on both sides: [docs/APP_LINKS.md](docs/APP_LINKS.md).
+
 - **Nothing open**: auto-dial off → the window opens on `/dial?number=…` (survives sign-in); auto-dial on →
   the window opens on the dialer and the call request goes in as a message once the app is ready.
 
