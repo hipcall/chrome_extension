@@ -35,7 +35,24 @@ var HC_CONFIG = (() => {
   };
   const REGION_ORDER = ['tr', 'eu', 'uk', 'us'];
 
-  const ALL_PATTERNS = [...SERVERS.tr.patterns, ...SERVERS.global.patterns];
+  // Loaded unpacked (chrome://extensions → Load unpacked): a Web Store install
+  // always has update_url in its manifest. Only then is the desktop web app
+  // run locally (`flutter run -d web-server --web-port=19823`, see the desktop
+  // repo's DEVELOPMENT.md) offered, so it can never reach a published build.
+  const IS_DEV = !('update_url' in chrome.runtime.getManifest());
+  // The port the desktop's OAuth app accepts for local runs.
+  const LOCAL_PORT = '19823';
+  if (IS_DEV) {
+    SERVERS.local = {
+      webphoneUrl: `http://localhost:${LOCAL_PORT}/calls`,
+      // Match patterns cannot name a port; any localhost page counts.
+      patterns: ['*://localhost/*']
+    };
+    REGIONS.local = { id: 'local', server: 'local', nameKey: 'regionLocal' };
+    REGION_ORDER.push('local');
+  }
+
+  const ALL_PATTERNS = Object.values(SERVERS).flatMap((s) => s.patterns);
 
   // Browser languages mapped to the EU region on first install.
   const EU_LANGS = ['bg', 'cs', 'da', 'de', 'el', 'es', 'et', 'fi', 'fr', 'ga', 'hr', 'hu', 'it',
@@ -91,8 +108,17 @@ var HC_CONFIG = (() => {
 
   /** Is the URL a Hipcall web phone page (any region, or the given region)? */
   function isWebphoneUrl(url, region) {
-    return (region ? region.patterns : ALL_PATTERNS).some((p) => matchesPattern(url, p));
+    if (!(region ? region.patterns : ALL_PATTERNS).some((p) => matchesPattern(url, p))) return false;
+    // The local pattern covers every localhost port; only the desktop's
+    // development port is the desktop.
+    try {
+      const u = new URL(url);
+      if (u.hostname === 'localhost') return u.port === LOCAL_PORT;
+    } catch (_) {
+      return false;
+    }
+    return true;
   }
 
-  return { REGIONS, REGION_ORDER, SERVERS, ALL_PATTERNS, POPUP_WINDOW, defaultRegion, getSettings, setSettings, region, isWebphoneUrl };
+  return { REGIONS, REGION_ORDER, SERVERS, ALL_PATTERNS, POPUP_WINDOW, IS_DEV, defaultRegion, getSettings, setSettings, region, isWebphoneUrl };
 })();

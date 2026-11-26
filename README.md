@@ -5,7 +5,7 @@ One extension for every Hipcall account region — **Türkiye** (hipcall.com.tr)
 ## Features
 
 - **Web phone window** — opens the Hipcall web phone in a separate popup window (popup → *Open web phone*) and warns when it is closed (no incoming calls while closed).
-- **Click to call** — clicking a `tel:` link or a call icon calls the number through the **Hipcall desktop** (desktop.hipcall.com(.tr) as a browser tab or installed app). If the desktop is not open, the web phone is opened in the extension's popup window; if the number cannot be entered (e.g. not signed in), a notification says so.
+- **Click to call** — clicking a `tel:` link or a call icon calls the number through the **Hipcall desktop** (desktop.hipcall.com(.tr) as a browser tab or installed app). If the desktop is not open, the web phone is opened in the extension's popup window; if the number cannot be handed over, a notification says so. Only real clicks count: a page cannot trigger a call by scripting a click.
 - **Right-click → Call with Hipcall** — select any number on a page (also ones the scan does not detect) and call it from the context menu.
 - **Local number formats per region** — besides international numbers (+/00), each account region detects its national format: Türkiye `0532 123 45 67`, UK `020 7946 0958`, US `(212) 555-0123` (`js/phone.js`). EU regions detect international numbers only.
 - **Works inside iframes** — call icons also appear in embedded frames (CRMs, panels); the site rules of the tab apply.
@@ -18,22 +18,30 @@ One extension for every Hipcall account region — **Türkiye** (hipcall.com.tr)
 ## How a call reaches the web phone
 
 ```
-content_script.js / popup ──{type:'call'}──▶ service_worker.js ──{type:'fillDialer'}──▶ hipcall_bridge.js
-                                               ▲                                            │
-                                               └──── trustedTap / trustedInput ─────────────┘
+content_script.js / popup / menu ──{type:'call'}──▶ service_worker.js ──{type:'dialLink'}──▶ hipcall_bridge.js
+                                                                                                  │
+                     desktop web app ◀── window.postMessage({type:'hipcall:link', path:'/dial?number=…', call}) ──┘
+                                     ──▶ {type:'hipcall:link-ack', id, ok}
 ```
 
-The web phone is a Flutter (canvas) app that ignores synthetic DOM events. The bridge enables Flutter's
-semantics layer to locate the number field and keypad; the service worker then clicks the field and inserts
-the number as **trusted input via `chrome.debugger`** (Chrome shows a short "is debugging this browser" bar).
-If the debugger cannot attach (e.g. DevTools open on that tab), the bridge falls back to pressing the keypad
-with DOM events.
+The desktop web app accepts links (hipcall/hq#5397): `/dial?number=%2B90…` as a URL puts the number on
+the dialpad, and the same path sent as a `hipcall:link` message from the page's own origin does it without
+reloading the page, so an active call is never dropped. `call: true` (the *Auto-dial* setting) asks the desktop
+to place the call. The desktop marks support with `<html data-hipcall-links="1">`; an older desktop tab gets a
+"reload the Hipcall tab" notification.
+
+- **Desktop open** (tab, installed app or the extension's window): the link goes in as a message.
+Full walkthrough with code references on both sides: [docs/APP_LINKS.md](docs/APP_LINKS.md).
+
+- **Nothing open**: auto-dial off → the window opens on `/dial?number=…` (survives sign-in); auto-dial on →
+  the window opens on the dialer and the call request goes in as a message once the app is ready.
 
 ## Security & privacy
 
 - No data leaves the browser except to the Hipcall web phone the user calls through; no analytics, no third-party requests.
-- `chrome.debugger` is attached **only** to Hipcall web phone pages (checked before attaching and on every input request), for a few seconds per call, and detached afterwards (leftover sessions are detached on service-worker start).
-- Numbers are sanitized (digits, leading `+`, `*`/`#`, 3–16 digits) before they reach the web phone; auto-dial only presses *call* when the number is verified on screen.
+- No `debugger` permission: numbers reach the desktop through its link API, never as simulated input.
+- Calls start only from a real user action (`isTrusted` click, context menu, popup). A page cannot place a call by scripting a click on a `tel:` link or an icon.
+- Numbers are sanitized (digits, leading `+`, `*`/`#`, 3–16 digits) before they reach the web phone, and again by the desktop.
 - Page text is inserted with `textContent` only; the contact-page scan fetches plain same-origin pages and skips links that could change state (logout, delete, unsubscribe...).
 
 ## Files
@@ -41,13 +49,13 @@ with DOM events.
 | File | Purpose |
 |---|---|
 | `manifest.json` | MV3 manifest, permissions, localized name/description |
-| `service_worker.js` | Web phone window, click-to-call, trusted input via `chrome.debugger` |
+| `service_worker.js` | Web phone window, click-to-call: hands `/dial` links to the desktop |
 | `js/config.js` | Account regions → web phone servers, user settings |
 | `js/phone.js` | Phone number detection and normalization per region (shared by content script and popup) |
 | `js/i18n.js` | Translations with a user-selectable language |
 | `js/content_script.js` | `tel:` link handling and call icons on websites |
 | `js/site_rules.js` | Per-site icon rules (shared by content script and popup) |
-| `js/hipcall_bridge.js` | Runs in the web phone; types the number and starts the call |
+| `js/hipcall_bridge.js` | Runs in the desktop tab; posts the link to the app and waits for its ack |
 | `src/browser_action/*` | Toolbar popup: numbers/e-mails and settings |
 | `_locales/{de,en,es,fr,it,nl,tr}/messages.json` | Translations — add a folder, an `<option>` in the popup and the code in `HC_I18N.SUPPORTED` to add a language |
 | `scripts/*.sh`, `.github/workflows/release.yml` | Packaging and release (see *Release*) |
@@ -57,7 +65,9 @@ with DOM events.
 
 1. `chrome://extensions` → enable *Developer mode* → *Load unpacked* → select this folder.
 2. After changing files click *Reload* on the extension and refresh open pages.
-3. Web phone URLs per region are in `js/config.js`.
+3. Web phone URLs per region are in `js/config.js`. Unpacked builds also offer **Local development** in
+   *Settings → Account region*: the desktop web app run with
+   `fvm flutter run -d web-server --web-port=19823` (desktop repo, DEVELOPMENT.md). Web Store installs never show it.
 4. `scripts/package.sh` checks the JSON files and builds `dist/hipcall-webphone-<version>.zip` (needs `jq`).
 
 ## Release

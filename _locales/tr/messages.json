@@ -313,5 +313,13 @@
   "menuNoNumberHere": {
     "message": "Sağ tıkladığınız yerde aranabilecek bir numara bulunamadı. Numarayı seçip tekrar deneyin.",
     "description": "Notification text"
+  },
+  "regionLocal": {
+    "message": "Yerel geliştirme (localhost:19823)",
+    "description": ""
+  },
+  "desktopOutdated": {
+    "message": "Hipcall sekmesini yenileyip tekrar deneyin. Hipcall'un bu sürümü eklentiden numara alamıyor.",
+    "description": ""
   }
 }
