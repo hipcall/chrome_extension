@@ -569,6 +569,8 @@
     if (!isAlive()) return;
     const page = await pageLocation();
     pageHost = page.hostname;
+    // Hipcall's own pages (portal, contacts…) keep their own call icons.
+    if (HC_CONFIG.isHipcallSite(page.hostname)) { deactivate(); return; }
     const rule = await HC_SITE_RULES.getRule(page.hostname);
     if (HC_SITE_RULES.isEnabled(rule, page.pathname)) activate();
     else deactivate();

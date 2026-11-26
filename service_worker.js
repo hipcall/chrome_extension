@@ -16,7 +16,7 @@
  * text input on it through chrome.debugger. If the debugger cannot attach
  * (e.g. DevTools is open on that tab) the bridge falls back to DOM events.
  */
-importScripts('js/config.js', 'js/i18n.js', 'js/phone.js');
+importScripts('js/config.js', 'js/i18n.js', 'js/phone.js', 'js/auth.js', 'js/crm.js');
 
 const DEBUGGER_VERSION = '1.3';
 // Keep the debugger attached for a while after a call so consecutive calls are
@@ -158,6 +158,29 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     return true;
   }
 
+  // Hipcall account (OAuth) and CRM — only from the extension's own pages
+  // (popup), never from content scripts running on websites.
+  const fromExtensionPage = sender.id === chrome.runtime.id &&
+    typeof sender.url === 'string' && sender.url.startsWith(chrome.runtime.getURL(''));
+  if (/^(auth|crm)/.test(request.type || '') && fromExtensionPage) {
+    const jobs = {
+      authStatus: () => HC_AUTH.status(),
+      authLogin: () => HC_AUTH.login(),
+      authLogout: () => HC_AUTH.logout().then(() => HC_AUTH.status()),
+      crmFind: () => HC_CRM.find(request.data || {}),
+      crmActivities: () => HC_CRM.activities(request.data || {}),
+      crmCreateCompany: () => HC_CRM.createCompany(request.data || {}),
+      crmCompanyFields: () => HC_CRM.companyCustomFields(),
+      crmLinkedin: () => HC_CRM.linkedinLookup(request.data || {})
+    };
+    const job = jobs[request.type];
+    if (!job) return false;
+    job()
+      .then((data) => sendResponse({ ok: true, data }))
+      .catch((err) => sendResponse({ ok: false, error: errText(err), fields: err.fields || null }));
+    return true;
+  }
+
   // Content script inside an iframe asks for the tab's URL (site rules apply
   // to the page the user sees, not to the embedded frame).
   if (request.type === 'tabUrl') {
@@ -292,6 +315,14 @@ async function openWebphone() {
 
   return openPopupWindow();
 }
+
+// OAuth sign-in window: read the redirect, and notice when it is closed.
+chrome.webNavigation.onBeforeNavigate.addListener((details) => { HC_AUTH.onRedirect(details); });
+chrome.webNavigation.onErrorOccurred.addListener((details) => { HC_AUTH.onRedirect(details); });
+chrome.tabs.onUpdated.addListener((tabId, info, tab) => {
+  if (info.url) HC_AUTH.onRedirect({ frameId: 0, url: info.url, windowId: tab.windowId });
+});
+chrome.windows.onRemoved.addListener((windowId) => { HC_AUTH.onWindowClosed(windowId); });
 
 chrome.windows.onRemoved.addListener(async (windowId) => {
   if (windowId !== (await getPopupWindowId())) return;

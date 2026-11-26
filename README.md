@@ -14,6 +14,15 @@ One extension for every Hipcall account region — **Türkiye** (hipcall.com.tr)
 - **Account region** — Türkiye, EU, UK or US, like the Hipcall apps. Guessed from the browser language on install and changeable in *Settings*; the web phone server (hipcall.com.tr / hipcall.com) follows the region automatically.
 - **Language** — Automatic (browser language), Türkçe or English, selectable in *Settings* (`_locales/tr`, `_locales/en`, loaded by `js/i18n.js`).
 - **Auto-dial** — optionally press the call button automatically after the number is entered.
+- **No icons on Hipcall's own sites** — use.hipcall.com(.tr), hipcall.com(.tr): their pages have their own call buttons, so the extension never adds icons there (whatever the site rules say).
+
+### Hipcall account (OAuth 2.1 + PKCE)
+
+- **Sign in with Hipcall** — *Settings* (gear icon) → *Hipcall account*. Authorization code flow with PKCE (S256) for a public client: **no client secret in the extension**. Scopes: `profile email offline_access contacts:read contacts:write`. Tokens are kept in `chrome.storage.local` by the service worker (pages and content scripts never see them) and refreshed automatically. Currently configured for the Türkiye server only (`js/config.js` → `OAUTH`).
+- **Find** (Discover tab) — looks the page's phone numbers, e-mails and website up in Hipcall (`/api/v3/lookup/by_phone`, `/lookup/by_email`, company search by domain) and lists the matching contacts and companies, with why they matched.
+- **Add as a company** — when nothing is found, a form prefilled from the page (name, website, LinkedIn, description, all phones/e-mails found — at most 6 each, the API limit — and the account's custom fields, required ones marked) creates the company with `POST /api/v3/companies`, assigned to the signed-in user. Validation errors are shown per field in plain language.
+- **LinkedIn** — on a LinkedIn profile the popup shows the person (headline, location, current company, the *Contact info* dialog's websites/phones/e-mails) and whether the person and the company are in Hipcall; on a company page it shows the company (industry, size, website, phone from the *About* tab) and can add it to Hipcall prefilled.
+- **Activities** tab — your latest Hipcall activities (`/api/v3/me/activities`).
 
 ## How a call reaches the web phone
 
@@ -42,13 +51,15 @@ with DOM events.
 |---|---|
 | `manifest.json` | MV3 manifest, permissions, localized name/description |
 | `service_worker.js` | Web phone window, click-to-call, trusted input via `chrome.debugger` |
-| `js/config.js` | Account regions → web phone servers, user settings |
+| `js/config.js` | Account regions → web phone / API servers, OAuth client, user settings |
+| `js/auth.js` | Sign-in with Hipcall (OAuth 2.1 + PKCE), tokens, authenticated API calls |
+| `js/crm.js` | Find, LinkedIn lookup, add company, custom fields, activities |
 | `js/phone.js` | Phone number detection and normalization per region (shared by content script and popup) |
 | `js/i18n.js` | Translations with a user-selectable language |
 | `js/content_script.js` | `tel:` link handling and call icons on websites |
 | `js/site_rules.js` | Per-site icon rules (shared by content script and popup) |
 | `js/hipcall_bridge.js` | Runs in the web phone; types the number and starts the call |
-| `src/browser_action/*` | Toolbar popup: numbers/e-mails and settings |
+| `src/browser_action/*` | Toolbar popup: Discover (numbers/e-mails, Find, LinkedIn), Activities, settings sheet, add-company form |
 | `_locales/{tr,en}/messages.json` | Translations — add a folder to add a language |
 | `icons/hipcall-*.svg`, `fonts/` | Brand assets from the [Hipcall brand guide](https://www.hipcall.com/brand-guide/); fonts are OFL-1.1 (licenses in `fonts/`) |
 
@@ -57,3 +68,4 @@ with DOM events.
 1. `chrome://extensions` → enable *Developer mode* → *Load unpacked* → select this folder.
 2. After changing files click *Reload* on the extension and refresh open pages.
 3. Web phone URLs per region are in `js/config.js`.
+4. OAuth: `OAUTH.redirectUri` in `js/config.js` must be registered for the PKCE client exactly as written (temporary ngrok address for now). The sign-in window is closed as soon as it reaches that address and the code is read from the URL.
