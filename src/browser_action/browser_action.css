@@ -467,3 +467,17 @@ header .logo { margin-right: auto; }
 .li-status.info .mark { background: var(--gray-400); }
 .li-hipcall .wide { width: 100%; margin-top: 6px; }
 .muted-link { color: var(--gray-400) !important; font-size: 11.5px !important; display: block; }
+
+/* Account region combobox: the selected region's flag sits inside the box */
+.region-select .flag {
+  position: absolute; left: 12px; top: 50%; transform: translateY(-50%); pointer-events: none;
+  width: 24px; height: 16px; border-radius: 3px; overflow: hidden; box-shadow: 0 0 0 1px rgba(15, 23, 42, .1);
+}
+.region-select .flag svg { display: block; width: 100%; height: 100%; }
+.region-select select { padding-left: 46px; }
+
+/* Signed out: only the sign-in button */
+.find-head .signin-btn { flex: none; white-space: nowrap; }
+.signin-only { display: flex; flex-direction: column; align-items: center; gap: 10px; padding: 28px 12px; text-align: center; }
+.signin-only .signin-btn { min-width: 200px; }
+.li-hipcall.signed-out { display: flex; justify-content: center; padding: 14px; }

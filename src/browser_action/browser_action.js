@@ -356,29 +356,25 @@ const FLAGS = {
 async function initGeneralSettings() {
   const settings = await HC_CONFIG.getSettings();
 
-  // Account region
-  const list = $('regionList');
-  const buttons = HC_CONFIG.REGION_ORDER.map((id) => {
+  // Account region (combobox; the flag of the selected region is shown in it)
+  const select = $('region');
+  HC_CONFIG.REGION_ORDER.forEach((id) => {
     const region = HC_CONFIG.region(id);
-    const btn = document.createElement('button');
-    btn.className = 'region';
-    btn.setAttribute('role', 'radio');
-    btn.dataset.value = id;
-    btn.innerHTML = `<span class="flag">${FLAGS[id] ? FLAGS[id]() : ''}</span>
-      <span class="name"></span>${ICON.check.replace('<svg', '<svg class="check"')}`;
-    btn.querySelector('.name').textContent = t(region.nameKey);
+    const opt = document.createElement('option');
+    opt.value = id;
+    opt.textContent = t(region.nameKey);
     // The server (hipcall.com.tr / hipcall.com) follows the region automatically.
-    btn.title = new URL(region.webphoneUrl).hostname;
-    btn.addEventListener('click', async () => {
-      mark(id);
-      await HC_CONFIG.setSettings({ region: id });
-      chrome.runtime.sendMessage({ type: 'regionChanged' });
-    });
-    list.appendChild(btn);
-    return btn;
+    opt.title = new URL(region.webphoneUrl).hostname;
+    select.appendChild(opt);
   });
-  const mark = (id) => buttons.forEach((b) => b.setAttribute('aria-checked', b.dataset.value === id));
-  mark(settings.region);
+  const showFlag = (id) => { $('regionFlag').innerHTML = FLAGS[id] ? FLAGS[id]() : ''; };
+  select.value = settings.region;
+  showFlag(settings.region);
+  select.addEventListener('change', async () => {
+    showFlag(select.value);
+    await HC_CONFIG.setSettings({ region: select.value });
+    chrome.runtime.sendMessage({ type: 'regionChanged' });
+  });
 
   // Language → reopen the popup in the new language.
   $('language').value = settings.language || 'auto';
@@ -782,6 +778,7 @@ async function refreshAccount() {
   const res = await bg('authStatus');
   account = res.ok ? res.data : { available: false, signedIn: false, user: null };
   renderAccount();
+  renderFindGate();
   renderActivitiesGate();
   // LinkedIn view: search Hipcall as soon as we know the user is signed in.
   if (linkedinData) {
@@ -1058,7 +1055,35 @@ function initActivities() {
   $('activitiesMore').addEventListener('click', () => loadActivities(false, true));
 }
 
+/**
+ * Features that need a Hipcall sign-in are not shown without it: signed out,
+ * only the sign-in button is; where sign-in is not available (region without
+ * an OAuth client) they are hidden altogether.
+ */
+function renderFindGate() {
+  const card = document.querySelector('.find.card');
+  if (!card) return;
+  card.hidden = !account.available;
+  $('findBtn').hidden = !account.signedIn;
+  let btn = card.querySelector('.find-head .signin-btn');
+  if (account.available && !account.signedIn) {
+    if (!btn) {
+      btn = signinButton();
+      btn.classList.add('small');
+      card.querySelector('.find-head').appendChild(btn);
+    }
+    $('findResults').innerHTML = '';
+    $('findStatus').textContent = '';
+  } else if (btn) {
+    btn.remove();
+  }
+}
+
 function renderActivitiesGate() {
+  const tab = document.querySelector('.tab[data-tab="activities"]');
+  tab.hidden = !account.available;
+  if (!account.available && tab.classList.contains('active')) showTab('find');
+
   const gate = $('activitiesSignin');
   $('activitiesArea').hidden = !account.signedIn;
   gate.hidden = account.signedIn;
@@ -1069,11 +1094,7 @@ function renderActivitiesGate() {
   activitiesLoaded = false;
   $('activitiesList').innerHTML = '';
   gate.innerHTML = '';
-  const h = document.createElement('h3');
-  h.textContent = t('activitiesTitle');
-  const p = document.createElement('p');
-  p.textContent = account.available ? t('activitiesNeedsSignin') : t('signinNotAvailable');
-  gate.append(h, p);
+  gate.className = 'signin-only';
   if (account.available) gate.appendChild(signinButton());
 }
 
@@ -2407,10 +2428,15 @@ function renderLinkedinHipcall() {
   hc.appendChild(h);
 
   if (!account.signedIn) {
-    hc.appendChild(el('p', 'muted', account.available ? t('findNeedsSignin') : t('signinNotAvailable')));
+    // Signed out: only the sign-in button (nothing at all where sign-in is not available).
+    hc.innerHTML = '';
+    hc.hidden = !account.available;
+    hc.classList.add('signed-out');
     if (account.available) hc.appendChild(signinButton(t('signIn'), lookupLinkedin));
     return;
   }
+  hc.hidden = false;
+  hc.classList.remove('signed-out');
   const r = linkedinHipcall;
   if (!r || r.loading) { hc.appendChild(el('p', 'muted', t('findSearching'))); return; }
   if (r.error) { hc.appendChild(el('p', 'is-error', errorText(r.error))); return; }

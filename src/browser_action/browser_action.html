@@ -107,9 +107,13 @@
       </div>
 
       <div class="group">
-        <h2 data-i18n="regionTitle"></h2>
+        <h2 id="regionTitle" data-i18n="regionTitle"></h2>
         <p class="sub" data-i18n="regionSub"></p>
-        <div class="card list" id="regionList" role="radiogroup"></div>
+        <!-- A combobox: compact, and room for more regions -->
+        <div class="select-wrap region-select">
+          <span class="flag" id="regionFlag" aria-hidden="true"></span>
+          <select id="region" aria-labelledby="regionTitle"></select>
+        </div>
       </div>
 
       <div class="group">
