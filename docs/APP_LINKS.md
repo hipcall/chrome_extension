@@ -1,6 +1,6 @@
 # How a call reaches the web phone (app links)
 
-From v2.1.0 on `feat/app-links`, the extension no longer attaches `chrome.debugger` to type the number into the web phone and press the call button. It now hands the web phone a **link**: the app path `/dial?number=…`. The web phone (the Hipcall desktop web app) opens that link itself.
+From v2.2.0 on, the extension no longer attaches `chrome.debugger` to type the number into the web phone and press the call button. It now hands the web phone a **link**: the app path `/dial?number=…`. The web phone (the Hipcall desktop web app) opens that link itself.
 
 This document explains the new flow end to end, with code references on both sides. It is written for anyone who maintains the extension.
 

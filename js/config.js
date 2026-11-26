@@ -16,15 +16,14 @@ var HC_CONFIG = (() => {
     tr: {
       webphoneUrl: 'https://desktop.hipcall.com.tr/calls',
       apiBase: 'https://use.hipcall.com.tr',
-      // Pages that ARE the web phone. use.hipcall.com.tr also hosts other
-      // pages (e.g. /api-docs) that must not be mistaken for it; its old
-      // /phone/dialpad/ address redirects to desktop.hipcall.com.tr.
-      patterns: ['*://desktop.hipcall.com.tr/*', '*://use.hipcall.com.tr/phone/*', '*://phone.hipcall.com.tr/*']
+      // Pages that ARE the web phone (the desktop). use.hipcall.com(.tr) is the
+      // CRM / API host, never the web phone.
+      patterns: ['*://desktop.hipcall.com.tr/*']
     },
     global: {
       webphoneUrl: 'https://desktop.hipcall.com/calls',
       apiBase: 'https://use.hipcall.com',
-      patterns: ['*://desktop.hipcall.com/*', '*://use.hipcall.com/phone/*', '*://phone.hipcall.com/*']
+      patterns: ['*://desktop.hipcall.com/*']
     }
   };
 
@@ -114,7 +113,7 @@ var HC_CONFIG = (() => {
     return { ...r, ...SERVERS[r.server] };
   }
 
-  /** Does the URL match a match pattern like '*://use.hipcall.com.tr/phone/*'? */
+  /** Does the URL match a match pattern like '*://desktop.hipcall.com.tr/*'? */
   function matchesPattern(url, pattern) {
     const m = pattern.match(/^\*:\/\/([^/]+)(\/.*)$/);
     if (!m) return false;

@@ -1,6 +1,6 @@
 {
   "name": "__MSG_extName__",
-  "version": "2.1.0",
+  "version": "2.2.0",
   "manifest_version": 3,
   "description": "__MSG_extDescription__",
   "homepage_url": "https://www.hipcall.com/",
@@ -22,11 +22,9 @@
       ],
       "exclude_matches": [
         "*://desktop.hipcall.com.tr/*",
-        "*://use.hipcall.com.tr/phone/*",
-        "*://phone.hipcall.com.tr/*",
+        "*://use.hipcall.com.tr/*",
         "*://desktop.hipcall.com/*",
-        "*://use.hipcall.com/phone/*",
-        "*://phone.hipcall.com/*"
+        "*://use.hipcall.com/*"
       ],
       "js": [
         "js/i18n.js",
@@ -41,11 +39,7 @@
     {
       "matches": [
         "*://desktop.hipcall.com.tr/*",
-        "*://use.hipcall.com.tr/phone/*",
-        "*://phone.hipcall.com.tr/*",
-        "*://desktop.hipcall.com/*",
-        "*://use.hipcall.com/phone/*",
-        "*://phone.hipcall.com/*"
+        "*://desktop.hipcall.com/*"
       ],
       "js": [
         "js/hipcall_bridge.js"
