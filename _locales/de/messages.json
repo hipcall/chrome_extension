@@ -321,5 +321,446 @@
   "desktopOutdated": {
     "message": "Laden Sie den Hipcall-Tab neu und versuchen Sie es erneut. Diese Hipcall-Version kann keine Nummern von der Erweiterung empfangen.",
     "description": ""
+  },
+  "tabActivities": {
+    "message": "Aktivitäten"
+  },
+  "back": {
+    "message": "Zurück"
+  },
+  "accountTitle": {
+    "message": "Hipcall-Konto"
+  },
+  "signIn": {
+    "message": "Mit Hipcall anmelden"
+  },
+  "signingIn": {
+    "message": "Anmeldefenster ist geöffnet…"
+  },
+  "signOut": {
+    "message": "Abmelden"
+  },
+  "signedIn": {
+    "message": "Angemeldet"
+  },
+  "signinHint": {
+    "message": "Melden Sie sich mit Ihrem Hipcall-Konto an, um Kontakte und Firmen zu finden und Ihre Aktivitäten zu sehen."
+  },
+  "signinNotAvailable": {
+    "message": "Die Anmeldung mit Hipcall ist vorerst nur für Konten in der Türkei verfügbar."
+  },
+  "signinCancelled": {
+    "message": "Das Anmeldefenster wurde geschlossen."
+  },
+  "signinDenied": {
+    "message": "Der Zugriff wurde nicht gewährt."
+  },
+  "errSignedOut": {
+    "message": "Ihre Sitzung ist abgelaufen, bitte melden Sie sich erneut an."
+  },
+  "errForbidden": {
+    "message": "Sie haben keinen Zugriff auf diese Informationen."
+  },
+  "errGeneric": {
+    "message": "Ein unerwarteter Fehler ist aufgetreten: $1"
+  },
+  "findTitle": {
+    "message": "In Hipcall suchen"
+  },
+  "findHint": {
+    "message": "Sucht Kontakte und Firmen in Hipcall anhand der Nummern, E-Mail-Adressen und der Website dieser Seite."
+  },
+  "findButton": {
+    "message": "Suchen"
+  },
+  "findSearching": {
+    "message": "Suche läuft…"
+  },
+  "findNeedsSignin": {
+    "message": "Melden Sie sich mit Ihrem Hipcall-Konto an, um zu suchen."
+  },
+  "findSearched": {
+    "message": "$1 Nummern, $2 E-Mail-Adressen und die Website $3 durchsucht."
+  },
+  "findNothing": {
+    "message": "Kein passender Kontakt und keine passende Firma in Hipcall."
+  },
+  "findCompanies": {
+    "message": "Firmen ($1)"
+  },
+  "findContacts": {
+    "message": "Kontakte ($1)"
+  },
+  "findOwner": {
+    "message": "Verantwortlich: $1"
+  },
+  "match_phone": {
+    "message": "Telefon"
+  },
+  "match_email": {
+    "message": "E-Mail"
+  },
+  "match_website": {
+    "message": "Website"
+  },
+  "activitiesTitle": {
+    "message": "Ihre Aktivitäten"
+  },
+  "activitiesHint": {
+    "message": "Ihre neuesten Aktivitäten in Hipcall"
+  },
+  "activitiesNeedsSignin": {
+    "message": "Melden Sie sich mit Ihrem Hipcall-Konto an, um Ihre Aktivitäten zu sehen."
+  },
+  "activitiesEmpty": {
+    "message": "Noch keine Aktivitäten."
+  },
+  "activity": {
+    "message": "Aktivität"
+  },
+  "refresh": {
+    "message": "Aktualisieren"
+  },
+  "loadMore": {
+    "message": "Mehr laden"
+  },
+  "loading": {
+    "message": "Wird geladen…"
+  },
+  "act_call_outbound": {
+    "message": "Ausgehender Anruf"
+  },
+  "act_call_inbound": {
+    "message": "Eingehender Anruf"
+  },
+  "act_call_missed": {
+    "message": "Verpasster Anruf"
+  },
+  "act_note_created": {
+    "message": "Notiz hinzugefügt"
+  },
+  "act_contact_created": {
+    "message": "Kontakt erstellt"
+  },
+  "act_company_created": {
+    "message": "Firma erstellt"
+  },
+  "addCompany": {
+    "message": "Als Firma zu Hipcall hinzufügen"
+  },
+  "addCompanyAnyway": {
+    "message": "Als neue Firma hinzufügen"
+  },
+  "companyAddTitle": {
+    "message": "Firma hinzufügen"
+  },
+  "companyAddHint": {
+    "message": "Die Angaben wurden von dieser Website übernommen. Sie können vor dem Speichern alles ändern, ergänzen oder entfernen."
+  },
+  "fieldName": {
+    "message": "Firmenname *"
+  },
+  "fieldWebsite": {
+    "message": "Website"
+  },
+  "fieldLinkedin": {
+    "message": "LinkedIn"
+  },
+  "fieldCustomUrl": {
+    "message": "Eigene URL"
+  },
+  "fieldEmployees": {
+    "message": "Mitarbeitende"
+  },
+  "fieldDescription": {
+    "message": "Beschreibung"
+  },
+  "fieldOwner": {
+    "message": "Verantwortlich"
+  },
+  "addPhone": {
+    "message": "+ Telefon hinzufügen"
+  },
+  "addEmail": {
+    "message": "+ E-Mail hinzufügen"
+  },
+  "cancel": {
+    "message": "Abbrechen"
+  },
+  "saveCompany": {
+    "message": "Firma hinzufügen"
+  },
+  "saving": {
+    "message": "Wird gespeichert…"
+  },
+  "employeesUnknown": {
+    "message": "Keine Angabe"
+  },
+  "employees_1": {
+    "message": "1"
+  },
+  "employees_2_5": {
+    "message": "2–5"
+  },
+  "employees_6_10": {
+    "message": "6–10"
+  },
+  "employees_11_25": {
+    "message": "11–25"
+  },
+  "employees_26_50": {
+    "message": "26–50"
+  },
+  "employees_51_200": {
+    "message": "51–200"
+  },
+  "employees_201_1000": {
+    "message": "201–1.000"
+  },
+  "employees_1001_10000": {
+    "message": "1.001–10.000"
+  },
+  "employees_10001_more": {
+    "message": "10.000+"
+  },
+  "needsWriteAccess": {
+    "message": "Zum Hinzufügen von Firmen ist Schreibzugriff nötig. Bitte melden Sie sich erneut an – Ihr Formular bleibt erhalten."
+  },
+  "signInAgain": {
+    "message": "Erneut anmelden"
+  },
+  "countryCode": {
+    "message": "Ländercode (TR, US, GB…)"
+  },
+  "overLimit": {
+    "message": "Hipcall akzeptiert höchstens $1 pro Firma; diese Zeile wird nicht hinzugefügt."
+  },
+  "limitOver": {
+    "message": "$1 gefunden – die ersten $2 werden hinzugefügt"
+  },
+  "errNameShort": {
+    "message": "Der Firmenname muss mindestens 3 Zeichen lang sein."
+  },
+  "errValidation": {
+    "message": "Bitte korrigieren Sie Folgendes:"
+  },
+  "companyAdded": {
+    "message": "„$1“ wurde zu Hipcall hinzugefügt."
+  },
+  "fieldPhones": {
+    "message": "Telefonnummern"
+  },
+  "fieldEmails": {
+    "message": "E-Mail-Adressen"
+  },
+  "errInvalidScope": {
+    "message": "Hipcall erlaubt dieser Erweiterung nicht, Kontakte/Firmen hinzuzufügen (contacts:write). Dies muss bei Hipcall freigeschaltet werden."
+  },
+  "signinTimeout": {
+    "message": "Die Anmeldung hat zu lange gedauert, bitte versuchen Sie es erneut."
+  },
+  "draftRestored": {
+    "message": "Angemeldet. Ihr Formular wurde wiederhergestellt – klicken Sie erneut auf „Firma hinzufügen“."
+  },
+  "moreFields": {
+    "message": "Weitere Felder ($1)"
+  },
+  "choose": {
+    "message": "Auswählen"
+  },
+  "yes": {
+    "message": "Ja"
+  },
+  "errNumber": {
+    "message": "Geben Sie eine gültige Zahl ein."
+  },
+  "errRequired": {
+    "message": "Dieses Feld ist erforderlich."
+  },
+  "customField": {
+    "message": "Benutzerdefiniertes Feld „$1“"
+  },
+  "errNotAdded": {
+    "message": "Die Firma wurde nicht hinzugefügt. Bitte korrigieren Sie Folgendes:"
+  },
+  "errNotAddedShort": {
+    "message": "Die Firma wurde nicht hinzugefügt."
+  },
+  "errNetwork": {
+    "message": "Hipcall ist nicht erreichbar. Prüfen Sie Ihre Internetverbindung und versuchen Sie es erneut."
+  },
+  "errRateLimited": {
+    "message": "Zu viele Anfragen in kurzer Zeit. Warten Sie einen Moment und versuchen Sie es erneut."
+  },
+  "errNotFound": {
+    "message": "Hipcall konnte diesen Datensatz oder diese Adresse nicht finden."
+  },
+  "errServer": {
+    "message": "Hipcall kann gerade nicht antworten (Serverfehler). Versuchen Sie es in einigen Minuten erneut."
+  },
+  "errApi": {
+    "message": "Hipcall hat die Anfrage nicht akzeptiert: $1"
+  },
+  "errSigninState": {
+    "message": "Die Anmeldung konnte nicht bestätigt werden (Sicherheitsprüfung). Bitte melden Sie sich erneut an."
+  },
+  "errToken": {
+    "message": "Die Anmeldung konnte nicht abgeschlossen werden, Hipcall hat keinen Sitzungsschlüssel ausgegeben ($1). Bitte versuchen Sie es erneut."
+  },
+  "errSignin": {
+    "message": "Hipcall hat die Anmeldung abgelehnt ($1)."
+  },
+  "phoneN": {
+    "message": "Telefon $1"
+  },
+  "emailN": {
+    "message": "E-Mail $1"
+  },
+  "vBlank": {
+    "message": "Dieses Feld darf nicht leer sein."
+  },
+  "vTaken": {
+    "message": "Ein anderer Datensatz verwendet diesen Wert bereits."
+  },
+  "vInvalid": {
+    "message": "Ungültiger Wert."
+  },
+  "vFormat": {
+    "message": "Falsches Format."
+  },
+  "vPhone": {
+    "message": "Keine gültige Telefonnummer. Prüfen Sie Nummer und Ländercode."
+  },
+  "vEmail": {
+    "message": "Keine gültige E-Mail-Adresse."
+  },
+  "vMinLen": {
+    "message": "Muss mindestens $1 Zeichen lang sein."
+  },
+  "vMaxLen": {
+    "message": "Darf höchstens $1 Zeichen lang sein."
+  },
+  "vMaxItems": {
+    "message": "Höchstens $1 möglich."
+  },
+  "vMinItems": {
+    "message": "Mindestens $1 erforderlich."
+  },
+  "vNotInList": {
+    "message": "Keine der erlaubten Optionen."
+  },
+  "vNotExist": {
+    "message": "Dieser Datensatz existiert in Hipcall nicht."
+  },
+  "vReserved": {
+    "message": "Dieser Wert kann nicht verwendet werden."
+  },
+  "vRange": {
+    "message": "Der Wert liegt außerhalb des erlaubten Bereichs."
+  },
+  "vUnknownField": {
+    "message": "Hipcall kennt dieses benutzerdefinierte Feld nicht."
+  },
+  "vInactive": {
+    "message": "Dieses benutzerdefinierte Feld ist in Hipcall deaktiviert."
+  },
+  "customFieldsUnavailable": {
+    "message": "Die benutzerdefinierten Felder konnten nicht von Hipcall geladen werden ($1). Pflichtfelder werden beim Speichern hier angezeigt."
+  },
+  "liPerson": {
+    "message": "LinkedIn-Profil"
+  },
+  "liCompany": {
+    "message": "LinkedIn-Unternehmensseite"
+  },
+  "liReadingPerson": {
+    "message": "LinkedIn-Profil wird gelesen…"
+  },
+  "liReadingCompany": {
+    "message": "LinkedIn-Unternehmensseite wird gelesen…"
+  },
+  "liNotReadable": {
+    "message": "Diese LinkedIn-Seite konnte nicht gelesen werden. Klicken Sie auf Aktualisieren, sobald die Seite vollständig geladen ist."
+  },
+  "liContactInfo": {
+    "message": "Kontaktinfo"
+  },
+  "liNoContactShared": {
+    "message": "Diese Person teilt auf LinkedIn keine Telefonnummer, E-Mail-Adresse oder Website."
+  },
+  "liContactNotRead": {
+    "message": "Die Kontaktinfo wurde noch nicht gelesen."
+  },
+  "liNoCompanyContact": {
+    "message": "Keine Telefonnummer auf der Unternehmensseite."
+  },
+  "liReadContact": {
+    "message": "Kontaktinfo abrufen"
+  },
+  "liReloadContact": {
+    "message": "Kontaktinfo erneut lesen"
+  },
+  "liFounded": {
+    "message": "Gegründet: $1"
+  },
+  "liInHipcall": {
+    "message": "In Hipcall"
+  },
+  "liPersonHint": {
+    "message": "Sind diese Person und ihre Firma in Hipcall?"
+  },
+  "liCompanyHint": {
+    "message": "Ist diese Firma in Hipcall?"
+  },
+  "liPersonSection": {
+    "message": "Person"
+  },
+  "liCompanySection": {
+    "message": "Firma"
+  },
+  "liPersonMissing": {
+    "message": "„$1“ ist kein Kontakt in Hipcall."
+  },
+  "liCompanyMissing": {
+    "message": "„$1“ ist nicht in Hipcall."
+  },
+  "liCompanyFound": {
+    "message": "Diese Firma ist in Hipcall ($1 Datensatz/Datensätze)."
+  },
+  "liNoCompanyOnProfile": {
+    "message": "Im Profil ist keine aktuelle Firma angegeben."
+  },
+  "liOpenCompanyPage": {
+    "message": "$1 auf LinkedIn öffnen"
+  },
+  "liOpenCompanyHint": {
+    "message": "Sie können die Firma über ihre Unternehmensseite zu Hipcall hinzufügen."
+  },
+  "liFormFilled": {
+    "message": "Die Angaben wurden von der LinkedIn-Unternehmensseite übernommen."
+  },
+  "liEmployeesHint": {
+    "message": "Mitarbeitende laut LinkedIn: $1 – bei Bedarf ändern."
+  },
+  "match_name": {
+    "message": "Name"
+  },
+  "match_linkedin": {
+    "message": "LinkedIn"
+  },
+  "liContactLoading": {
+    "message": "Kontaktinfo wird von LinkedIn gelesen…"
+  },
+  "liContactFailed": {
+    "message": "Das Fenster mit der Kontaktinfo konnte nicht gelesen werden. Klicken Sie erneut auf „Kontaktinfo abrufen“."
+  },
+  "liCopyDebug": {
+    "message": "Gelesenen Inhalt kopieren (für den Support)"
+  },
+  "hipcallSiteNoIcons": {
+    "message": "Auf den eigenen Seiten von Hipcall zeigt die Erweiterung keine Symbole an; diese Seiten haben eigene Anruf-Schaltflächen."
+  },
+  "findSavedAt": {
+    "message": "(letzte Suche: $1 – zum Aktualisieren auf Suchen klicken)"
   }
 }

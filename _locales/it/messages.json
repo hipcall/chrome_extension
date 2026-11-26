@@ -321,5 +321,446 @@
   "desktopOutdated": {
     "message": "Ricarica la scheda di Hipcall e riprova. Questa versione di Hipcall non può ricevere numeri dall'estensione.",
     "description": ""
+  },
+  "tabActivities": {
+    "message": "Attività"
+  },
+  "back": {
+    "message": "Indietro"
+  },
+  "accountTitle": {
+    "message": "Account Hipcall"
+  },
+  "signIn": {
+    "message": "Accedi con Hipcall"
+  },
+  "signingIn": {
+    "message": "La finestra di accesso è aperta…"
+  },
+  "signOut": {
+    "message": "Esci"
+  },
+  "signedIn": {
+    "message": "Accesso effettuato"
+  },
+  "signinHint": {
+    "message": "Accedi con il tuo account Hipcall per trovare contatti e aziende e vedere le tue attività."
+  },
+  "signinNotAvailable": {
+    "message": "Per ora l’accesso con Hipcall è disponibile solo per gli account della Turchia."
+  },
+  "signinCancelled": {
+    "message": "La finestra di accesso è stata chiusa."
+  },
+  "signinDenied": {
+    "message": "L’accesso non è stato concesso."
+  },
+  "errSignedOut": {
+    "message": "La sessione è scaduta, accedi di nuovo."
+  },
+  "errForbidden": {
+    "message": "Non hai accesso a queste informazioni."
+  },
+  "errGeneric": {
+    "message": "Si è verificato un errore imprevisto: $1"
+  },
+  "findTitle": {
+    "message": "Cerca in Hipcall"
+  },
+  "findHint": {
+    "message": "Cerca contatti e aziende in Hipcall in base a numeri, e-mail e sito web di questa pagina."
+  },
+  "findButton": {
+    "message": "Cerca"
+  },
+  "findSearching": {
+    "message": "Ricerca in corso…"
+  },
+  "findNeedsSignin": {
+    "message": "Accedi con il tuo account Hipcall per cercare."
+  },
+  "findSearched": {
+    "message": "Cercati $1 numeri, $2 e-mail e il sito $3."
+  },
+  "findNothing": {
+    "message": "Nessun contatto o azienda corrispondente in Hipcall."
+  },
+  "findCompanies": {
+    "message": "Aziende ($1)"
+  },
+  "findContacts": {
+    "message": "Contatti ($1)"
+  },
+  "findOwner": {
+    "message": "Responsabile: $1"
+  },
+  "match_phone": {
+    "message": "Telefono"
+  },
+  "match_email": {
+    "message": "E-mail"
+  },
+  "match_website": {
+    "message": "Sito web"
+  },
+  "activitiesTitle": {
+    "message": "Le tue attività"
+  },
+  "activitiesHint": {
+    "message": "Le tue attività più recenti in Hipcall"
+  },
+  "activitiesNeedsSignin": {
+    "message": "Accedi con il tuo account Hipcall per vedere le tue attività."
+  },
+  "activitiesEmpty": {
+    "message": "Ancora nessuna attività."
+  },
+  "activity": {
+    "message": "Attività"
+  },
+  "refresh": {
+    "message": "Aggiorna"
+  },
+  "loadMore": {
+    "message": "Carica altro"
+  },
+  "loading": {
+    "message": "Caricamento…"
+  },
+  "act_call_outbound": {
+    "message": "Chiamata in uscita"
+  },
+  "act_call_inbound": {
+    "message": "Chiamata in entrata"
+  },
+  "act_call_missed": {
+    "message": "Chiamata persa"
+  },
+  "act_note_created": {
+    "message": "Nota aggiunta"
+  },
+  "act_contact_created": {
+    "message": "Contatto creato"
+  },
+  "act_company_created": {
+    "message": "Azienda creata"
+  },
+  "addCompany": {
+    "message": "Aggiungi a Hipcall come azienda"
+  },
+  "addCompanyAnyway": {
+    "message": "Aggiungi come nuova azienda"
+  },
+  "companyAddTitle": {
+    "message": "Aggiungi azienda"
+  },
+  "companyAddHint": {
+    "message": "I dati sono stati presi da questo sito. Prima di salvare puoi modificare, aggiungere o rimuovere qualsiasi cosa."
+  },
+  "fieldName": {
+    "message": "Nome dell’azienda *"
+  },
+  "fieldWebsite": {
+    "message": "Sito web"
+  },
+  "fieldLinkedin": {
+    "message": "LinkedIn"
+  },
+  "fieldCustomUrl": {
+    "message": "URL personalizzato"
+  },
+  "fieldEmployees": {
+    "message": "Dipendenti"
+  },
+  "fieldDescription": {
+    "message": "Descrizione"
+  },
+  "fieldOwner": {
+    "message": "Responsabile"
+  },
+  "addPhone": {
+    "message": "+ Aggiungi telefono"
+  },
+  "addEmail": {
+    "message": "+ Aggiungi e-mail"
+  },
+  "cancel": {
+    "message": "Annulla"
+  },
+  "saveCompany": {
+    "message": "Aggiungi azienda"
+  },
+  "saving": {
+    "message": "Salvataggio…"
+  },
+  "employeesUnknown": {
+    "message": "Non specificato"
+  },
+  "employees_1": {
+    "message": "1"
+  },
+  "employees_2_5": {
+    "message": "2–5"
+  },
+  "employees_6_10": {
+    "message": "6–10"
+  },
+  "employees_11_25": {
+    "message": "11–25"
+  },
+  "employees_26_50": {
+    "message": "26–50"
+  },
+  "employees_51_200": {
+    "message": "51–200"
+  },
+  "employees_201_1000": {
+    "message": "201–1.000"
+  },
+  "employees_1001_10000": {
+    "message": "1.001–10.000"
+  },
+  "employees_10001_more": {
+    "message": "10.000+"
+  },
+  "needsWriteAccess": {
+    "message": "Per aggiungere aziende serve l’accesso in scrittura. Accedi di nuovo: il modulo viene conservato."
+  },
+  "signInAgain": {
+    "message": "Accedi di nuovo"
+  },
+  "countryCode": {
+    "message": "Prefisso internazionale (TR, US, GB…)"
+  },
+  "overLimit": {
+    "message": "Hipcall accetta al massimo $1 per azienda; questa riga non verrà aggiunta."
+  },
+  "limitOver": {
+    "message": "$1 trovati: verranno aggiunti i primi $2"
+  },
+  "errNameShort": {
+    "message": "Il nome dell’azienda deve avere almeno 3 caratteri."
+  },
+  "errValidation": {
+    "message": "Correggi quanto segue:"
+  },
+  "companyAdded": {
+    "message": "«$1» è stata aggiunta a Hipcall."
+  },
+  "fieldPhones": {
+    "message": "Telefoni"
+  },
+  "fieldEmails": {
+    "message": "E-mail"
+  },
+  "errInvalidScope": {
+    "message": "Hipcall non consente a questa estensione di aggiungere contatti/aziende (contacts:write). Deve essere abilitato in Hipcall."
+  },
+  "signinTimeout": {
+    "message": "L’accesso ha richiesto troppo tempo, riprova."
+  },
+  "draftRestored": {
+    "message": "Accesso effettuato. Il modulo è stato ripristinato: premi di nuovo «Aggiungi azienda»."
+  },
+  "moreFields": {
+    "message": "Altri campi ($1)"
+  },
+  "choose": {
+    "message": "Scegli"
+  },
+  "yes": {
+    "message": "Sì"
+  },
+  "errNumber": {
+    "message": "Inserisci un numero valido."
+  },
+  "errRequired": {
+    "message": "Questo campo è obbligatorio."
+  },
+  "customField": {
+    "message": "Campo personalizzato «$1»"
+  },
+  "errNotAdded": {
+    "message": "L’azienda non è stata aggiunta. Correggi quanto segue:"
+  },
+  "errNotAddedShort": {
+    "message": "L’azienda non è stata aggiunta."
+  },
+  "errNetwork": {
+    "message": "Impossibile raggiungere Hipcall. Controlla la connessione a internet e riprova."
+  },
+  "errRateLimited": {
+    "message": "Troppe richieste in poco tempo. Attendi un momento e riprova."
+  },
+  "errNotFound": {
+    "message": "Hipcall non ha trovato questo record o indirizzo."
+  },
+  "errServer": {
+    "message": "Hipcall al momento non risponde (errore del server). Riprova tra qualche minuto."
+  },
+  "errApi": {
+    "message": "Hipcall non ha accettato la richiesta: $1"
+  },
+  "errSigninState": {
+    "message": "Impossibile verificare l’accesso (controllo di sicurezza). Accedi di nuovo."
+  },
+  "errToken": {
+    "message": "Impossibile completare l’accesso, Hipcall non ha rilasciato una chiave di sessione ($1). Riprova."
+  },
+  "errSignin": {
+    "message": "Hipcall ha rifiutato l’accesso ($1)."
+  },
+  "phoneN": {
+    "message": "Telefono $1"
+  },
+  "emailN": {
+    "message": "E-mail $1"
+  },
+  "vBlank": {
+    "message": "Questo campo non può essere vuoto."
+  },
+  "vTaken": {
+    "message": "Un altro record usa già questo valore."
+  },
+  "vInvalid": {
+    "message": "Valore non valido."
+  },
+  "vFormat": {
+    "message": "Formato errato."
+  },
+  "vPhone": {
+    "message": "Numero di telefono non valido. Controlla il numero e il prefisso internazionale."
+  },
+  "vEmail": {
+    "message": "Indirizzo e-mail non valido."
+  },
+  "vMinLen": {
+    "message": "Deve avere almeno $1 caratteri."
+  },
+  "vMaxLen": {
+    "message": "Può avere al massimo $1 caratteri."
+  },
+  "vMaxItems": {
+    "message": "Se ne possono aggiungere al massimo $1."
+  },
+  "vMinItems": {
+    "message": "Ne servono almeno $1."
+  },
+  "vNotInList": {
+    "message": "Non è una delle opzioni consentite."
+  },
+  "vNotExist": {
+    "message": "Questo record non esiste in Hipcall."
+  },
+  "vReserved": {
+    "message": "Questo valore non può essere usato."
+  },
+  "vRange": {
+    "message": "Il valore è fuori dall’intervallo consentito."
+  },
+  "vUnknownField": {
+    "message": "Hipcall non conosce questo campo personalizzato."
+  },
+  "vInactive": {
+    "message": "Questo campo personalizzato è disattivato in Hipcall."
+  },
+  "customFieldsUnavailable": {
+    "message": "Impossibile caricare i campi personalizzati da Hipcall ($1). Eventuali campi obbligatori compariranno qui al salvataggio."
+  },
+  "liPerson": {
+    "message": "Profilo LinkedIn"
+  },
+  "liCompany": {
+    "message": "Pagina aziendale LinkedIn"
+  },
+  "liReadingPerson": {
+    "message": "Lettura del profilo LinkedIn…"
+  },
+  "liReadingCompany": {
+    "message": "Lettura della pagina aziendale LinkedIn…"
+  },
+  "liNotReadable": {
+    "message": "Impossibile leggere questa pagina LinkedIn. Premi aggiorna quando la pagina è caricata completamente."
+  },
+  "liContactInfo": {
+    "message": "Informazioni di contatto"
+  },
+  "liNoContactShared": {
+    "message": "Questa persona non condivide telefono, e-mail o sito web su LinkedIn."
+  },
+  "liContactNotRead": {
+    "message": "Le informazioni di contatto non sono ancora state lette."
+  },
+  "liNoCompanyContact": {
+    "message": "Nessun telefono nella pagina dell’azienda."
+  },
+  "liReadContact": {
+    "message": "Recupera informazioni di contatto"
+  },
+  "liReloadContact": {
+    "message": "Rileggi informazioni di contatto"
+  },
+  "liFounded": {
+    "message": "Fondata: $1"
+  },
+  "liInHipcall": {
+    "message": "In Hipcall"
+  },
+  "liPersonHint": {
+    "message": "Questa persona e la sua azienda sono in Hipcall?"
+  },
+  "liCompanyHint": {
+    "message": "Questa azienda è in Hipcall?"
+  },
+  "liPersonSection": {
+    "message": "Persona"
+  },
+  "liCompanySection": {
+    "message": "Azienda"
+  },
+  "liPersonMissing": {
+    "message": "«$1» non è un contatto in Hipcall."
+  },
+  "liCompanyMissing": {
+    "message": "«$1» non è in Hipcall."
+  },
+  "liCompanyFound": {
+    "message": "Questa azienda è in Hipcall ($1 record)."
+  },
+  "liNoCompanyOnProfile": {
+    "message": "Nessuna azienda attuale nel profilo."
+  },
+  "liOpenCompanyPage": {
+    "message": "Apri $1 su LinkedIn"
+  },
+  "liOpenCompanyHint": {
+    "message": "Puoi aggiungere l’azienda a Hipcall dalla sua pagina aziendale."
+  },
+  "liFormFilled": {
+    "message": "I dati sono stati presi dalla pagina aziendale LinkedIn."
+  },
+  "liEmployeesHint": {
+    "message": "Dipendenti su LinkedIn: $1; modificalo se necessario."
+  },
+  "match_name": {
+    "message": "Nome"
+  },
+  "match_linkedin": {
+    "message": "LinkedIn"
+  },
+  "liContactLoading": {
+    "message": "Lettura delle informazioni di contatto da LinkedIn…"
+  },
+  "liContactFailed": {
+    "message": "Impossibile leggere la finestra delle informazioni di contatto. Premi di nuovo «Recupera informazioni di contatto»."
+  },
+  "liCopyDebug": {
+    "message": "Copia ciò che è stato letto (per l’assistenza)"
+  },
+  "hipcallSiteNoIcons": {
+    "message": "L’estensione non mostra mai le sue icone nelle pagine di Hipcall; queste pagine hanno i propri pulsanti di chiamata."
+  },
+  "findSavedAt": {
+    "message": "(ultima ricerca: $1; premi Cerca per aggiornare)"
   }
 }

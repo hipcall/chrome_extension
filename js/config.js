@@ -15,6 +15,7 @@ var HC_CONFIG = (() => {
   const SERVERS = {
     tr: {
       webphoneUrl: 'https://desktop.hipcall.com.tr/calls',
+      apiBase: 'https://use.hipcall.com.tr',
       // Pages that ARE the web phone. use.hipcall.com.tr also hosts other
       // pages (e.g. /api-docs) that must not be mistaken for it; its old
       // /phone/dialpad/ address redirects to desktop.hipcall.com.tr.
@@ -22,6 +23,7 @@ var HC_CONFIG = (() => {
     },
     global: {
       webphoneUrl: 'https://desktop.hipcall.com/calls',
+      apiBase: 'https://use.hipcall.com',
       patterns: ['*://desktop.hipcall.com/*', '*://use.hipcall.com/phone/*', '*://phone.hipcall.com/*']
     }
   };
@@ -51,6 +53,25 @@ var HC_CONFIG = (() => {
     REGIONS.local = { id: 'local', server: 'local', nameKey: 'regionLocal' };
     REGION_ORDER.push('local');
   }
+
+  /**
+   * OAuth 2.1 sign-in (authorization code + PKCE, public client: no secret).
+   * Endpoints come from GET /.well-known/oauth-authorization-server.
+   *
+   * redirectUri must be registered for the client in Hipcall exactly as written.
+   * The extension never loads it: the sign-in window is closed and the request
+   * blocked as soon as the browser is about to open it, and the code is read
+   * from the URL. TEMPORARY: ngrok address, will change.
+   * clientId null = sign-in not available for that server yet.
+   */
+  const OAUTH = {
+    redirectUri: 'https://envelope-footrest-flyable.ngrok-free.dev/callback',
+    scope: 'profile email offline_access contacts:read contacts:write',
+    clients: {
+      tr: 'bKK2FNa4gTpzqtXaxn2q-Lx3HJgqNME5up4hiW_POKs',
+      global: null
+    }
+  };
 
   const ALL_PATTERNS = Object.values(SERVERS).flatMap((s) => s.patterns);
 
@@ -120,5 +141,14 @@ var HC_CONFIG = (() => {
     return true;
   }
 
-  return { REGIONS, REGION_ORDER, SERVERS, ALL_PATTERNS, POPUP_WINDOW, IS_DEV, defaultRegion, getSettings, setSettings, region, isWebphoneUrl };
+  /**
+   * Hipcall's own sites (use.hipcall.com.tr portal, use.hipcall.com, …) have
+   * their own call buttons: the extension never adds its icons there, whatever
+   * the site settings say.
+   */
+  function isHipcallSite(hostname) {
+    return /(^|\.)hipcall\.com(\.tr)?$/i.test(String(hostname || ''));
+  }
+
+  return { REGIONS, REGION_ORDER, SERVERS, OAUTH, ALL_PATTERNS, POPUP_WINDOW, IS_DEV, defaultRegion, getSettings, setSettings, region, isWebphoneUrl, isHipcallSite };
 })();
