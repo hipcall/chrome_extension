@@ -12,10 +12,11 @@
       <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1z"/></svg>
       <span data-i18n="openWebphone"></span>
     </button>
+    <button class="icon-btn gear" id="openSettings" data-i18n-title="tabSettings"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19.14 12.94a7.1 7.1 0 0 0 0-1.88l2.03-1.58a.5.5 0 0 0 .12-.64l-1.92-3.32a.5.5 0 0 0-.61-.22l-2.39.96a7 7 0 0 0-1.62-.94l-.36-2.54A.5.5 0 0 0 13.9 2h-3.84a.5.5 0 0 0-.49.42l-.36 2.54c-.59.24-1.13.56-1.62.94l-2.39-.96a.5.5 0 0 0-.61.22L2.67 8.48a.5.5 0 0 0 .12.64l2.03 1.58a7.1 7.1 0 0 0 0 1.88l-2.03 1.58a.5.5 0 0 0-.12.64l1.92 3.32c.13.22.39.3.61.22l2.39-.96c.49.38 1.03.7 1.62.94l.36 2.54c.05.24.25.42.49.42h3.84c.24 0 .44-.18.49-.42l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.48 0 .61-.22l1.92-3.32a.5.5 0 0 0-.12-.64l-2.03-1.58zM12 15.6a3.6 3.6 0 1 1 0-7.2 3.6 3.6 0 0 1 0 7.2z"/></svg></button>
   </header>
   <nav class="tabs" role="tablist">
     <button class="tab active" data-tab="find" role="tab" data-i18n="tabNumbers"></button>
-    <button class="tab" data-tab="settings" role="tab" data-i18n="tabSettings"></button>
+    <button class="tab" data-tab="activities" role="tab" data-i18n="tabActivities"></button>
   </nav>
 
   <main>
@@ -29,14 +30,33 @@
             <span data-i18n="rescan"></span>
           </button>
         </div>
-        <label class="opt"><input type="checkbox" id="deep"> <span data-i18n="scanContactPages"></span></label>
+        <label class="opt" id="deepOpt"><input type="checkbox" id="deep"> <span data-i18n="scanContactPages"></span></label>
         <div id="status" role="status"></div>
 
-        <div class="results">
+        <!-- LinkedIn profile / company page: its own Discover view -->
+        <div id="linkedinArea" hidden></div>
+
+        <div class="results" id="genericResults">
           <h2><span data-i18n="phones"></span><span class="count" id="phoneCount"></span></h2>
           <ul id="phones"></ul>
           <h2><span data-i18n="emails"></span><span class="count" id="emailCount"></span></h2>
           <ul id="emails"></ul>
+
+          <!-- FIND: look the page up in the Hipcall CRM -->
+          <div class="find card">
+            <div class="find-head">
+              <div>
+                <b data-i18n="findTitle"></b>
+                <small data-i18n="findHint"></small>
+              </div>
+              <button class="primary small" id="findBtn">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15.5 14h-.79l-.28-.27a6.5 6.5 0 1 0-.7.7l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0a4.5 4.5 0 1 1 0-9 4.5 4.5 0 0 1 0 9z"/></svg>
+                <span data-i18n="findButton"></span>
+              </button>
+            </div>
+            <div id="findStatus" class="muted"></div>
+            <div id="findResults"></div>
+          </div>
         </div>
       </div>
 
@@ -54,72 +74,181 @@
       </form>
     </section>
 
-    <!-- ============ SETTINGS ============ -->
-    <section class="panel" id="panel-settings" hidden>
-      <div class="group">
-        <h2 data-i18n="regionTitle"></h2>
-        <p class="sub" data-i18n="regionSub"></p>
-        <div class="card list" id="regionList" role="radiogroup"></div>
-      </div>
-
-      <div class="group">
-        <h2 id="languageTitle" data-i18n="languageTitle"></h2>
-        <div class="select-wrap">
-          <!-- New languages: add an <option> and a _locales/<code> folder. -->
-          <select id="language" aria-labelledby="languageTitle">
-            <option value="auto" data-i18n="langAuto"></option>
-            <option value="de" lang="de">Deutsch</option>
-            <option value="en" lang="en">English</option>
-            <option value="es" lang="es">Español</option>
-            <option value="fr" lang="fr">Français</option>
-            <option value="it" lang="it">Italiano</option>
-            <option value="nl" lang="nl">Nederlands</option>
-            <option value="tr" lang="tr">Türkçe</option>
-          </select>
+    <!-- ============ ACTIVITIES ============ -->
+    <section class="panel" id="panel-activities" hidden>
+      <div class="signin-prompt" id="activitiesSignin" hidden></div>
+      <div id="activitiesArea" hidden>
+        <div class="toolbar">
+          <div class="site" data-i18n="activitiesHint"></div>
+          <button class="ghost" id="activitiesRefresh">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.65 6.35A7.96 7.96 0 0 0 12 4a8 8 0 1 0 7.75 10h-2.08A6 6 0 1 1 12 6c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35z"/></svg>
+            <span data-i18n="refresh"></span>
+          </button>
         </div>
+        <div id="activitiesStatus" class="muted"></div>
+        <ul class="feed" id="activitiesList"></ul>
+        <button class="soft wide" id="activitiesMore" hidden data-i18n="loadMore"></button>
       </div>
+    </section>
+  </main>
 
-      <div class="group">
-        <h2 data-i18n="callTitle"></h2>
-        <label class="card switch-row">
-          <span><b data-i18n="autoDial"></b><small data-i18n="autoDialHint"></small></span>
-          <input type="checkbox" class="switch" id="autoDial">
-        </label>
-      </div>
+  <!-- ============ SETTINGS (opens from the gear) ============ -->
+  <section class="sheet" id="panel-settings" hidden aria-labelledby="settingsTitle">
+    <div class="sheet-head">
+      <button class="icon-btn" id="closeSettings" data-i18n-title="back">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>
+      </button>
+      <h1 id="settingsTitle" data-i18n="tabSettings"></h1>
+    </div>
+    <div class="sheet-body settings">
+      <!-- Account: who is signed in, and which Hipcall server (region) -->
+      <section class="set-group">
+        <h2 data-i18n="accountTitle"></h2>
+        <div class="set-card">
+          <div class="set-row account" id="accountCard"></div>
+          <div class="set-row">
+            <span class="set-label"><b id="regionTitle" data-i18n="regionTitle"></b><small id="regionSub" data-i18n="regionSub"></small></span>
+            <div class="select-wrap region-select compact">
+              <span class="flag" id="regionFlag" aria-hidden="true"></span>
+              <select id="region" aria-labelledby="regionTitle"></select>
+            </div>
+          </div>
+        </div>
+      </section>
 
-      <div class="group" id="siteSettings">
+      <!-- General -->
+      <section class="set-group">
+        <h2 data-i18n="settingsGeneral"></h2>
+        <div class="set-card">
+          <div class="set-row">
+            <span class="set-label"><b id="languageTitle" data-i18n="languageTitle"></b></span>
+            <div class="select-wrap compact">
+              <!-- New languages: add an <option> and a _locales/<code> folder. -->
+              <select id="language" aria-labelledby="languageTitle">
+                <option value="auto" data-i18n="langAuto"></option>
+                <option value="de" lang="de">Deutsch</option>
+                <option value="en" lang="en">English</option>
+                <option value="es" lang="es">Español</option>
+                <option value="fr" lang="fr">Français</option>
+                <option value="it" lang="it">Italiano</option>
+                <option value="nl" lang="nl">Nederlands</option>
+                <option value="tr" lang="tr">Türkçe</option>
+              </select>
+            </div>
+          </div>
+          <label class="set-row">
+            <span class="set-label"><b data-i18n="autoDial"></b><small data-i18n="autoDialHint"></small></span>
+            <input type="checkbox" class="switch" id="autoDial">
+          </label>
+        </div>
+      </section>
+
+      <!-- Call icons on the site of the open tab -->
+      <section class="set-group" id="siteSettings">
         <h2 data-i18n="iconsOnSite"></h2>
         <div class="site-name">
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm0 18a8 8 0 0 1-7.75-6h3.39a16 16 0 0 0 .46 3.13h1.98A14.5 14.5 0 0 1 9.6 14h4.8a14.5 14.5 0 0 1-.48 3.13h1.98c.24-1 .4-2.05.46-3.13h3.39A8 8 0 0 1 12 20zM4.25 10a8 8 0 0 1 15.5 0h-3.39a16 16 0 0 0-.46-3.13H13.92c.23.98.4 2.03.48 3.13H9.6c.08-1.1.25-2.15.48-3.13H8.1c-.24 1-.4 2.05-.46 3.13H4.25z"/></svg>
           <b id="setSite"></b>
         </div>
-
-        <div class="segmented" id="modeSeg" role="radiogroup">
-          <button data-value="selected" role="radio" data-i18n="modeSelected"></button>
-          <button data-value="all" role="radio" data-i18n="modeAll"></button>
+        <p class="sub" id="siteNote" hidden></p>
+        <div class="set-card" id="siteCard">
+          <label class="set-row">
+            <span class="set-label"><b data-i18n="showOnThisPage"></b><small id="curPath"></small></span>
+            <input type="checkbox" class="switch" id="curToggle">
+          </label>
+          <label class="set-row">
+            <span class="set-label"><b data-i18n="showOnAllPages"></b><small id="modeHint"></small></span>
+            <input type="checkbox" class="switch" id="modeAll">
+          </label>
+          <details class="set-more">
+            <summary data-i18n="pageListTitle"></summary>
+            <h3 class="list-title" id="listTitle"></h3>
+            <div class="chips" id="pageList"></div>
+            <div class="muted" id="pageEmpty"></div>
+            <form class="add" id="addPageForm">
+              <input type="text" id="addPageInput" autocomplete="off">
+              <button class="soft" type="submit" data-i18n="add"></button>
+            </form>
+            <div class="muted small" data-i18n="patternHint"></div>
+            <button class="link" id="resetRule" type="button" data-i18n="resetSite"></button>
+          </details>
         </div>
-        <p class="sub" id="modeHint"></p>
+      </section>
+    </div>
+  </section>
 
-        <label class="card switch-row">
-          <span><b data-i18n="showOnThisPage"></b><small id="curPath"></small></span>
-          <input type="checkbox" class="switch" id="curToggle">
-        </label>
+  <!-- ============ ADD COMPANY (prefilled from the page, editable) ============ -->
+  <section class="sheet" id="panel-company" hidden aria-labelledby="companyTitle">
+    <div class="sheet-head">
+      <button class="icon-btn" id="closeCompany" data-i18n-title="back">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>
+      </button>
+      <h1 id="companyTitle" data-i18n="companyAddTitle"></h1>
+    </div>
+    <form class="sheet-body company-form" id="companyForm" novalidate>
+      <p class="sub" data-i18n="companyAddHint"></p>
 
-        <h3 class="list-title" id="listTitle"></h3>
-        <div class="chips" id="pageList"></div>
-        <div class="muted" id="pageEmpty"></div>
+      <label class="field">
+        <span data-i18n="fieldName"></span>
+        <input type="text" id="cName" maxlength="255" required>
+        <em class="field-err" data-for="name"></em>
+      </label>
+      <label class="field">
+        <span data-i18n="fieldWebsite"></span>
+        <input type="text" id="cWebsite" maxlength="255" inputmode="url" placeholder="https://">
+        <em class="field-err" data-for="website_url"></em>
+      </label>
+      <label class="field">
+        <span data-i18n="fieldLinkedin"></span>
+        <input type="text" id="cLinkedin" maxlength="255" inputmode="url" placeholder="https://linkedin.com/company/…">
+        <em class="field-err" data-for="linkedin_url"></em>
+      </label>
+      <label class="field">
+        <span data-i18n="fieldCustomUrl"></span>
+        <input type="text" id="cCustomUrl" maxlength="255" inputmode="url" placeholder="https://">
+        <em class="field-err" data-for="custom_url"></em>
+      </label>
+      <label class="field">
+        <span data-i18n="fieldEmployees"></span>
+        <div class="select-wrap"><select id="cEmployees"></select></div>
+        <em class="field-err" data-for="employee_size"></em>
+      </label>
+      <label class="field">
+        <span data-i18n="fieldDescription"></span>
+        <textarea id="cDescription" rows="3" maxlength="2000"></textarea>
+        <em class="field-err" data-for="description"></em>
+      </label>
 
-        <form class="add" id="addPageForm">
-          <input type="text" id="addPageInput" autocomplete="off">
-          <button class="soft" type="submit" data-i18n="add"></button>
-        </form>
-        <div class="muted small" data-i18n="patternHint"></div>
-
-        <button class="link" id="resetRule" data-i18n="resetSite"></button>
+      <div class="field">
+        <span><span data-i18n="fieldPhones"></span> <small class="limit" id="cPhonesCount"></small></span>
+        <ul class="multi" id="cPhones"></ul>
+        <button type="button" class="link-btn" id="cAddPhone" data-i18n="addPhone"></button>
+        <em class="field-err" data-for="phones"></em>
       </div>
-    </section>
-  </main>
+      <div class="field">
+        <span><span data-i18n="fieldEmails"></span> <small class="limit" id="cEmailsCount"></small></span>
+        <ul class="multi" id="cEmails"></ul>
+        <button type="button" class="link-btn" id="cAddEmail" data-i18n="addEmail"></button>
+        <em class="field-err" data-for="emails"></em>
+      </div>
 
+      <!-- Account-defined fields (GET /api/v3/companies/custom-fields) -->
+      <div id="cCustom"></div>
+
+      <div class="field">
+        <span data-i18n="fieldOwner"></span>
+        <div class="owner" id="cOwner"></div>
+      </div>
+
+      <div id="companyStatus" class="form-status" role="status"></div>
+      <div class="form-actions">
+        <button type="button" class="soft" id="cancelCompany" data-i18n="cancel"></button>
+        <button type="submit" class="primary" id="saveCompany" data-i18n="saveCompany"></button>
+      </div>
+    </form>
+  </section>
+
+  <script src="../../js/oauth_clients.js"></script>
   <script src="../../js/config.js"></script>
   <script src="../../js/i18n.js"></script>
   <script src="../../js/site_rules.js"></script>

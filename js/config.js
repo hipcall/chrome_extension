@@ -15,14 +15,15 @@ var HC_CONFIG = (() => {
   const SERVERS = {
     tr: {
       webphoneUrl: 'https://desktop.hipcall.com.tr/calls',
-      // Pages that ARE the web phone. use.hipcall.com.tr also hosts other
-      // pages (e.g. /api-docs) that must not be mistaken for it; its old
-      // /phone/dialpad/ address redirects to desktop.hipcall.com.tr.
-      patterns: ['*://desktop.hipcall.com.tr/*', '*://use.hipcall.com.tr/phone/*', '*://phone.hipcall.com.tr/*']
+      apiBase: 'https://use.hipcall.com.tr',
+      // Pages that ARE the web phone (the desktop). use.hipcall.com(.tr) is the
+      // CRM / API host, never the web phone.
+      patterns: ['*://desktop.hipcall.com.tr/*']
     },
     global: {
       webphoneUrl: 'https://desktop.hipcall.com/calls',
-      patterns: ['*://desktop.hipcall.com/*', '*://use.hipcall.com/phone/*', '*://phone.hipcall.com/*']
+      apiBase: 'https://use.hipcall.com',
+      patterns: ['*://desktop.hipcall.com/*']
     }
   };
 
@@ -51,6 +52,31 @@ var HC_CONFIG = (() => {
     REGIONS.local = { id: 'local', server: 'local', nameKey: 'regionLocal' };
     REGION_ORDER.push('local');
   }
+
+  /**
+   * OAuth 2.1 sign-in (authorization code + PKCE, public client: no secret).
+   * Endpoints come from GET /.well-known/oauth-authorization-server.
+   *
+   * Redirect: https://<extension-id>.chromiumapp.org/<server>/ (tr or global),
+   * from chrome.identity.getRedirectURL(); it must be registered for the client
+   * in Hipcall. Only this extension can receive that address.
+   * Public clients (PKCE, no client secret). Never put a client secret in the
+   * extension.
+   * The client ids are not kept in the repository: they come from
+   * js/oauth_clients.js (git-ignored), which scripts/package.sh writes from
+   * the HC_OAUTH_CLIENT_TR / HC_OAUTH_CLIENT_GLOBAL GitHub variables. For
+   * development copy js/oauth_clients.example.js to js/oauth_clients.js.
+   * No id for a server = sign-in not available there.
+   */
+  const LOADED_CLIENTS = (typeof HC_OAUTH_CLIENTS === 'object' && HC_OAUTH_CLIENTS) || {};
+  const clientId = (v) => (typeof v === 'string' && /^[A-Za-z0-9_-]{8,200}$/.test(v) ? v : null);
+  const OAUTH = {
+    scope: 'profile email offline_access contacts:read contacts:write',
+    clients: {
+      tr: clientId(LOADED_CLIENTS.tr),         // use.hipcall.com.tr
+      global: clientId(LOADED_CLIENTS.global)  // use.hipcall.com
+    }
+  };
 
   const ALL_PATTERNS = Object.values(SERVERS).flatMap((s) => s.patterns);
 
@@ -93,7 +119,7 @@ var HC_CONFIG = (() => {
     return { ...r, ...SERVERS[r.server] };
   }
 
-  /** Does the URL match a match pattern like '*://use.hipcall.com.tr/phone/*'? */
+  /** Does the URL match a match pattern like '*://desktop.hipcall.com.tr/*'? */
   function matchesPattern(url, pattern) {
     const m = pattern.match(/^\*:\/\/([^/]+)(\/.*)$/);
     if (!m) return false;
@@ -120,5 +146,14 @@ var HC_CONFIG = (() => {
     return true;
   }
 
-  return { REGIONS, REGION_ORDER, SERVERS, ALL_PATTERNS, POPUP_WINDOW, IS_DEV, defaultRegion, getSettings, setSettings, region, isWebphoneUrl };
+  /**
+   * Hipcall's own sites (use.hipcall.com.tr portal, use.hipcall.com, …) have
+   * their own call buttons: the extension never adds its icons there, whatever
+   * the site settings say.
+   */
+  function isHipcallSite(hostname) {
+    return /(^|\.)hipcall\.com(\.tr)?$/i.test(String(hostname || ''));
+  }
+
+  return { REGIONS, REGION_ORDER, SERVERS, OAUTH, ALL_PATTERNS, POPUP_WINDOW, IS_DEV, defaultRegion, getSettings, setSettings, region, isWebphoneUrl, isHipcallSite };
 })();

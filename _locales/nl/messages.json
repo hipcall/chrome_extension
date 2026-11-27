@@ -321,5 +321,495 @@
   "desktopOutdated": {
     "message": "Laad het Hipcall-tabblad opnieuw en probeer het nog eens. Deze versie van Hipcall kan geen nummers van de extensie ontvangen.",
     "description": ""
+  },
+  "tabActivities": {
+    "message": "Activiteiten"
+  },
+  "back": {
+    "message": "Terug"
+  },
+  "accountTitle": {
+    "message": "Hipcall-account"
+  },
+  "signIn": {
+    "message": "Inloggen met Hipcall"
+  },
+  "signingIn": {
+    "message": "Het inlogvenster is geopend…"
+  },
+  "signOut": {
+    "message": "Uitloggen"
+  },
+  "signedIn": {
+    "message": "Ingelogd"
+  },
+  "signinHint": {
+    "message": "Log in met je Hipcall-account om contacten en bedrijven te vinden en je activiteiten te zien."
+  },
+  "signinNotAvailable": {
+    "message": "Inloggen met Hipcall is voorlopig alleen beschikbaar voor accounts in Turkije."
+  },
+  "signinCancelled": {
+    "message": "Het inlogvenster is gesloten."
+  },
+  "signinDenied": {
+    "message": "Er is geen toegang verleend."
+  },
+  "errSignedOut": {
+    "message": "Je sessie is verlopen, log opnieuw in."
+  },
+  "errForbidden": {
+    "message": "Je hebt geen toegang tot deze informatie."
+  },
+  "errGeneric": {
+    "message": "Er is een onverwachte fout opgetreden: $1"
+  },
+  "findTitle": {
+    "message": "Zoeken in Hipcall"
+  },
+  "findHint": {
+    "message": "Zoekt contacten en bedrijven in Hipcall op basis van de nummers, e-mailadressen en website van deze pagina."
+  },
+  "findButton": {
+    "message": "Zoeken"
+  },
+  "findSearching": {
+    "message": "Bezig met zoeken…"
+  },
+  "findNeedsSignin": {
+    "message": "Log in met je Hipcall-account om te zoeken."
+  },
+  "findSearched": {
+    "message": "$1 nummers, $2 e-mailadressen en de site $3 doorzocht."
+  },
+  "findNothing": {
+    "message": "Geen passend contact of bedrijf in Hipcall."
+  },
+  "findCompanies": {
+    "message": "Bedrijven ($1)"
+  },
+  "findContacts": {
+    "message": "Contacten ($1)"
+  },
+  "findOwner": {
+    "message": "Eigenaar: $1"
+  },
+  "match_phone": {
+    "message": "Telefoon"
+  },
+  "match_email": {
+    "message": "E-mail"
+  },
+  "match_website": {
+    "message": "Website"
+  },
+  "activitiesTitle": {
+    "message": "Je activiteiten"
+  },
+  "activitiesHint": {
+    "message": "Je nieuwste activiteiten in Hipcall"
+  },
+  "activitiesNeedsSignin": {
+    "message": "Log in met je Hipcall-account om je activiteiten te zien."
+  },
+  "activitiesEmpty": {
+    "message": "Nog geen activiteiten"
+  },
+  "activity": {
+    "message": "Activiteit"
+  },
+  "refresh": {
+    "message": "Vernieuwen"
+  },
+  "loadMore": {
+    "message": "Meer laden"
+  },
+  "loading": {
+    "message": "Laden…"
+  },
+  "act_call_outbound": {
+    "message": "Uitgaand gesprek"
+  },
+  "act_call_inbound": {
+    "message": "Inkomend gesprek"
+  },
+  "act_call_missed": {
+    "message": "Gemist gesprek"
+  },
+  "act_note_created": {
+    "message": "Notitie toegevoegd"
+  },
+  "act_contact_created": {
+    "message": "Contact aangemaakt"
+  },
+  "act_company_created": {
+    "message": "Bedrijf aangemaakt"
+  },
+  "addCompany": {
+    "message": "Als bedrijf aan Hipcall toevoegen"
+  },
+  "addCompanyAnyway": {
+    "message": "Als nieuw bedrijf toevoegen"
+  },
+  "companyAddTitle": {
+    "message": "Bedrijf toevoegen"
+  },
+  "companyAddHint": {
+    "message": "De gegevens zijn van deze site overgenomen. Je kunt alles wijzigen, toevoegen of verwijderen voordat je opslaat."
+  },
+  "fieldName": {
+    "message": "Bedrijfsnaam *"
+  },
+  "fieldWebsite": {
+    "message": "Website"
+  },
+  "fieldLinkedin": {
+    "message": "LinkedIn"
+  },
+  "fieldCustomUrl": {
+    "message": "Eigen URL"
+  },
+  "fieldEmployees": {
+    "message": "Medewerkers"
+  },
+  "fieldDescription": {
+    "message": "Beschrijving"
+  },
+  "fieldOwner": {
+    "message": "Eigenaar"
+  },
+  "addPhone": {
+    "message": "+ Telefoon toevoegen"
+  },
+  "addEmail": {
+    "message": "+ E-mail toevoegen"
+  },
+  "cancel": {
+    "message": "Annuleren"
+  },
+  "saveCompany": {
+    "message": "Bedrijf toevoegen"
+  },
+  "saving": {
+    "message": "Opslaan…"
+  },
+  "employeesUnknown": {
+    "message": "Niet opgegeven"
+  },
+  "employees_1": {
+    "message": "1"
+  },
+  "employees_2_5": {
+    "message": "2–5"
+  },
+  "employees_6_10": {
+    "message": "6–10"
+  },
+  "employees_11_25": {
+    "message": "11–25"
+  },
+  "employees_26_50": {
+    "message": "26–50"
+  },
+  "employees_51_200": {
+    "message": "51–200"
+  },
+  "employees_201_1000": {
+    "message": "201–1.000"
+  },
+  "employees_1001_10000": {
+    "message": "1.001–10.000"
+  },
+  "employees_10001_more": {
+    "message": "10.000+"
+  },
+  "needsWriteAccess": {
+    "message": "Voor het toevoegen van bedrijven is schrijftoegang nodig. Log opnieuw in; je formulier blijft bewaard."
+  },
+  "signInAgain": {
+    "message": "Opnieuw inloggen"
+  },
+  "countryCode": {
+    "message": "Landcode (TR, US, GB…)"
+  },
+  "overLimit": {
+    "message": "Hipcall accepteert maximaal $1 per bedrijf; deze regel wordt niet toegevoegd."
+  },
+  "limitOver": {
+    "message": "$1 gevonden — de eerste $2 worden toegevoegd"
+  },
+  "errNameShort": {
+    "message": "De bedrijfsnaam moet minstens 3 tekens lang zijn."
+  },
+  "errValidation": {
+    "message": "Corrigeer het volgende:"
+  },
+  "companyAdded": {
+    "message": "‘$1’ is aan Hipcall toegevoegd."
+  },
+  "fieldPhones": {
+    "message": "Telefoonnummers"
+  },
+  "fieldEmails": {
+    "message": "E-mailadressen"
+  },
+  "errInvalidScope": {
+    "message": "Hipcall staat deze extensie niet toe contacten/bedrijven toe te voegen (contacts:write). Dit moet in Hipcall worden ingeschakeld."
+  },
+  "signinTimeout": {
+    "message": "Inloggen duurde te lang, probeer het opnieuw."
+  },
+  "draftRestored": {
+    "message": "Ingelogd. Je formulier is hersteld — klik nogmaals op ‘Bedrijf toevoegen’."
+  },
+  "moreFields": {
+    "message": "Meer velden ($1)"
+  },
+  "choose": {
+    "message": "Kiezen"
+  },
+  "yes": {
+    "message": "Ja"
+  },
+  "errNumber": {
+    "message": "Voer een geldig getal in."
+  },
+  "errRequired": {
+    "message": "Dit veld is verplicht."
+  },
+  "customField": {
+    "message": "Aangepast veld ‘$1’"
+  },
+  "errNotAdded": {
+    "message": "Het bedrijf is niet toegevoegd. Corrigeer het volgende:"
+  },
+  "errNotAddedShort": {
+    "message": "Het bedrijf is niet toegevoegd."
+  },
+  "errNetwork": {
+    "message": "Hipcall is niet bereikbaar. Controleer je internetverbinding en probeer het opnieuw."
+  },
+  "errRateLimited": {
+    "message": "Te veel verzoeken in korte tijd. Wacht even en probeer het opnieuw."
+  },
+  "errNotFound": {
+    "message": "Hipcall kon dit record of adres niet vinden."
+  },
+  "errServer": {
+    "message": "Hipcall kan nu niet antwoorden (serverfout). Probeer het over een paar minuten opnieuw."
+  },
+  "errApi": {
+    "message": "Hipcall heeft het verzoek niet geaccepteerd: $1"
+  },
+  "errSigninState": {
+    "message": "Het inloggen kon niet worden gecontroleerd (beveiligingscontrole). Log opnieuw in."
+  },
+  "errToken": {
+    "message": "Inloggen kon niet worden voltooid, Hipcall gaf geen sessiesleutel uit ($1). Probeer het opnieuw."
+  },
+  "errSignin": {
+    "message": "Hipcall heeft het inloggen geweigerd ($1)."
+  },
+  "phoneN": {
+    "message": "Telefoon $1"
+  },
+  "emailN": {
+    "message": "E-mail $1"
+  },
+  "vBlank": {
+    "message": "Dit veld mag niet leeg zijn."
+  },
+  "vTaken": {
+    "message": "Een ander record gebruikt deze waarde al."
+  },
+  "vInvalid": {
+    "message": "Ongeldige waarde."
+  },
+  "vFormat": {
+    "message": "Verkeerde notatie."
+  },
+  "vPhone": {
+    "message": "Geen geldig telefoonnummer. Controleer het nummer en de landcode."
+  },
+  "vEmail": {
+    "message": "Geen geldig e-mailadres."
+  },
+  "vMinLen": {
+    "message": "Moet minstens $1 tekens lang zijn."
+  },
+  "vMaxLen": {
+    "message": "Mag maximaal $1 tekens lang zijn."
+  },
+  "vMaxItems": {
+    "message": "Er kunnen maximaal $1 worden toegevoegd."
+  },
+  "vMinItems": {
+    "message": "Minstens $1 vereist."
+  },
+  "vNotInList": {
+    "message": "Geen van de toegestane opties."
+  },
+  "vNotExist": {
+    "message": "Dit record bestaat niet in Hipcall."
+  },
+  "vReserved": {
+    "message": "Deze waarde kan niet worden gebruikt."
+  },
+  "vRange": {
+    "message": "De waarde valt buiten het toegestane bereik."
+  },
+  "vUnknownField": {
+    "message": "Hipcall kent dit aangepaste veld niet."
+  },
+  "vInactive": {
+    "message": "Dit aangepaste veld is in Hipcall uitgeschakeld."
+  },
+  "customFieldsUnavailable": {
+    "message": "De aangepaste velden konden niet uit Hipcall worden geladen ($1). Verplichte velden worden hier getoond bij het opslaan."
+  },
+  "liPerson": {
+    "message": "LinkedIn-profiel"
+  },
+  "liCompany": {
+    "message": "LinkedIn-bedrijfspagina"
+  },
+  "liReadingPerson": {
+    "message": "LinkedIn-profiel wordt gelezen…"
+  },
+  "liReadingCompany": {
+    "message": "LinkedIn-bedrijfspagina wordt gelezen…"
+  },
+  "liNotReadable": {
+    "message": "Deze LinkedIn-pagina kon niet worden gelezen. Klik op vernieuwen zodra de pagina volledig is geladen."
+  },
+  "liContactInfo": {
+    "message": "Contactgegevens"
+  },
+  "liNoContactShared": {
+    "message": "Deze persoon deelt geen telefoon, e-mail of website op LinkedIn."
+  },
+  "liContactNotRead": {
+    "message": "De contactgegevens zijn nog niet gelezen."
+  },
+  "liNoCompanyContact": {
+    "message": "Geen telefoon op de bedrijfspagina."
+  },
+  "liReadContact": {
+    "message": "Contactgegevens ophalen"
+  },
+  "liReloadContact": {
+    "message": "Contactgegevens opnieuw lezen"
+  },
+  "liFounded": {
+    "message": "Opgericht: $1"
+  },
+  "liInHipcall": {
+    "message": "In Hipcall"
+  },
+  "liPersonHint": {
+    "message": "Staan deze persoon en zijn of haar bedrijf in Hipcall?"
+  },
+  "liCompanyHint": {
+    "message": "Staat dit bedrijf in Hipcall?"
+  },
+  "liPersonSection": {
+    "message": "Persoon"
+  },
+  "liCompanySection": {
+    "message": "Bedrijf"
+  },
+  "liPersonMissing": {
+    "message": "‘$1’ is geen contact in Hipcall."
+  },
+  "liCompanyMissing": {
+    "message": "‘$1’ staat niet in Hipcall."
+  },
+  "liCompanyFound": {
+    "message": "Dit bedrijf staat in Hipcall ($1 record(s))."
+  },
+  "liNoCompanyOnProfile": {
+    "message": "Geen huidig bedrijf op het profiel."
+  },
+  "liOpenCompanyPage": {
+    "message": "$1 openen op LinkedIn"
+  },
+  "liOpenCompanyHint": {
+    "message": "Je kunt het bedrijf vanaf de bedrijfspagina aan Hipcall toevoegen."
+  },
+  "liFormFilled": {
+    "message": "De gegevens zijn van de LinkedIn-bedrijfspagina overgenomen."
+  },
+  "liEmployeesHint": {
+    "message": "Medewerkers op LinkedIn: $1 — pas dit zo nodig aan."
+  },
+  "match_name": {
+    "message": "Naam"
+  },
+  "match_linkedin": {
+    "message": "LinkedIn"
+  },
+  "liContactLoading": {
+    "message": "Contactgegevens worden van LinkedIn gelezen…"
+  },
+  "liContactFailed": {
+    "message": "Het venster met contactgegevens kon niet worden gelezen. Klik nogmaals op ‘Contactgegevens ophalen’."
+  },
+  "liCopyDebug": {
+    "message": "Gelezen inhoud kopiëren (voor support)"
+  },
+  "hipcallSiteNoIcons": {
+    "message": "De extensie toont nooit haar pictogrammen op de eigen pagina’s van Hipcall; die hebben hun eigen belknoppen."
+  },
+  "findSavedAt": {
+    "message": "(laatste zoekopdracht: $1 — klik op Zoeken om te vernieuwen)"
+  },
+  "settingsGeneral": {
+    "message": "Algemeen"
+  },
+  "showOnAllPages": {
+    "message": "Op alle pagina’s van deze site tonen"
+  },
+  "pageListTitle": {
+    "message": "Paginalijst"
+  },
+  "addCompanyPortalHint": {
+    "message": "Opent de pagina voor een nieuw bedrijf in Hipcall"
+  },
+  "errRedirectNotRegistered": {
+    "message": "De Hipcall-aanmelding is niet teruggekeerd naar de extensie. Dit adres is mogelijk niet geregistreerd in Hipcall: $1"
+  },
+  "errClientNotPublic": {
+    "message": "Hipcall vraagt om een client secret voor deze app. De client van de extensie moet in Hipcall als openbare client (PKCE, zonder secret) worden ingesteld."
+  },
+  "signinAlreadyOpen": {
+    "message": "Het aanmeldvenster is al geopend en naar voren gehaald. Ga daar verder of sluit het en probeer het opnieuw."
+  },
+  "actIntro": {
+    "message": "Bekijk hier je laatste gesprekken, notities en andere activiteiten in Hipcall."
+  },
+  "actEmptyText": {
+    "message": "Ze verschijnen hier zodra je in Hipcall belt of notities toevoegt."
+  },
+  "noAccessTitle": {
+    "message": "Je hebt hier geen toegang toe"
+  },
+  "noAccessText": {
+    "message": "Je Hipcall-rol staat niet toe dat je dit ziet. Vraag je Hipcall-beheerder om toegang."
+  },
+  "offlineTitle": {
+    "message": "Geen verbinding"
+  },
+  "errorTitle": {
+    "message": "Er ging iets mis"
+  },
+  "retry": {
+    "message": "Opnieuw proberen"
+  },
+  "notFoundTitle": {
+    "message": "Niet in Hipcall"
+  },
+  "regionLocked": {
+    "message": "Meld je eerst af om de regio te wijzigen.",
+    "description": ""
   }
 }

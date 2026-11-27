@@ -14,6 +14,15 @@ One extension for every Hipcall account region — **Türkiye** (hipcall.com.tr)
 - **Account region** — Türkiye, EU, UK or US, like the Hipcall apps. Guessed from the browser language on install and changeable in *Settings*; the web phone server (hipcall.com.tr / hipcall.com) follows the region automatically.
 - **Language** — Automatic (browser language, English if it is not supported), Deutsch, English, Español, Français, Italiano, Nederlands or Türkçe, selectable in *Settings* (`_locales/<code>`, loaded by `js/i18n.js`).
 - **Auto-dial** — optionally press the call button automatically after the number is entered.
+- **No icons on Hipcall's own sites** — use.hipcall.com(.tr), hipcall.com(.tr): their pages have their own call buttons, so the extension never adds icons there (whatever the site rules say).
+
+### Hipcall account (OAuth 2.1 + PKCE)
+
+- **Sign in with Hipcall** — *Settings* (gear icon) → *Hipcall account*. Authorization code flow with PKCE (S256) for a public client: **no client secret in the extension**. Scopes: `profile email offline_access contacts:read contacts:write`. Tokens are kept only in memory (`chrome.storage.session`, trusted contexts only): never written to disk, never visible to websites or content scripts, refreshed automatically, and gone when the browser closes (the user signs in again). The `client_id` is public by design — it is part of the sign-in URL; security rests on the registered `redirect_uri` and PKCE. Client ids are not in the repository: `scripts/package.sh` writes `js/oauth_clients.js` (git-ignored) from the GitHub Actions variables `HC_OAUTH_CLIENT_TR` and `HC_OAUTH_CLIENT_GLOBAL` (*Settings → Secrets and variables → Actions → Variables*). For local development copy `js/oauth_clients.example.js` to `js/oauth_clients.js` and fill in the ids. Without the file the extension works, but Hipcall sign-in is hidden. Never put a client secret in the extension.
+- **Find** (Discover tab) — looks the page's phone numbers, e-mails and website up in Hipcall (`/api/v3/lookup/by_phone`, `/lookup/by_email`, company search by domain) and lists the matching contacts and companies, with why they matched.
+- **Add as a company** — when nothing is found, opens the Hipcall portal's *new company* page (`/portal/contact-center/companies/new/` on use.hipcall.com.tr or use.hipcall.com, by account region). An in-extension form prefilled from the page also exists (`ADD_COMPANY_IN_PORTAL = false` in the popup turns it back on).
+- **LinkedIn** — profile pages show the person, current company and *Contact info*, and whether the person and the company are in Hipcall. (A company-page view also exists, switched off for now: `LINKEDIN_COMPANY_VIEW`.)
+- **Activities** tab — your latest Hipcall activities (`/api/v3/me/activities`).
 
 ## How a call reaches the web phone
 
@@ -50,13 +59,16 @@ Full walkthrough with code references on both sides: [docs/APP_LINKS.md](docs/AP
 |---|---|
 | `manifest.json` | MV3 manifest, permissions, localized name/description |
 | `service_worker.js` | Web phone window, click-to-call: hands `/dial` links to the desktop |
-| `js/config.js` | Account regions → web phone servers, user settings |
+| `js/oauth_clients.js` | OAuth client ids (generated, git-ignored; see `js/oauth_clients.example.js`) |
+| `js/config.js` | Account regions → web phone / API servers, OAuth client, user settings |
+| `js/auth.js` | Sign-in with Hipcall (OAuth 2.1 + PKCE), tokens, authenticated API calls |
+| `js/crm.js` | Find, LinkedIn lookup, add company, custom fields, activities |
 | `js/phone.js` | Phone number detection and normalization per region (shared by content script and popup) |
 | `js/i18n.js` | Translations with a user-selectable language |
 | `js/content_script.js` | `tel:` link handling and call icons on websites |
 | `js/site_rules.js` | Per-site icon rules (shared by content script and popup) |
 | `js/hipcall_bridge.js` | Runs in the desktop tab; posts the link to the app and waits for its ack |
-| `src/browser_action/*` | Toolbar popup: numbers/e-mails and settings |
+| `src/browser_action/*` | Toolbar popup: Discover (numbers/e-mails, Find, LinkedIn), Activities, settings sheet, add-company form |
 | `_locales/{de,en,es,fr,it,nl,tr}/messages.json` | Translations — add a folder, an `<option>` in the popup and the code in `HC_I18N.SUPPORTED` to add a language |
 | `scripts/*.sh`, `.github/workflows/release.yml` | Packaging and release (see *Release*) |
 | `icons/hipcall-*.svg`, `fonts/` | Brand assets from the [Hipcall brand guide](https://www.hipcall.com/brand-guide/); fonts are OFL-1.1 (licenses in `fonts/`) |
@@ -68,7 +80,8 @@ Full walkthrough with code references on both sides: [docs/APP_LINKS.md](docs/AP
 3. Web phone URLs per region are in `js/config.js`. Unpacked builds also offer **Local development** in
    *Settings → Account region*: the desktop web app run with
    `fvm flutter run -d web-server --web-port=19823` (desktop repo, DEVELOPMENT.md). Web Store installs never show it.
-4. `scripts/package.sh` checks the JSON files and builds `dist/hipcall-webphone-<version>.zip` (needs `jq`).
+4. OAuth: sign-in uses `chrome.identity.launchWebAuthFlow`. The redirect address is `https://<extension-id>.chromiumapp.org/tr` (use.hipcall.com.tr) or `/global` (use.hipcall.com); it must be registered for the client. `manifest.json` carries the Web Store item's public `key`, so an unpacked build gets the same id (`loeoapeffpblcmdicchlekiajcbfmpnm`) and the registered addresses work while developing; `scripts/package.sh` removes `key` from the release ZIP. Remove the Web Store copy while testing — two extensions cannot share an id.
+5. `scripts/package.sh` checks the JSON files and builds `dist/hipcall-webphone-<version>.zip` (needs `jq`).
 
 ## Release
 

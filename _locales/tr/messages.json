@@ -321,5 +321,495 @@
   "desktopOutdated": {
     "message": "Hipcall sekmesini yenileyip tekrar deneyin. Hipcall'un bu sürümü eklentiden numara alamıyor.",
     "description": ""
+  },
+  "tabActivities": {
+    "message": "Aktiviteler"
+  },
+  "back": {
+    "message": "Geri"
+  },
+  "accountTitle": {
+    "message": "Hipcall hesabı"
+  },
+  "signIn": {
+    "message": "Hipcall ile giriş yap"
+  },
+  "signingIn": {
+    "message": "Giriş penceresi açık…"
+  },
+  "signOut": {
+    "message": "Çıkış yap"
+  },
+  "signedIn": {
+    "message": "Giriş yapıldı"
+  },
+  "signinHint": {
+    "message": "Kişi ve firmaları bulmak, aktivitelerinizi görmek için Hipcall hesabınızla giriş yapın."
+  },
+  "signinNotAvailable": {
+    "message": "Hipcall ile giriş şimdilik yalnızca Türkiye hesapları için açık."
+  },
+  "signinCancelled": {
+    "message": "Giriş penceresi kapatıldı."
+  },
+  "signinDenied": {
+    "message": "Erişim izni verilmedi."
+  },
+  "errSignedOut": {
+    "message": "Oturumunuz sona erdi, lütfen tekrar giriş yapın."
+  },
+  "errForbidden": {
+    "message": "Bu bilgiye erişim izniniz yok."
+  },
+  "errGeneric": {
+    "message": "Beklenmeyen bir hata oluştu: $1"
+  },
+  "findTitle": {
+    "message": "Hipcall'da bul"
+  },
+  "findHint": {
+    "message": "Bu sayfadaki numara, e-posta ve web sitesiyle Hipcall'daki kişi ve firmaları arar."
+  },
+  "findButton": {
+    "message": "Bul"
+  },
+  "findSearching": {
+    "message": "Aranıyor…"
+  },
+  "findNeedsSignin": {
+    "message": "Aramak için önce Hipcall hesabınızla giriş yapın."
+  },
+  "findSearched": {
+    "message": "$1 numara, $2 e-posta ve $3 sitesi arandı."
+  },
+  "findNothing": {
+    "message": "Bu sayfadaki numara, e-posta ve web sitesiyle eşleşen kişi ya da firma bulunamadı."
+  },
+  "findCompanies": {
+    "message": "Firmalar ($1)"
+  },
+  "findContacts": {
+    "message": "Kişiler ($1)"
+  },
+  "findOwner": {
+    "message": "Sorumlu: $1"
+  },
+  "match_phone": {
+    "message": "Telefon"
+  },
+  "match_email": {
+    "message": "E-posta"
+  },
+  "match_website": {
+    "message": "Web sitesi"
+  },
+  "activitiesTitle": {
+    "message": "Aktiviteleriniz"
+  },
+  "activitiesHint": {
+    "message": "Hipcall'daki son aktiviteleriniz"
+  },
+  "activitiesNeedsSignin": {
+    "message": "Aktivitelerinizi görmek için Hipcall hesabınızla giriş yapın."
+  },
+  "activitiesEmpty": {
+    "message": "Henüz aktivite yok"
+  },
+  "activity": {
+    "message": "Aktivite"
+  },
+  "refresh": {
+    "message": "Yenile"
+  },
+  "loadMore": {
+    "message": "Daha fazla göster"
+  },
+  "loading": {
+    "message": "Yükleniyor…"
+  },
+  "act_call_outbound": {
+    "message": "Giden arama"
+  },
+  "act_call_inbound": {
+    "message": "Gelen arama"
+  },
+  "act_call_missed": {
+    "message": "Cevapsız arama"
+  },
+  "act_note_created": {
+    "message": "Not eklendi"
+  },
+  "act_contact_created": {
+    "message": "Kişi oluşturuldu"
+  },
+  "act_company_created": {
+    "message": "Firma oluşturuldu"
+  },
+  "addCompany": {
+    "message": "Hipcall'a firma olarak ekle"
+  },
+  "addCompanyAnyway": {
+    "message": "Yeni firma olarak ekle"
+  },
+  "companyAddTitle": {
+    "message": "Firma ekle"
+  },
+  "companyAddHint": {
+    "message": "Bilgiler bu siteden dolduruldu. Eklemeden önce değiştirebilir, ekleyip çıkarabilirsiniz."
+  },
+  "fieldName": {
+    "message": "Firma adı *"
+  },
+  "fieldWebsite": {
+    "message": "Web sitesi"
+  },
+  "fieldLinkedin": {
+    "message": "LinkedIn"
+  },
+  "fieldCustomUrl": {
+    "message": "Özel URL"
+  },
+  "fieldEmployees": {
+    "message": "Çalışan sayısı"
+  },
+  "fieldDescription": {
+    "message": "Açıklama"
+  },
+  "fieldOwner": {
+    "message": "Sorumlu"
+  },
+  "addPhone": {
+    "message": "+ Telefon ekle"
+  },
+  "addEmail": {
+    "message": "+ E-posta ekle"
+  },
+  "cancel": {
+    "message": "Vazgeç"
+  },
+  "saveCompany": {
+    "message": "Firmayı ekle"
+  },
+  "saving": {
+    "message": "Ekleniyor…"
+  },
+  "employeesUnknown": {
+    "message": "Belirtilmemiş"
+  },
+  "employees_1": {
+    "message": "1"
+  },
+  "employees_2_5": {
+    "message": "2–5"
+  },
+  "employees_6_10": {
+    "message": "6–10"
+  },
+  "employees_11_25": {
+    "message": "11–25"
+  },
+  "employees_26_50": {
+    "message": "26–50"
+  },
+  "employees_51_200": {
+    "message": "51–200"
+  },
+  "employees_201_1000": {
+    "message": "201–1.000"
+  },
+  "employees_1001_10000": {
+    "message": "1.001–10.000"
+  },
+  "employees_10001_more": {
+    "message": "10.000+"
+  },
+  "needsWriteAccess": {
+    "message": "Firma eklemek için ekleme izni gerekiyor. Lütfen tekrar giriş yapın, form kaybolmaz."
+  },
+  "signInAgain": {
+    "message": "Tekrar giriş yap"
+  },
+  "countryCode": {
+    "message": "Ülke kodu (TR, US, GB…)"
+  },
+  "overLimit": {
+    "message": "Hipcall bir firmaya en fazla $1 kayıt kabul ediyor; bu satır eklenmeyecek."
+  },
+  "limitOver": {
+    "message": "$1 bulundu — ilk $2 eklenecek"
+  },
+  "errNameShort": {
+    "message": "Firma adı en az 3 karakter olmalı."
+  },
+  "errValidation": {
+    "message": "Lütfen şunları düzeltin:"
+  },
+  "companyAdded": {
+    "message": "“$1” Hipcall'a eklendi."
+  },
+  "fieldPhones": {
+    "message": "Telefonlar"
+  },
+  "fieldEmails": {
+    "message": "E-postalar"
+  },
+  "errInvalidScope": {
+    "message": "Hipcall bu eklentiye kişi/firma ekleme izni (contacts:write) vermiyor. Hipcall tarafında bu iznin açılması gerekiyor."
+  },
+  "signinTimeout": {
+    "message": "Giriş süresi doldu, lütfen tekrar deneyin."
+  },
+  "draftRestored": {
+    "message": "Giriş yapıldı. Formunuz geri yüklendi, \"Firmayı ekle\"ye tekrar basın."
+  },
+  "moreFields": {
+    "message": "Diğer alanlar ($1)"
+  },
+  "choose": {
+    "message": "Seçin"
+  },
+  "yes": {
+    "message": "Evet"
+  },
+  "errNumber": {
+    "message": "Geçerli bir sayı girin."
+  },
+  "errRequired": {
+    "message": "Bu alan zorunlu."
+  },
+  "customField": {
+    "message": "Özel alan “$1”"
+  },
+  "errNotAdded": {
+    "message": "Firma eklenemedi. Lütfen şunları düzeltin:"
+  },
+  "errNotAddedShort": {
+    "message": "Firma eklenemedi."
+  },
+  "errNetwork": {
+    "message": "Hipcall'a bağlanılamadı. İnternet bağlantınızı kontrol edip tekrar deneyin."
+  },
+  "errRateLimited": {
+    "message": "Kısa sürede çok fazla istek gönderildi. Biraz bekleyip tekrar deneyin."
+  },
+  "errNotFound": {
+    "message": "Hipcall'da bu kayıt ya da adres bulunamadı."
+  },
+  "errServer": {
+    "message": "Hipcall şu an yanıt veremiyor (sunucu hatası). Birkaç dakika sonra tekrar deneyin."
+  },
+  "errApi": {
+    "message": "Hipcall isteği kabul etmedi: $1"
+  },
+  "errSigninState": {
+    "message": "Giriş doğrulanamadı (güvenlik kontrolü). Lütfen tekrar giriş yapın."
+  },
+  "errToken": {
+    "message": "Giriş tamamlanamadı, Hipcall oturum anahtarı vermedi ($1). Lütfen tekrar deneyin."
+  },
+  "errSignin": {
+    "message": "Hipcall girişi reddetti ($1)."
+  },
+  "phoneN": {
+    "message": "$1. telefon"
+  },
+  "emailN": {
+    "message": "$1. e-posta"
+  },
+  "vBlank": {
+    "message": "Bu alan boş bırakılamaz."
+  },
+  "vTaken": {
+    "message": "Bu değerle kayıtlı başka bir kayıt zaten var."
+  },
+  "vInvalid": {
+    "message": "Geçersiz değer."
+  },
+  "vFormat": {
+    "message": "Biçimi hatalı."
+  },
+  "vPhone": {
+    "message": "Geçerli bir telefon numarası değil. Numarayı ve ülke kodunu kontrol edin."
+  },
+  "vEmail": {
+    "message": "Geçerli bir e-posta adresi değil."
+  },
+  "vMinLen": {
+    "message": "En az $1 karakter olmalı."
+  },
+  "vMaxLen": {
+    "message": "En fazla $1 karakter olabilir."
+  },
+  "vMaxItems": {
+    "message": "En fazla $1 tane eklenebilir."
+  },
+  "vMinItems": {
+    "message": "En az $1 tane olmalı."
+  },
+  "vNotInList": {
+    "message": "İzin verilen seçeneklerden biri değil."
+  },
+  "vNotExist": {
+    "message": "Hipcall'da böyle bir kayıt yok."
+  },
+  "vReserved": {
+    "message": "Bu değer kullanılamaz."
+  },
+  "vRange": {
+    "message": "Değer izin verilen aralıkta değil."
+  },
+  "vUnknownField": {
+    "message": "Hipcall bu özel alanı tanımıyor."
+  },
+  "vInactive": {
+    "message": "Bu özel alan Hipcall'da kapatılmış."
+  },
+  "customFieldsUnavailable": {
+    "message": "Hipcall'daki özel alanlar alınamadı ($1). Zorunlu bir alan varsa kaydederken burada gösterilecek."
+  },
+  "liPerson": {
+    "message": "LinkedIn kişi profili"
+  },
+  "liCompany": {
+    "message": "LinkedIn şirket sayfası"
+  },
+  "liReadingPerson": {
+    "message": "LinkedIn profili okunuyor…"
+  },
+  "liReadingCompany": {
+    "message": "LinkedIn şirket sayfası okunuyor…"
+  },
+  "liNotReadable": {
+    "message": "Bu LinkedIn sayfası okunamadı. Sayfa tam yüklendikten sonra yenile'ye basın."
+  },
+  "liContactInfo": {
+    "message": "İletişim bilgileri"
+  },
+  "liNoContactShared": {
+    "message": "Bu kişi LinkedIn'de telefon, e-posta ya da web sitesi paylaşmamış."
+  },
+  "liContactNotRead": {
+    "message": "İletişim bilgileri henüz okunmadı."
+  },
+  "liNoCompanyContact": {
+    "message": "Şirket sayfasında telefon bulunamadı."
+  },
+  "liReadContact": {
+    "message": "İletişim bilgilerini getir"
+  },
+  "liReloadContact": {
+    "message": "İletişim bilgilerini yeniden oku"
+  },
+  "liFounded": {
+    "message": "Kuruluş: $1"
+  },
+  "liInHipcall": {
+    "message": "Hipcall'da"
+  },
+  "liPersonHint": {
+    "message": "Bu kişi ve şirketi Hipcall'da kayıtlı mı?"
+  },
+  "liCompanyHint": {
+    "message": "Bu şirket Hipcall'da kayıtlı mı?"
+  },
+  "liPersonSection": {
+    "message": "Kişi"
+  },
+  "liCompanySection": {
+    "message": "Şirketi"
+  },
+  "liPersonMissing": {
+    "message": "“$1” Hipcall'da kişi olarak kayıtlı değil."
+  },
+  "liCompanyMissing": {
+    "message": "“$1” Hipcall'da kayıtlı değil."
+  },
+  "liCompanyFound": {
+    "message": "Bu şirket Hipcall'da kayıtlı ($1 kayıt)."
+  },
+  "liNoCompanyOnProfile": {
+    "message": "Profilde güncel bir şirket görünmüyor."
+  },
+  "liOpenCompanyPage": {
+    "message": "$1 LinkedIn sayfasını aç"
+  },
+  "liOpenCompanyHint": {
+    "message": "Şirketi Hipcall'a şirket sayfasından ekleyebilirsiniz."
+  },
+  "liFormFilled": {
+    "message": "Bilgiler LinkedIn şirket sayfasından dolduruldu."
+  },
+  "liEmployeesHint": {
+    "message": "LinkedIn'deki çalışan sayısı: $1 — gerekirse değiştirin."
+  },
+  "match_name": {
+    "message": "İsim"
+  },
+  "match_linkedin": {
+    "message": "LinkedIn"
+  },
+  "liContactLoading": {
+    "message": "İletişim bilgileri LinkedIn'den okunuyor…"
+  },
+  "liContactFailed": {
+    "message": "İletişim bilgileri penceresi okunamadı. \"İletişim bilgilerini getir\"e tekrar basın."
+  },
+  "liCopyDebug": {
+    "message": "Okunan pencere içeriğini kopyala (destek için)"
+  },
+  "hipcallSiteNoIcons": {
+    "message": "Hipcall'ın kendi sayfalarında eklenti ikonu gösterilmez; bu sayfaların kendi arama düğmeleri var."
+  },
+  "findSavedAt": {
+    "message": "(son arama: $1 — yenilemek için Bul'a basın)"
+  },
+  "settingsGeneral": {
+    "message": "Genel"
+  },
+  "showOnAllPages": {
+    "message": "Sitenin tüm sayfalarında göster"
+  },
+  "pageListTitle": {
+    "message": "Sayfa listesi"
+  },
+  "addCompanyPortalHint": {
+    "message": "Hipcall'da yeni firma sayfasını açar"
+  },
+  "errRedirectNotRegistered": {
+    "message": "Hipcall giriş penceresi eklentiye geri dönmedi. Bu adres Hipcall'da kayıtlı olmayabilir: $1"
+  },
+  "errClientNotPublic": {
+    "message": "Hipcall bu uygulama için gizli anahtar istiyor. Eklentinin client'ı Hipcall'da \"public\" (PKCE, secret'sız) olarak ayarlanmalı."
+  },
+  "signinAlreadyOpen": {
+    "message": "Giriş penceresi zaten açık; öne getirildi. Oradan devam edin ya da pencereyi kapatıp tekrar deneyin."
+  },
+  "actIntro": {
+    "message": "Hipcall'daki son aramalarınızı, notlarınızı ve diğer aktivitelerinizi burada görün."
+  },
+  "actEmptyText": {
+    "message": "Hipcall'da arama yaptığınızda ya da not eklediğinizde burada görünecek."
+  },
+  "noAccessTitle": {
+    "message": "Bu bölüme erişiminiz yok"
+  },
+  "noAccessText": {
+    "message": "Hipcall hesabınızın rolü bu bilgiyi görmeye izin vermiyor. Hipcall yöneticinizden yetki isteyebilirsiniz."
+  },
+  "offlineTitle": {
+    "message": "Bağlantı kurulamadı"
+  },
+  "errorTitle": {
+    "message": "Bir sorun oluştu"
+  },
+  "retry": {
+    "message": "Tekrar dene"
+  },
+  "notFoundTitle": {
+    "message": "Hipcall'da kayıt yok"
+  },
+  "regionLocked": {
+    "message": "Bölgeyi değiştirmek için önce çıkış yapın.",
+    "description": ""
   }
 }

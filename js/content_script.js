@@ -442,7 +442,7 @@
   }
 
   function processElements(root) {
-    if (root.nodeType !== Node.ELEMENT_NODE) return;
+    if (!root || root.nodeType !== Node.ELEMENT_NODE) return;
     const candidates = [root, ...root.querySelectorAll('*')].filter((el) =>
       !el.closest(SKIP_SELECTOR) && !el.closest(`[${MARK_ATTR}]`) && !hasIcon(el));
 
@@ -458,11 +458,71 @@
     }
   }
 
+  /*
+   * Numbers split over several text nodes inside a long line, e.g. an e-mail
+   * signature "… | <span>0 </span><span>(850)</span> 885 00 00 | …": the text
+   * pass sees only pieces and the element pass skips long elements. Here the
+   * text of a (short enough) element is joined, and the icon is put right
+   * after the last piece of each number.
+   */
+  const MAX_SPLIT_TEXT = 600;
+
+  function processSplitNumbers(root) {
+    if (!root || root.nodeType !== Node.ELEMENT_NODE) return;
+    const elements = [root, ...root.querySelectorAll('*')].filter((el) => {
+      const text = el.textContent || '';
+      return el.childNodes.length > 1 && text.length <= MAX_SPLIT_TEXT &&
+        MIN_DIGITS_REGEX.test(text) && !el.closest(SKIP_SELECTOR) && !el.closest(`[${MARK_ATTR}]`);
+    });
+    for (const el of elements) {
+      if (!el.isConnected) continue;
+      const nodes = [];
+      const walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT, {
+        acceptNode: (n) => (n.parentElement && !n.parentElement.closest(SKIP_SELECTOR)
+          ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_REJECT)
+      });
+      let n;
+      while ((n = walker.nextNode())) nodes.push(n);
+      if (nodes.length < 2) continue;
+
+      let text = '';
+      const starts = nodes.map((node) => { const at = text.length; text += node.nodeValue; return at; });
+      const nodeAt = (pos) => {
+        for (let i = starts.length - 1; i >= 0; i--) if (starts[i] <= pos) return i;
+        return 0;
+      };
+      // From the end, so splitting a node does not move the earlier matches.
+      const matches = HC_PHONE.findAll(text, region).reverse();
+      for (const m of matches) {
+        const first = nodeAt(m.index);
+        const last = nodeAt(m.index + m.raw.length - 1);
+        if (first === last) continue; // inside one text node: the text pass handles it
+        const range = document.createRange();
+        range.setStart(nodes[first], 0);
+        range.setEnd(nodes[last], 0);
+        const common = range.commonAncestorContainer;
+        if (common !== el) continue; // an inner element holds it: handled there
+        if (nodes.slice(first, last + 1).some((x) => x.parentElement.closest(`[${MARK_ATTR}], .${WRAP_CLASS}`))) continue;
+        const endNode = nodes[last];
+        const offset = m.index + m.raw.length - starts[last];
+        const next = endNode.nextSibling;
+        if (next && next.nodeType === Node.ELEMENT_NODE && next.classList.contains(BTN_CLASS)) continue;
+        if (offset < endNode.nodeValue.length) endNode.splitText(offset);
+        endNode.parentNode.insertBefore(createCallButton(m.number.dial), endNode.nextSibling);
+      }
+    }
+  }
+
   function scan(root) {
     if (!root || !root.isConnected) return;
+    // Take the element first: wrapping a number replaces a text node, which
+    // then has no parent any more.
+    const el = root.nodeType === Node.TEXT_NODE ? root.parentElement : root;
     processTelLinks(root);
     collectTextNodes(root).forEach(processTextNode);
-    processElements(root.nodeType === Node.TEXT_NODE ? root.parentElement : root);
+    if (!el || !el.isConnected) return;
+    processElements(el);
+    processSplitNumbers(el);
   }
 
   /* ------------------------------------------------------------------ */
@@ -580,6 +640,8 @@
     if (!isAlive()) return;
     const page = await pageLocation();
     pageHost = page.hostname;
+    // Hipcall's own pages (portal, contacts…) keep their own call icons.
+    if (HC_CONFIG.isHipcallSite(page.hostname)) { deactivate(); return; }
     const rule = await HC_SITE_RULES.getRule(page.hostname);
     if (HC_SITE_RULES.isEnabled(rule, page.pathname)) activate();
     else deactivate();
