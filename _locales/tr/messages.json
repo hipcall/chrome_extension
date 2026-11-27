@@ -383,7 +383,7 @@
     "message": "$1 numara, $2 e-posta ve $3 sitesi arandı."
   },
   "findNothing": {
-    "message": "Hipcall'da eşleşen kişi ya da firma bulunamadı."
+    "message": "Bu sayfadaki numara, e-posta ve web sitesiyle eşleşen kişi ya da firma bulunamadı."
   },
   "findCompanies": {
     "message": "Firmalar ($1)"
@@ -413,7 +413,7 @@
     "message": "Aktivitelerinizi görmek için Hipcall hesabınızla giriş yapın."
   },
   "activitiesEmpty": {
-    "message": "Henüz aktivite yok."
+    "message": "Henüz aktivite yok"
   },
   "activity": {
     "message": "Aktivite"
@@ -762,5 +762,54 @@
   },
   "findSavedAt": {
     "message": "(son arama: $1 — yenilemek için Bul'a basın)"
+  },
+  "settingsGeneral": {
+    "message": "Genel"
+  },
+  "showOnAllPages": {
+    "message": "Sitenin tüm sayfalarında göster"
+  },
+  "pageListTitle": {
+    "message": "Sayfa listesi"
+  },
+  "addCompanyPortalHint": {
+    "message": "Hipcall'da yeni firma sayfasını açar"
+  },
+  "errRedirectNotRegistered": {
+    "message": "Hipcall giriş penceresi eklentiye geri dönmedi. Bu adres Hipcall'da kayıtlı olmayabilir: $1"
+  },
+  "errClientNotPublic": {
+    "message": "Hipcall bu uygulama için gizli anahtar istiyor. Eklentinin client'ı Hipcall'da \"public\" (PKCE, secret'sız) olarak ayarlanmalı."
+  },
+  "signinAlreadyOpen": {
+    "message": "Giriş penceresi zaten açık; öne getirildi. Oradan devam edin ya da pencereyi kapatıp tekrar deneyin."
+  },
+  "actIntro": {
+    "message": "Hipcall'daki son aramalarınızı, notlarınızı ve diğer aktivitelerinizi burada görün."
+  },
+  "actEmptyText": {
+    "message": "Hipcall'da arama yaptığınızda ya da not eklediğinizde burada görünecek."
+  },
+  "noAccessTitle": {
+    "message": "Bu bölüme erişiminiz yok"
+  },
+  "noAccessText": {
+    "message": "Hipcall hesabınızın rolü bu bilgiyi görmeye izin vermiyor. Hipcall yöneticinizden yetki isteyebilirsiniz."
+  },
+  "offlineTitle": {
+    "message": "Bağlantı kurulamadı"
+  },
+  "errorTitle": {
+    "message": "Bir sorun oluştu"
+  },
+  "retry": {
+    "message": "Tekrar dene"
+  },
+  "notFoundTitle": {
+    "message": "Hipcall'da kayıt yok"
+  },
+  "regionLocked": {
+    "message": "Bölgeyi değiştirmek için önce çıkış yapın.",
+    "description": ""
   }
 }

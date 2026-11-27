@@ -22,6 +22,10 @@ const ICON = {
   check: '<svg viewBox="0 0 24 24"><path d="M9 16.17 4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>',
   linkedin: '<svg viewBox="0 0 24 24"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14zM8.34 17.34V10.1H5.93v7.24h2.41zM7.13 9.11a1.4 1.4 0 1 0 0-2.8 1.4 1.4 0 0 0 0 2.8zm11.21 8.23v-3.97c0-2.13-1.14-3.12-2.66-3.12a2.3 2.3 0 0 0-2.09 1.15V10.1h-2.41v7.24h2.41v-3.83c0-1 .19-1.98 1.44-1.98 1.23 0 1.25 1.15 1.25 2.05v3.76h2.06z"/></svg>',
   web: '<svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm6.93 6h-2.95a15.65 15.65 0 0 0-1.38-3.56A8.03 8.03 0 0 1 18.93 8zM12 4.04c.83 1.2 1.48 2.53 1.91 3.96h-3.82c.43-1.43 1.08-2.76 1.91-3.96zM4.26 14a8.2 8.2 0 0 1 0-4h3.38a16.5 16.5 0 0 0 0 4H4.26zm.81 2h2.95c.32 1.25.78 2.45 1.38 3.56A7.99 7.99 0 0 1 5.07 16zm2.95-8H5.07a7.99 7.99 0 0 1 4.33-3.56A15.65 15.65 0 0 0 8.02 8zM12 19.96c-.83-1.2-1.48-2.53-1.91-3.96h3.82c-.43 1.43-1.08 2.76-1.91 3.96zM14.34 14H9.66a14.7 14.7 0 0 1 0-4h4.68a14.7 14.7 0 0 1 0 4zm.25 5.56c.6-1.11 1.06-2.31 1.38-3.56h2.95a8.03 8.03 0 0 1-4.33 3.56zM16.36 14a16.5 16.5 0 0 0 0-4h3.38a8.2 8.2 0 0 1 0 4h-3.38z"/></svg>',
+  clock: '<svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm0 18a8 8 0 1 1 0-16 8 8 0 0 1 0 16zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67V7z"/></svg>',
+  lock: '<svg viewBox="0 0 24 24"><path d="M18 8h-1V6a5 5 0 0 0-10 0v2H6a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V10a2 2 0 0 0-2-2zM9 6a3 3 0 0 1 6 0v2H9V6zm9 14H6V10h12v10zm-6-3a2 2 0 1 0 0-4 2 2 0 0 0 0 4z"/></svg>',
+  cloudOff: '<svg viewBox="0 0 24 24"><path d="M19.35 10.04A7.49 7.49 0 0 0 12 4c-1.48 0-2.85.43-4.01 1.17l1.46 1.46A5.47 5.47 0 0 1 12 6a5.5 5.5 0 0 1 5.5 5.5v.5H19a3 3 0 0 1 3 3c0 1.13-.64 2.11-1.56 2.62l1.45 1.45A4.98 4.98 0 0 0 24 15c0-2.64-2.05-4.78-4.65-4.96zM3 5.27l2.75 2.74A6.01 6.01 0 0 0 6 20h11.73l2 2L21 20.73 4.27 4 3 5.27zM7.73 10l8 8H6a4 4 0 0 1 0-8h1.73z"/></svg>',
+  searchOff: '<svg viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27A6.47 6.47 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14zM7.21 7.79 9.5 10.08l2.29-2.29.71.71L10.21 10.8l2.29 2.29-.71.71-2.29-2.29-2.29 2.29-.71-.71 2.29-2.29L6.5 8.5z"/></svg>',
   pin: '<svg viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg>',
   open: '<svg viewBox="0 0 24 24"><path d="M19 19H5V5h7V3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"/></svg>',
   person: '<svg viewBox="0 0 24 24"><path d="M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>',
@@ -246,16 +250,8 @@ function render({ phones, emails }) {
   const el = $('emails');
   el.innerHTML = '';
   if (!emails.length) el.appendChild(emptyRow(t('noEmails')));
-  for (const item of emails) {
-    const a = document.createElement('a');
-    a.className = 'round light';
-    a.href = 'mailto:' + item.email;
-    a.target = '_blank';
-    a.title = t('writeEmail', [item.email]);
-    a.setAttribute('aria-label', a.title);
-    a.innerHTML = ICON.mail;
-    el.appendChild(itemRow(item.email, 'mail', item.email, a));
-  }
+  // E-mails: copy only (no "write e-mail" button).
+  for (const item of emails) el.appendChild(itemRow(item.email, 'mail', item.email, null));
 }
 
 function itemRow(text, cls, copyValue, actionEl) {
@@ -283,7 +279,8 @@ function itemRow(text, cls, copyValue, actionEl) {
     }, 1200);
   });
 
-  li.append(val, copy, actionEl);
+  li.append(val, copy);
+  if (actionEl) li.appendChild(actionEl);
   return li;
 }
 
@@ -371,6 +368,10 @@ async function initGeneralSettings() {
   select.value = settings.region;
   showFlag(settings.region);
   select.addEventListener('change', async () => {
+    if (account.signedIn) {            // signed in → sign out first
+      select.value = (await HC_CONFIG.getSettings()).region;
+      return renderRegionLock();
+    }
     showFlag(select.value);
     await HC_CONFIG.setSettings({ region: select.value });
     chrome.runtime.sendMessage({ type: 'regionChanged' });
@@ -405,20 +406,18 @@ async function initSiteSettings() {
   $('setSite').textContent = pageUrl.hostname.replace(/^www\./, '');
   if (HC_CONFIG.isHipcallSite(pageUrl.hostname)) {
     // No icons on Hipcall's own pages: nothing to set here.
-    const box = $('siteSettings');
-    if (box.querySelector('.hipcall-note')) return;
-    [...box.children].forEach((c) => { if (c.tagName !== 'H2' && !c.classList.contains('site-name')) c.style.display = 'none'; });
-    const note = document.createElement('p');
-    note.classList.add('hipcall-note');
-    note.className = 'sub';
-    note.textContent = t('hipcallSiteNoIcons');
-    box.appendChild(note);
+    $('siteCard').hidden = true;
+    $('siteNote').hidden = false;
+    $('siteNote').textContent = t('hipcallSiteNoIcons');
     return;
   }
   rule = await HC_SITE_RULES.getRule(pageUrl.hostname);
 
-  markMode = segmented($('modeSeg'), rule.mode, (mode) => {
-    rule.mode = mode;
+  // "All pages of this site" switch = rule mode all / selected pages.
+  markMode = (mode) => { $('modeAll').checked = mode === 'all'; };
+  markMode(rule.mode);
+  $('modeAll').addEventListener('change', () => {
+    rule.mode = $('modeAll').checked ? 'all' : 'selected';
     saveRule();
   });
 
@@ -689,11 +688,15 @@ function errorText(error) {
   if (/FORBIDDEN/.test(e)) return t('errForbidden');
   if (/SIGNIN_NOT_AVAILABLE/.test(e)) return t('signinNotAvailable');
   if (/SIGNIN_CANCELLED/.test(e)) return t('signinCancelled');
-  if (/SIGNIN_DENIED/.test(e)) return t('signinDenied');
+  if (/SIGNIN_DENIED/.test(e)) return t('signinDenied') + (e.includes(' | ') ? ' (' + e.split(' | ').slice(1).join(' | ') + ')' : '');
   if (/NEEDS_SCOPE/.test(e)) return t('needsWriteAccess');
   if (/invalid_scope/.test(e)) return t('errInvalidScope');
   if (/SIGNIN_TIMEOUT/.test(e)) return t('signinTimeout');
   if (/SIGNIN_STATE_MISMATCH/.test(e)) return t('errSigninState');
+  if (/SIGNIN_ALREADY_OPEN|only one web auth flow/i.test(e)) return t('signinAlreadyOpen');
+  // Hipcall did not come back: usually the redirect address is not registered for this extension's id.
+  if (/SIGNIN_ERROR/.test(e) && /could not be loaded|redirect/i.test(e)) return t('errRedirectNotRegistered', [account.redirectUri || '']);
+  if (/invalid_client|unauthorized_client|invalid client|client credentials/i.test(e)) return t('errClientNotPublic');
   if (/TOKEN_ERROR/.test(e)) return t('errToken', [detailOf(e, 'TOKEN_ERROR')]);
   if (/SIGNIN_ERROR/.test(e)) return t('errSignin', [detailOf(e, 'SIGNIN_ERROR')]);
   if (/NETWORK|Failed to fetch/.test(e)) return t('errNetwork');
@@ -769,7 +772,7 @@ async function initAccount() {
   await refreshAccount();
   // Sign-in finishes in the service worker (the popup may be closed meanwhile).
   chrome.storage.onChanged.addListener((changes, area) => {
-    if (area === 'local' && 'auth' in changes) refreshAccount();
+    if (area === 'session' && 'auth' in changes) refreshAccount();
     if (area === 'sync' && 'region' in changes) refreshAccount();
   });
 }
@@ -816,10 +819,19 @@ function signinButton(label = t('signIn'), onSuccess, before) {
   return btn;
 }
 
+/** The region can only be changed while signed out (the session belongs to one server). */
+function renderRegionLock() {
+  const locked = !!account.signedIn;
+  $('region').disabled = locked;
+  $('region').closest('.select-wrap').classList.toggle('locked', locked);
+  $('regionSub').textContent = t(locked ? 'regionLocked' : 'regionSub');
+}
+
 function renderAccount() {
+  renderRegionLock();
   const card = $('accountCard');
   card.innerHTML = '';
-  card.className = 'card account';
+  card.className = 'set-row account';
 
   if (!account.signedIn) {
     card.classList.add('signed-out');
@@ -865,6 +877,44 @@ function renderAccount() {
   }
 }
 
+/**
+ * A friendly empty / no-access / error state: icon, title, one line and an
+ * optional button. kind: 'empty' | 'locked' | 'error' | 'info'.
+ */
+function stateBox({ icon, title, text, kind = 'empty', action }) {
+  const box = document.createElement('div');
+  box.className = 'state-box ' + kind;
+  const i = document.createElement('div');
+  i.className = 'state-icon';
+  i.innerHTML = icon || ICON.dot;
+  box.appendChild(i);
+  if (title) { const h = document.createElement('b'); h.textContent = title; box.appendChild(h); }
+  if (text) { const p = document.createElement('p'); p.textContent = text; box.appendChild(p); }
+  if (action) box.appendChild(action);
+  return box;
+}
+
+function retryButton(onClick) {
+  const b = document.createElement('button');
+  b.type = 'button';
+  b.className = 'soft small';
+  b.textContent = t('retry');
+  b.addEventListener('click', onClick);
+  return b;
+}
+
+/** The right state box for a failed Hipcall request. */
+function errorState(error, retry) {
+  const e = String(error || '');
+  if (/FORBIDDEN|NEEDS_SCOPE|lacks permissions/i.test(e)) {
+    return stateBox({ kind: 'locked', icon: ICON.lock, title: t('noAccessTitle'), text: t('noAccessText') });
+  }
+  if (/NETWORK|Failed to fetch/i.test(e)) {
+    return stateBox({ kind: 'error', icon: ICON.cloudOff, title: t('offlineTitle'), text: t('errNetwork'), action: retry && retryButton(retry) });
+  }
+  return stateBox({ kind: 'error', icon: ICON.cloudOff, title: t('errorTitle'), text: errorText(e), action: retry && retryButton(retry) });
+}
+
 function errLine(error) {
   const d = document.createElement('div');
   d.className = 'err';
@@ -906,9 +956,9 @@ async function runFind() {
   $('findBtn').disabled = false;
 
   if (!res.ok) {
-    status.textContent = errorText(res.error);
-    status.classList.add('is-error');
-    if (/SIGNED_OUT/.test(res.error)) refreshAccount();
+    status.textContent = '';
+    if (/SIGNED_OUT/.test(res.error)) { refreshAccount(); return; }
+    box.appendChild(errorState(res.error, runFind));
     return;
   }
 
@@ -942,10 +992,7 @@ function renderFindResults(data, at) {
     (at ? ' ' + t('findSavedAt', [relativeTime(new Date(at).toISOString())]) : '');
   const siteKnown = companies.some((c) => c.matchedBy.includes('website'));
   if (!contacts.length && !companies.length) {
-    const nf = document.createElement('div');
-    nf.className = 'not-found';
-    nf.textContent = t('findNothing');
-    box.appendChild(nf);
+    box.appendChild(stateBox({ icon: ICON.searchOff, title: t('notFoundTitle'), text: t('findNothing') }));
     box.appendChild(addCompanyAction(false));
     return;
   }
@@ -965,6 +1012,23 @@ function renderFindResults(data, at) {
   if (!companies.length) box.appendChild(addCompanyAction(siteKnown));
 }
 
+// New companies are created in the Hipcall portal for now. The in-extension
+// form (openCompanyForm) is kept; set to false to use it again.
+const ADD_COMPANY_IN_PORTAL = true;
+
+/** Portal page for a new company, on the account region's server (.com.tr / .com). */
+async function newCompanyUrl() {
+  const { region } = await HC_CONFIG.getSettings();
+  const base = HC_CONFIG.region(region).apiBase || HC_CONFIG.SERVERS.tr.apiBase;
+  return `${base}/portal/contact-center/companies/new/`;
+}
+
+async function addCompany() {
+  if (!ADD_COMPANY_IN_PORTAL) { openCompanyForm(); return; }
+  chrome.tabs.create({ url: await newCompanyUrl() });
+  window.close();
+}
+
 /** "Add as a company" under the FIND results (soft when the site is already known). */
 function addCompanyAction(siteKnown) {
   const row = document.createElement('div');
@@ -972,8 +1036,10 @@ function addCompanyAction(siteKnown) {
   const btn = document.createElement('button');
   btn.className = siteKnown ? 'soft' : 'primary';
   btn.id = 'addCompanyBtn';
-  btn.textContent = siteKnown ? t('addCompanyAnyway') : t('addCompany');
-  btn.addEventListener('click', openCompanyForm);
+  btn.innerHTML = ICON.open;
+  btn.append(' ' + (siteKnown ? t('addCompanyAnyway') : t('addCompany')));
+  btn.title = t('addCompanyPortalHint');
+  btn.addEventListener('click', addCompany);
   row.appendChild(btn);
   return row;
 }
@@ -1095,7 +1161,9 @@ function renderActivitiesGate() {
   $('activitiesList').innerHTML = '';
   gate.innerHTML = '';
   gate.className = 'signin-only';
-  if (account.available) gate.appendChild(signinButton());
+  if (account.available) {
+    gate.appendChild(stateBox({ kind: 'info', icon: ICON.clock, title: t('activitiesTitle'), text: t('actIntro'), action: signinButton() }));
+  }
 }
 
 async function loadActivities(reset, more = false) {
@@ -1103,15 +1171,18 @@ async function loadActivities(reset, more = false) {
   if (activitiesLoaded && !reset && !more) return;
   if (reset) { activitiesCursor = null; $('activitiesList').innerHTML = ''; }
   activitiesLoading = true;
-  $('activitiesStatus').classList.remove('is-error');
-  $('activitiesStatus').textContent = t('loading');
+  const st = $('activitiesStatus');
+  st.classList.remove('is-error');
+  st.innerHTML = '';
+  if (!more) st.appendChild(loadingRows());
+  else st.textContent = t('loading');
   const res = await bg('crmActivities', { cursor: more ? activitiesCursor : undefined, limit: 20 });
   activitiesLoading = false;
 
+  st.innerHTML = '';
   if (!res.ok) {
-    $('activitiesStatus').classList.add('is-error');
-    $('activitiesStatus').textContent = errorText(res.error);
-    if (/SIGNED_OUT/.test(res.error)) refreshAccount();
+    if (/SIGNED_OUT/.test(res.error)) { refreshAccount(); return; }
+    st.appendChild(errorState(res.error, () => loadActivities(true)));
     return;
   }
   activitiesLoaded = true;
@@ -1119,7 +1190,23 @@ async function loadActivities(reset, more = false) {
   $('activitiesMore').hidden = !activitiesCursor;
   const list = $('activitiesList');
   res.data.items.forEach((a) => list.appendChild(activityRow(a)));
-  $('activitiesStatus').textContent = list.children.length ? '' : t('activitiesEmpty');
+  if (!list.children.length) {
+    st.appendChild(stateBox({ icon: ICON.clock, title: t('activitiesEmpty'), text: t('actEmptyText') }));
+  }
+}
+
+/** Grey placeholder rows while the list loads. */
+function loadingRows(n = 4) {
+  const wrap = document.createElement('div');
+  wrap.className = 'skeleton';
+  wrap.setAttribute('aria-label', t('loading'));
+  for (let i = 0; i < n; i++) {
+    const row = document.createElement('div');
+    row.className = 'sk-row';
+    row.innerHTML = '<span class="sk-dot"></span><span class="sk-lines"><span></span><span></span></span>';
+    wrap.appendChild(row);
+  }
+  return wrap;
 }
 
 function activityTitle(a) {
@@ -1826,10 +1913,14 @@ async function saveCompany() {
 // person or company on screen: its contact info, its company, and whether
 // Hipcall already knows them.
 
+// The company-page view is switched off for now (company pages get the normal
+// Discover view); set to true to bring it back — the code below is kept.
+const LINKEDIN_COMPANY_VIEW = false;
+
 function linkedinKind(u) {
   if (!u || !/(^|\.)linkedin\.com$/i.test(u.hostname)) return null;
   if (/^\/in\/[^/]+/.test(u.pathname)) return 'person';
-  if (/^\/(company|school|showcase)\/[^/]+/.test(u.pathname)) return 'company';
+  if (LINKEDIN_COMPANY_VIEW && /^\/(company|school|showcase)\/[^/]+/.test(u.pathname)) return 'company';
   return null;
 }
 
@@ -1915,7 +2006,7 @@ async function collectLinkedIn(opts) {
           .replace(/\.\s*(Deneyim.*|Click to skip.*|Go to .*|Skip to .*)$/i, '');
         company = { name: cleanCo(lines(first)[0] || label || (first.querySelector('img[alt]') || {}).alt) };
         const a = first.closest('a[href*="/company/"]') || first.querySelector('a[href*="/company/"]');
-        if (a) company.url = a.href;
+        if (a && /^https:\/\/([a-z0-9-]+\.)?linkedin\.com\//i.test(a.href)) company.url = a.href;
       }
     }
     if (!company || !company.name) {
@@ -2259,7 +2350,18 @@ function el(tag, cls, text) {
   return e;
 }
 
+/** Only http(s) links read from web pages are opened (never javascript:, data:, …). */
+function safeHttpUrl(value) {
+  try {
+    const u = new URL(value);
+    return u.protocol === 'https:' || u.protocol === 'http:' ? u.href : null;
+  } catch (e) {
+    return null;
+  }
+}
+
 function infoRow(icon, text, href) {
+  href = href && safeHttpUrl(href);
   const row = el('div', 'li-row');
   const i = el('span', 'li-ico');
   i.innerHTML = icon;
@@ -2323,14 +2425,9 @@ function renderLinkedin() {
     list.appendChild(itemRow(p.number + (p.label ? ` · ${p.label}` : ''), 'num', p.number, btn));
   });
   (d.kind === 'person' && d.contact ? d.contact.emails : []).forEach((m) => {
-    const a = el('a', 'round light');
-    a.href = 'mailto:' + m;
-    a.target = '_blank';
-    a.title = t('writeEmail', [m]);
-    a.innerHTML = ICON.mail;
-    list.appendChild(itemRow(m, 'mail', m, a));
+    list.appendChild(itemRow(m, 'mail', m, null));
   });
-  (d.kind === 'person' && d.contact ? d.contact.websites : []).forEach((w) => {
+  (d.kind === 'person' && d.contact ? d.contact.websites : []).filter((w) => safeHttpUrl(w.url)).forEach((w) => {
     const a = el('a', 'round light');
     a.href = w.url;
     a.target = '_blank';
@@ -2439,7 +2536,7 @@ function renderLinkedinHipcall() {
   hc.classList.remove('signed-out');
   const r = linkedinHipcall;
   if (!r || r.loading) { hc.appendChild(el('p', 'muted', t('findSearching'))); return; }
-  if (r.error) { hc.appendChild(el('p', 'is-error', errorText(r.error))); return; }
+  if (r.error) { hc.appendChild(errorState(r.error, lookupLinkedin)); return; }
 
   const wrap = el('div', 'records');
   if (d.kind === 'person') {
@@ -2458,10 +2555,17 @@ function renderLinkedinHipcall() {
       if (d.company.url) {
         const go = el('button', 'soft wide', t('liOpenCompanyPage', [d.company.name]));
         go.type = 'button';
-        go.addEventListener('click', () => { chrome.tabs.update(activeTab.id, { url: d.company.url }); window.close(); });
+        go.addEventListener('click', () => { const url = safeHttpUrl(d.company.url); if (url) chrome.tabs.update(activeTab.id, { url }); window.close(); });
         wrap.appendChild(go);
-        wrap.appendChild(el('p', 'muted small', t('liOpenCompanyHint')));
       }
+      const add = el('button', 'primary wide');
+      add.type = 'button';
+      add.id = 'addCompanyBtn';
+      add.innerHTML = ICON.open;
+      add.append(' ' + t('addCompany'));
+      add.title = t('addCompanyPortalHint');
+      add.addEventListener('click', addCompany);
+      wrap.appendChild(add);
     }
   } else {
     if (r.companies.length) {
@@ -2479,7 +2583,7 @@ function renderLinkedinHipcall() {
       const add = el('button', 'primary wide', t('addCompany'));
       add.type = 'button';
       add.id = 'addCompanyBtn';
-      add.addEventListener('click', openCompanyFromLinkedin);
+      add.addEventListener('click', ADD_COMPANY_IN_PORTAL ? addCompany : openCompanyFromLinkedin);
       wrap.appendChild(add);
     }
   }

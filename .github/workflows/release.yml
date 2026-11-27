@@ -41,6 +41,9 @@ jobs:
 
       - name: Package
         id: package
+        env:
+          HC_OAUTH_CLIENT_TR: ${{ vars.HC_OAUTH_CLIENT_TR }}
+          HC_OAUTH_CLIENT_GLOBAL: ${{ vars.HC_OAUTH_CLIENT_GLOBAL }}
         run: echo "zip=$(scripts/package.sh)" >> "$GITHUB_OUTPUT"
 
       - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2

@@ -383,7 +383,7 @@
     "message": "Searched $1 numbers, $2 e-mails and the site $3."
   },
   "findNothing": {
-    "message": "No matching contact or company in Hipcall."
+    "message": "No contact or company matches this page’s numbers, e-mails or website."
   },
   "findCompanies": {
     "message": "Companies ($1)"
@@ -413,7 +413,7 @@
     "message": "Sign in with your Hipcall account to see your activities."
   },
   "activitiesEmpty": {
-    "message": "No activities yet."
+    "message": "No activities yet"
   },
   "activity": {
     "message": "Activity"
@@ -762,5 +762,54 @@
   },
   "findSavedAt": {
     "message": "(last search: $1 — press Find to refresh)"
+  },
+  "settingsGeneral": {
+    "message": "General"
+  },
+  "showOnAllPages": {
+    "message": "Show on every page of this site"
+  },
+  "pageListTitle": {
+    "message": "Page list"
+  },
+  "addCompanyPortalHint": {
+    "message": "Opens the new company page in Hipcall"
+  },
+  "errRedirectNotRegistered": {
+    "message": "The Hipcall sign-in did not return to the extension. This address may not be registered in Hipcall: $1"
+  },
+  "errClientNotPublic": {
+    "message": "Hipcall asks for a client secret for this app. The extension's client must be set up as a public client (PKCE, no secret) in Hipcall."
+  },
+  "signinAlreadyOpen": {
+    "message": "The sign-in window is already open and was brought to the front. Continue there, or close it and try again."
+  },
+  "actIntro": {
+    "message": "See your latest calls, notes and other activities in Hipcall here."
+  },
+  "actEmptyText": {
+    "message": "They will show up here when you make calls or add notes in Hipcall."
+  },
+  "noAccessTitle": {
+    "message": "You do not have access to this"
+  },
+  "noAccessText": {
+    "message": "Your Hipcall role does not allow you to see this. You can ask your Hipcall administrator for access."
+  },
+  "offlineTitle": {
+    "message": "Could not connect"
+  },
+  "errorTitle": {
+    "message": "Something went wrong"
+  },
+  "retry": {
+    "message": "Try again"
+  },
+  "notFoundTitle": {
+    "message": "Not in Hipcall"
+  },
+  "regionLocked": {
+    "message": "Sign out first to change the region.",
+    "description": ""
   }
 }

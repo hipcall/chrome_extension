@@ -413,7 +413,7 @@
     "message": "Connectez-vous avec votre compte Hipcall pour voir vos activités."
   },
   "activitiesEmpty": {
-    "message": "Aucune activité pour le moment."
+    "message": "Aucune activité pour le moment"
   },
   "activity": {
     "message": "Activité"
@@ -762,5 +762,54 @@
   },
   "findSavedAt": {
     "message": "(dernière recherche : $1 ; cliquez sur Rechercher pour actualiser)"
+  },
+  "settingsGeneral": {
+    "message": "Général"
+  },
+  "showOnAllPages": {
+    "message": "Afficher sur toutes les pages de ce site"
+  },
+  "pageListTitle": {
+    "message": "Liste des pages"
+  },
+  "addCompanyPortalHint": {
+    "message": "Ouvre la page de nouvelle entreprise dans Hipcall"
+  },
+  "errRedirectNotRegistered": {
+    "message": "La connexion Hipcall n’est pas revenue à l’extension. Cette adresse n’est peut-être pas enregistrée dans Hipcall : $1"
+  },
+  "errClientNotPublic": {
+    "message": "Hipcall demande un secret client pour cette application. Le client de l’extension doit être configuré dans Hipcall comme client public (PKCE, sans secret)."
+  },
+  "signinAlreadyOpen": {
+    "message": "La fenêtre de connexion est déjà ouverte et a été mise au premier plan. Continuez-y, ou fermez-la et réessayez."
+  },
+  "actIntro": {
+    "message": "Retrouvez ici vos derniers appels, notes et autres activités dans Hipcall."
+  },
+  "actEmptyText": {
+    "message": "Elles apparaîtront ici dès que vous passerez des appels ou ajouterez des notes dans Hipcall."
+  },
+  "noAccessTitle": {
+    "message": "Vous n’avez pas accès à cette section"
+  },
+  "noAccessText": {
+    "message": "Votre rôle Hipcall ne vous permet pas de voir ceci. Vous pouvez demander l’accès à votre administrateur Hipcall."
+  },
+  "offlineTitle": {
+    "message": "Connexion impossible"
+  },
+  "errorTitle": {
+    "message": "Un problème est survenu"
+  },
+  "retry": {
+    "message": "Réessayer"
+  },
+  "notFoundTitle": {
+    "message": "Absent de Hipcall"
+  },
+  "regionLocked": {
+    "message": "Déconnectez-vous d’abord pour changer de région.",
+    "description": ""
   }
 }

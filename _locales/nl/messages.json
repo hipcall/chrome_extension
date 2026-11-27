@@ -413,7 +413,7 @@
     "message": "Log in met je Hipcall-account om je activiteiten te zien."
   },
   "activitiesEmpty": {
-    "message": "Nog geen activiteiten."
+    "message": "Nog geen activiteiten"
   },
   "activity": {
     "message": "Activiteit"
@@ -762,5 +762,54 @@
   },
   "findSavedAt": {
     "message": "(laatste zoekopdracht: $1 — klik op Zoeken om te vernieuwen)"
+  },
+  "settingsGeneral": {
+    "message": "Algemeen"
+  },
+  "showOnAllPages": {
+    "message": "Op alle pagina’s van deze site tonen"
+  },
+  "pageListTitle": {
+    "message": "Paginalijst"
+  },
+  "addCompanyPortalHint": {
+    "message": "Opent de pagina voor een nieuw bedrijf in Hipcall"
+  },
+  "errRedirectNotRegistered": {
+    "message": "De Hipcall-aanmelding is niet teruggekeerd naar de extensie. Dit adres is mogelijk niet geregistreerd in Hipcall: $1"
+  },
+  "errClientNotPublic": {
+    "message": "Hipcall vraagt om een client secret voor deze app. De client van de extensie moet in Hipcall als openbare client (PKCE, zonder secret) worden ingesteld."
+  },
+  "signinAlreadyOpen": {
+    "message": "Het aanmeldvenster is al geopend en naar voren gehaald. Ga daar verder of sluit het en probeer het opnieuw."
+  },
+  "actIntro": {
+    "message": "Bekijk hier je laatste gesprekken, notities en andere activiteiten in Hipcall."
+  },
+  "actEmptyText": {
+    "message": "Ze verschijnen hier zodra je in Hipcall belt of notities toevoegt."
+  },
+  "noAccessTitle": {
+    "message": "Je hebt hier geen toegang toe"
+  },
+  "noAccessText": {
+    "message": "Je Hipcall-rol staat niet toe dat je dit ziet. Vraag je Hipcall-beheerder om toegang."
+  },
+  "offlineTitle": {
+    "message": "Geen verbinding"
+  },
+  "errorTitle": {
+    "message": "Er ging iets mis"
+  },
+  "retry": {
+    "message": "Opnieuw proberen"
+  },
+  "notFoundTitle": {
+    "message": "Niet in Hipcall"
+  },
+  "regionLocked": {
+    "message": "Meld je eerst af om de regio te wijzigen.",
+    "description": ""
   }
 }

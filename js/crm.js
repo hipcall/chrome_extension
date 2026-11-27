@@ -102,10 +102,13 @@ var HC_CRM = (() => {
         }
       })] : [];
 
-    const { errors } = await pool([...phoneJobs, ...emailJobs, ...siteJobs], (job) => job());
+    const allJobs = [...phoneJobs, ...emailJobs, ...siteJobs];
+    const { errors } = await pool(allJobs, (job) => job());
     // Signed out / no permission → report instead of an empty "nothing found".
-    const fatal = errors.find((e) => /SIGNED_OUT|FORBIDDEN/.test(e.message));
+    const fatal = errors.find((e) => /SIGNED_OUT|FORBIDDEN|NEEDS_SCOPE/.test(e.message));
     if (fatal) throw fatal;
+    // Every request failed (offline, server down): that is not "nothing found".
+    if (allJobs.length && errors.length === allJobs.length) throw errors[0];
 
     const rank = (r) => r.matchedBy.length * 10 + (r.matchedBy.includes('phone') ? 2 : 0);
     return {
@@ -223,6 +226,7 @@ var HC_CRM = (() => {
     const { errors } = await pool(jobs, (job) => job());
     const fatal = errors.find((e) => /SIGNED_OUT|FORBIDDEN|NEEDS_SCOPE/.test(e.message));
     if (fatal) throw fatal;
+    if (jobs.length && errors.length === jobs.length) throw errors[0];
 
     const rank = (r) => r.matchedBy.length * 10 + (r.matchedBy.includes('linkedin') ? 5 : 0) + (r.matchedBy.includes('website') ? 3 : 0);
     return {

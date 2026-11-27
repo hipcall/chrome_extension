@@ -57,18 +57,24 @@ var HC_CONFIG = (() => {
    * OAuth 2.1 sign-in (authorization code + PKCE, public client: no secret).
    * Endpoints come from GET /.well-known/oauth-authorization-server.
    *
-   * redirectUri must be registered for the client in Hipcall exactly as written.
-   * The extension never loads it: the sign-in window is closed and the request
-   * blocked as soon as the browser is about to open it, and the code is read
-   * from the URL. TEMPORARY: ngrok address, will change.
-   * clientId null = sign-in not available for that server yet.
+   * Redirect: https://<extension-id>.chromiumapp.org/<server>/ (tr or global),
+   * from chrome.identity.getRedirectURL(); it must be registered for the client
+   * in Hipcall. Only this extension can receive that address.
+   * Public clients (PKCE, no client secret). Never put a client secret in the
+   * extension.
+   * The client ids are not kept in the repository: they come from
+   * js/oauth_clients.js (git-ignored), which scripts/package.sh writes from
+   * the HC_OAUTH_CLIENT_TR / HC_OAUTH_CLIENT_GLOBAL GitHub variables. For
+   * development copy js/oauth_clients.example.js to js/oauth_clients.js.
+   * No id for a server = sign-in not available there.
    */
+  const LOADED_CLIENTS = (typeof HC_OAUTH_CLIENTS === 'object' && HC_OAUTH_CLIENTS) || {};
+  const clientId = (v) => (typeof v === 'string' && /^[A-Za-z0-9_-]{8,200}$/.test(v) ? v : null);
   const OAUTH = {
-    redirectUri: 'https://envelope-footrest-flyable.ngrok-free.dev/callback',
     scope: 'profile email offline_access contacts:read contacts:write',
     clients: {
-      tr: 'bKK2FNa4gTpzqtXaxn2q-Lx3HJgqNME5up4hiW_POKs',
-      global: null
+      tr: clientId(LOADED_CLIENTS.tr),         // use.hipcall.com.tr
+      global: clientId(LOADED_CLIENTS.global)  // use.hipcall.com
     }
   };
 

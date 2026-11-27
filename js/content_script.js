@@ -442,7 +442,7 @@
   }
 
   function processElements(root) {
-    if (root.nodeType !== Node.ELEMENT_NODE) return;
+    if (!root || root.nodeType !== Node.ELEMENT_NODE) return;
     const candidates = [root, ...root.querySelectorAll('*')].filter((el) =>
       !el.closest(SKIP_SELECTOR) && !el.closest(`[${MARK_ATTR}]`) && !hasIcon(el));
 
@@ -515,9 +515,12 @@
 
   function scan(root) {
     if (!root || !root.isConnected) return;
+    // Take the element first: wrapping a number replaces a text node, which
+    // then has no parent any more.
+    const el = root.nodeType === Node.TEXT_NODE ? root.parentElement : root;
     processTelLinks(root);
     collectTextNodes(root).forEach(processTextNode);
-    const el = root.nodeType === Node.TEXT_NODE ? root.parentElement : root;
+    if (!el || !el.isConnected) return;
     processElements(el);
     processSplitNumbers(el);
   }

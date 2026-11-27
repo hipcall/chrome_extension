@@ -2,6 +2,7 @@
   "name": "__MSG_extName__",
   "version": "2.2.0",
   "manifest_version": 3,
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAqJu0jBNsxWnd7pFqeICRK0q85nhP4wDITK/rovS8vQo+bc121nyE0kG5Xc6TZVVkVhpX3+lre9sb5EKlKGVczyZJRA+r28EICtlj6zlVOSFx9r6lye3k6BziW4sRHvfAaBHwmJEN4raoD9Gx5gVBoWMG1rD00an9SNHkVu5C8tyuBPTQ01ud20WXbqHlBiq744KGqtFwOspT1fKKHuwOXkIenYBUeHqnfdwknqj0yZJJfsEd2SAJcmHedVkNi/1r9Dm9oBsK13H1+qDidd6oOyeGQZ26IUpDg8+zhp9ZgUhQ+mSeXh43UBZL/GTEDhBncBuPvJkeXsB+DvJvBeOLJwIDAQAB",
   "description": "__MSG_extDescription__",
   "homepage_url": "https://www.hipcall.com/",
   "icons": {
@@ -54,7 +55,7 @@
     "tabs",
     "storage",
     "scripting",
-    "declarativeNetRequestWithHostAccess"
+    "identity"
   ],
   "host_permissions": [
     "http://*/*",

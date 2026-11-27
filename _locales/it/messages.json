@@ -413,7 +413,7 @@
     "message": "Accedi con il tuo account Hipcall per vedere le tue attività."
   },
   "activitiesEmpty": {
-    "message": "Ancora nessuna attività."
+    "message": "Ancora nessuna attività"
   },
   "activity": {
     "message": "Attività"
@@ -762,5 +762,54 @@
   },
   "findSavedAt": {
     "message": "(ultima ricerca: $1; premi Cerca per aggiornare)"
+  },
+  "settingsGeneral": {
+    "message": "Generale"
+  },
+  "showOnAllPages": {
+    "message": "Mostra in tutte le pagine di questo sito"
+  },
+  "pageListTitle": {
+    "message": "Elenco delle pagine"
+  },
+  "addCompanyPortalHint": {
+    "message": "Apre la pagina della nuova azienda in Hipcall"
+  },
+  "errRedirectNotRegistered": {
+    "message": "L’accesso a Hipcall non è tornato all’estensione. Questo indirizzo potrebbe non essere registrato in Hipcall: $1"
+  },
+  "errClientNotPublic": {
+    "message": "Hipcall richiede un client secret per questa app. Il client dell’estensione deve essere configurato in Hipcall come client pubblico (PKCE, senza secret)."
+  },
+  "signinAlreadyOpen": {
+    "message": "La finestra di accesso è già aperta ed è stata portata in primo piano. Continua lì oppure chiudila e riprova."
+  },
+  "actIntro": {
+    "message": "Qui vedi le tue ultime chiamate, note e altre attività in Hipcall."
+  },
+  "actEmptyText": {
+    "message": "Compariranno qui quando farai chiamate o aggiungerai note in Hipcall."
+  },
+  "noAccessTitle": {
+    "message": "Non hai accesso a questa sezione"
+  },
+  "noAccessText": {
+    "message": "Il tuo ruolo in Hipcall non ti consente di vedere queste informazioni. Puoi chiedere l’accesso al tuo amministratore Hipcall."
+  },
+  "offlineTitle": {
+    "message": "Impossibile connettersi"
+  },
+  "errorTitle": {
+    "message": "Si è verificato un problema"
+  },
+  "retry": {
+    "message": "Riprova"
+  },
+  "notFoundTitle": {
+    "message": "Non presente in Hipcall"
+  },
+  "regionLocked": {
+    "message": "Esci prima per cambiare la regione.",
+    "description": ""
   }
 }

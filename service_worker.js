@@ -18,6 +18,12 @@
  * window opens on `/dial?number=…`, which puts the number on the dialpad and
  * survives the sign-in redirect.
  */
+// OAuth client ids (generated at build time, git-ignored); without it sign-in is off.
+try {
+  importScripts('js/oauth_clients.js');
+} catch (e) {
+  console.warn('[Hipcall] js/oauth_clients.js missing: Hipcall sign-in is disabled.');
+}
 importScripts('js/config.js', 'js/i18n.js', 'js/phone.js', 'js/auth.js', 'js/crm.js');
 
 const t = (key, subs) => HC_I18N.t(key, subs);
@@ -275,14 +281,6 @@ async function openPopupWindow(url) {
   await setPopupWindowId(win.id);
   return { tabId: win.tabs[0].id, created: true };
 }
-
-// OAuth sign-in window: read the redirect, and notice when it is closed.
-chrome.webNavigation.onBeforeNavigate.addListener((details) => { HC_AUTH.onRedirect(details); });
-chrome.webNavigation.onErrorOccurred.addListener((details) => { HC_AUTH.onRedirect(details); });
-chrome.tabs.onUpdated.addListener((tabId, info, tab) => {
-  if (info.url) HC_AUTH.onRedirect({ frameId: 0, url: info.url, windowId: tab.windowId });
-});
-chrome.windows.onRemoved.addListener((windowId) => { HC_AUTH.onWindowClosed(windowId); });
 
 chrome.windows.onRemoved.addListener(async (windowId) => {
   if (windowId !== (await getPopupWindowId())) return;

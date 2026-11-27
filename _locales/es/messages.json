@@ -413,7 +413,7 @@
     "message": "Inicia sesión con tu cuenta de Hipcall para ver tus actividades."
   },
   "activitiesEmpty": {
-    "message": "Todavía no hay actividades."
+    "message": "Todavía no hay actividades"
   },
   "activity": {
     "message": "Actividad"
@@ -762,5 +762,54 @@
   },
   "findSavedAt": {
     "message": "(última búsqueda: $1; pulsa Buscar para actualizar)"
+  },
+  "settingsGeneral": {
+    "message": "General"
+  },
+  "showOnAllPages": {
+    "message": "Mostrar en todas las páginas de este sitio"
+  },
+  "pageListTitle": {
+    "message": "Lista de páginas"
+  },
+  "addCompanyPortalHint": {
+    "message": "Abre la página de nueva empresa en Hipcall"
+  },
+  "errRedirectNotRegistered": {
+    "message": "El inicio de sesión de Hipcall no volvió a la extensión. Puede que esta dirección no esté registrada en Hipcall: $1"
+  },
+  "errClientNotPublic": {
+    "message": "Hipcall pide un secreto de cliente para esta aplicación. El cliente de la extensión debe configurarse en Hipcall como cliente público (PKCE, sin secreto)."
+  },
+  "signinAlreadyOpen": {
+    "message": "La ventana de inicio de sesión ya está abierta y se ha traído al frente. Continúa allí o ciérrala y vuelve a intentarlo."
+  },
+  "actIntro": {
+    "message": "Consulta aquí tus últimas llamadas, notas y demás actividades en Hipcall."
+  },
+  "actEmptyText": {
+    "message": "Aparecerán aquí cuando hagas llamadas o añadas notas en Hipcall."
+  },
+  "noAccessTitle": {
+    "message": "No tienes acceso a esto"
+  },
+  "noAccessText": {
+    "message": "Tu rol en Hipcall no te permite ver esto. Puedes pedir acceso a tu administrador de Hipcall."
+  },
+  "offlineTitle": {
+    "message": "No se pudo conectar"
+  },
+  "errorTitle": {
+    "message": "Algo salió mal"
+  },
+  "retry": {
+    "message": "Reintentar"
+  },
+  "notFoundTitle": {
+    "message": "No está en Hipcall"
+  },
+  "regionLocked": {
+    "message": "Cierra sesión primero para cambiar la región.",
+    "description": ""
   }
 }

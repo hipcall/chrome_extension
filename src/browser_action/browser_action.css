@@ -481,3 +481,67 @@ header .logo { margin-right: auto; }
 .signin-only { display: flex; flex-direction: column; align-items: center; gap: 10px; padding: 28px 12px; text-align: center; }
 .signin-only .signin-btn { min-width: 200px; }
 .li-hipcall.signed-out { display: flex; justify-content: center; padding: 14px; }
+
+/* ---------- Settings: grouped cards with one setting per row ---------- */
+.settings .set-group { margin-bottom: 18px; }
+.settings .set-group h2 { margin: 0 0 8px; }
+.set-card { background: #fff; border: 1px solid var(--gray-200); border-radius: var(--radius); box-shadow: var(--shadow); overflow: hidden; }
+.set-card[hidden] { display: none; }
+.set-row { display: flex; align-items: center; gap: 12px; padding: 12px 14px; min-height: 48px; }
+.set-row + .set-row, .set-card > .set-more { border-top: 1px solid var(--gray-100); }
+label.set-row { cursor: pointer; }
+.set-label { flex: 1; min-width: 0; }
+.set-label b { display: block; font: 600 13px/1.35 var(--font-display); color: var(--gray-900); }
+.set-label small { display: block; margin-top: 2px; color: var(--gray-500); font-size: 11.5px; line-height: 1.4; }
+.select-wrap.compact { flex: 0 0 auto; width: 170px; }
+.select-wrap.compact select { padding-top: 7px; padding-bottom: 7px; box-shadow: none; border-radius: 10px; font-size: 12.5px; }
+.region-select.compact select { padding-left: 40px; }
+.region-select.compact .flag { left: 10px; width: 21px; height: 14px; }
+.set-row.account { padding: 12px 14px; }
+.set-row.account.signed-out { padding: 14px; }
+.set-more { padding: 0 14px; }
+.set-more summary { cursor: pointer; padding: 12px 0; color: var(--primary-600); font: 600 12.5px var(--font-display); }
+.set-more[open] { padding-bottom: 12px; }
+.set-more .list-title { margin-top: 0; }
+.settings .site-name { margin-bottom: 8px; }
+
+/* Buttons with an "opens in a new tab" icon */
+#addCompanyBtn { display: inline-flex; align-items: center; justify-content: center; gap: 6px; }
+#addCompanyBtn svg { width: 15px; height: 15px; fill: currentColor; flex: none; }
+
+
+/* ---------- Empty / no access / error states ---------- */
+.state-box {
+  display: flex; flex-direction: column; align-items: center; text-align: center; gap: 6px;
+  padding: 26px 18px; margin: 8px 0; background: #fff; border: 1px solid var(--gray-200);
+  border-radius: var(--radius); box-shadow: var(--shadow);
+}
+.state-box .state-icon {
+  width: 48px; height: 48px; border-radius: 50%; display: grid; place-items: center; margin-bottom: 4px;
+  background: var(--primary-50); color: var(--primary-600);
+}
+.state-box .state-icon svg { width: 24px; height: 24px; fill: currentColor; }
+.state-box b { font: 700 14px/1.3 var(--font-display); color: var(--gray-900); }
+.state-box p { margin: 0; max-width: 280px; color: var(--gray-500); font-size: 12.5px; line-height: 1.5; }
+.state-box > button { margin-top: 8px; }
+.state-box .signin-btn { min-width: 210px; }
+.state-box.locked .state-icon { background: #fff7e8; color: #b07400; }
+.state-box.error .state-icon { background: var(--danger-50); color: var(--danger-600); }
+.signin-only { padding: 12px 0; display: block; }
+.signin-only .state-box { margin: 0; padding: 32px 18px; }
+.find .state-box, .li-hipcall .state-box { box-shadow: none; background: var(--gray-50); border-style: dashed; padding: 18px 14px; }
+
+/* Loading placeholder rows */
+.skeleton { display: flex; flex-direction: column; gap: 10px; padding: 6px 0; }
+.sk-row { display: flex; gap: 10px; align-items: center; }
+.sk-dot { width: 30px; height: 30px; border-radius: 50%; flex: none; }
+.sk-lines { flex: 1; display: flex; flex-direction: column; gap: 6px; }
+.sk-lines span { height: 9px; border-radius: 5px; }
+.sk-lines span:last-child { width: 60%; }
+.sk-dot, .sk-lines span { background: linear-gradient(90deg, var(--gray-100), var(--gray-200), var(--gray-100)); background-size: 200% 100%; animation: sk 1.2s ease-in-out infinite; }
+@keyframes sk { from { background-position: 100% 0; } to { background-position: -100% 0; } }
+@media (prefers-reduced-motion: reduce) { .sk-dot, .sk-lines span { animation: none; } }
+
+/* Region locked while signed in */
+.select-wrap.locked select { cursor: not-allowed; opacity: .6; background-color: var(--bg-soft, #f3f5f8); }
+.select-wrap.locked::after { opacity: .35; }

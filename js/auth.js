@@ -4,22 +4,26 @@
  * messages, so tokens never live in a page.
  *
  * Flow:
- *   1. login(): random code_verifier + state, S256 code_challenge; a small
- *      window opens /oauth/authorize on the region's server.
- *   2. When that window is about to open redirect_uri, the navigation is read
- *      (code + state) and blocked (declarativeNetRequest), the window closes.
+ *   1. login(): random code_verifier + state, S256 code_challenge; Chrome's
+ *      sign-in window (chrome.identity.launchWebAuthFlow) opens /oauth/authorize
+ *      on the region's server.
+ *   2. Hipcall redirects to https://<extension-id>.chromiumapp.org/<tr|global>;
+ *      Chrome catches it and returns the URL (code + state).
  *   3. The code is exchanged at /oauth/token with the code_verifier (public
- *      client, no secret). Access/refresh tokens go to chrome.storage.local.
+ *      client, no secret).
  *   4. api() adds the Bearer token and refreshes it when it expires.
+ *
+ * Token storage: chrome.storage.session only — kept in memory, never written
+ * to disk, and readable only by the extension's own pages and service worker
+ * (not by content scripts or websites). Closing the browser ends the session.
+ * The client_id is public by design (it is visible in the sign-in URL);
+ * security rests on the registered redirect_uri and PKCE, not on hiding it.
  */
 // eslint-disable-next-line no-var
 var HC_AUTH = (() => {
   'use strict';
 
   const STORE_KEY = 'auth';          // { server, accessToken, refreshToken, expiresAt, scope, user }
-  const PENDING_KEY = 'authPending'; // { state, verifier, server, windowId } (session only)
-  const BLOCK_RULE_ID = 4711;
-  const LOGIN_TIMEOUT_MS = 10 * 60 * 1000;
 
   /* ---------------- PKCE helpers ---------------- */
 
@@ -39,14 +43,19 @@ var HC_AUTH = (() => {
 
   /* ---------------- State ---------------- */
 
+  // Session storage: memory only, trusted contexts only (set explicitly, it is
+  // also Chrome's default). Earlier builds kept tokens on disk: remove them.
+  chrome.storage.session.setAccessLevel({ accessLevel: 'TRUSTED_CONTEXTS' }).catch(() => {});
+  chrome.storage.local.remove(STORE_KEY).catch(() => {});
+
   async function getAuth() {
-    const { [STORE_KEY]: auth } = await chrome.storage.local.get(STORE_KEY);
+    const { [STORE_KEY]: auth } = await chrome.storage.session.get(STORE_KEY);
     return auth || null;
   }
 
   async function setAuth(auth) {
-    if (auth) await chrome.storage.local.set({ [STORE_KEY]: auth });
-    else await chrome.storage.local.remove(STORE_KEY);
+    if (auth) await chrome.storage.session.set({ [STORE_KEY]: auth });
+    else await chrome.storage.session.remove(STORE_KEY);
   }
 
   async function serverFor(regionId) {
@@ -66,6 +75,8 @@ var HC_AUTH = (() => {
       available: !!server.clientId,
       signedIn: !!(auth && auth.server === server.id && auth.accessToken),
       user: auth && auth.server === server.id ? auth.user || null : null,
+      // The address Hipcall must have registered for this client (shown on errors).
+      redirectUri: server.clientId ? chrome.identity.getRedirectURL(server.id) : '',
       // Only a hint: the API decides (a missing scope comes back as NEEDS_SCOPE).
       canWrite: !!(auth && auth.server === server.id && scopeHas(auth, 'contacts:write')),
       // Why the last sign-in failed (shown even if the popup was closed meanwhile).
@@ -75,20 +86,88 @@ var HC_AUTH = (() => {
 
   /* ---------------- Sign-in ---------------- */
 
-  let pendingResolve = null;
   const ERROR_KEY = 'authError';
 
+  // Chrome allows one sign-in window at a time: a second click (e.g. after the
+  // popup was closed and reopened) brings the open window to the front instead.
+  let loginRunning = null;
+
+  /** Focuses an open Hipcall sign-in window, if there is one. */
+  async function focusSigninWindow() {
+    const wins = await chrome.windows.getAll({ populate: true, windowTypes: ['popup'] }).catch(() => []);
+    const win = wins.find((w) => (w.tabs || []).some((t) => /\/oauth\/(authorize|login)|\/portal\/oauth/.test(t.pendingUrl || t.url || '')));
+    if (!win) return false;
+    await chrome.windows.update(win.id, { focused: true, state: 'normal' }).catch(() => {});
+    return true;
+  }
+
   /** Sign-in; the outcome is also kept for a popup opened later. */
-  async function login() {
+  function login() {
+    if (loginRunning) {
+      focusSigninWindow();
+      return loginRunning;
+    }
+    loginRunning = runLogin().finally(() => { loginRunning = null; });
+    return loginRunning;
+  }
+
+  async function runLogin() {
     try {
       const result = await startLogin();
       await chrome.storage.session.remove(ERROR_KEY);
       return result;
     } catch (e) {
       const code = String((e && e.message) || e);
-      if (code !== 'SIGNIN_CANCELLED') await chrome.storage.session.set({ [ERROR_KEY]: code });
+      if (code !== 'SIGNIN_CANCELLED' && code !== 'SIGNIN_ALREADY_OPEN') await chrome.storage.session.set({ [ERROR_KEY]: code });
       throw e;
     }
+  }
+
+  /**
+   * Sign-in window: chrome.identity.launchWebAuthFlow. Chrome itself catches
+   * the redirect to https://<extension-id>.chromiumapp.org/<server>/ — an
+   * address only this extension can receive — and hands us the final URL.
+   * The page at that address is never loaded.
+   */
+  function redirectUri(serverId) {
+    return chrome.identity.getRedirectURL(serverId);
+  }
+
+  /**
+   * Chrome opens the sign-in window at its own (often full-screen) size and
+   * launchWebAuthFlow has no size option. While signing in, a new popup window
+   * showing this server's /oauth/authorize page is resized to a compact
+   * window centred on the current one, like the sign-in page itself.
+   */
+  const SIGNIN_WINDOW = { width: 480, height: 720 };
+
+  function sizeSigninWindow(apiBase) {
+    const onCreated = async (win) => {
+      if (win.type !== 'popup') return;
+      try {
+        // The tab's URL may not be set yet right after the window is created.
+        let url = '';
+        for (let i = 0; i < 20 && !url; i++) {
+          const [tab] = await chrome.tabs.query({ windowId: win.id });
+          url = (tab && (tab.pendingUrl || tab.url)) || '';
+          if (!url) await new Promise((r) => setTimeout(r, 50));
+        }
+        if (!url.startsWith(apiBase + '/oauth/authorize')) return;
+        const ref = await chrome.windows.getLastFocused({ windowTypes: ['normal'] }).catch(() => null);
+        const box = { ...SIGNIN_WINDOW, state: 'normal' };
+        if (ref && ref.width && ref.height) {
+          box.height = Math.min(box.height, ref.height);
+          box.left = Math.max(0, Math.round(ref.left + (ref.width - box.width) / 2));
+          box.top = Math.max(0, Math.round(ref.top + (ref.height - box.height) / 2));
+        }
+        if (win.state !== 'normal') await chrome.windows.update(win.id, { state: 'normal' });
+        await chrome.windows.update(win.id, box);
+      } catch (e) {
+        /* the window keeps Chrome's size */
+      }
+    };
+    chrome.windows.onCreated.addListener(onCreated);
+    return () => chrome.windows.onCreated.removeListener(onCreated);
   }
 
   async function startLogin() {
@@ -97,113 +176,59 @@ var HC_AUTH = (() => {
 
     const verifier = randomString(48);
     const state = randomString(16);
+    const redirect = redirectUri(server.id);
     const params = new URLSearchParams({
       response_type: 'code',
       client_id: server.clientId,
-      redirect_uri: HC_CONFIG.OAUTH.redirectUri,
+      redirect_uri: redirect,
       scope: HC_CONFIG.OAUTH.scope,
       state,
       code_challenge: await challengeFor(verifier),
       code_challenge_method: 'S256'
     });
 
-    await blockRedirect(true);
-    const win = await chrome.windows.create({
-      url: `${server.apiBase}/oauth/authorize?${params}`,
-      type: 'popup',
-      width: 520,
-      height: 720,
-      focused: true
-    });
-    await chrome.storage.session.set({ [PENDING_KEY]: { state, verifier, server: server.id, windowId: win.id } });
-
-    // Resolved by onRedirect() / onWindowClosed() below.
-    return new Promise((resolve, reject) => {
-      const timer = setTimeout(() => finish(new Error('SIGNIN_TIMEOUT')), LOGIN_TIMEOUT_MS);
-      pendingResolve = (err, value) => {
-        clearTimeout(timer);
-        pendingResolve = null;
-        if (err) reject(err); else resolve(value);
-      };
-    });
-  }
-
-  function finish(err, value) {
-    if (pendingResolve) pendingResolve(err, value);
-  }
-
-  /** Blocks the redirect_uri page itself: the extension only needs its URL. */
-  async function blockRedirect(on) {
-    const removeRuleIds = [BLOCK_RULE_ID];
-    const addRules = on ? [{
-      id: BLOCK_RULE_ID,
-      priority: 1,
-      action: { type: 'block' },
-      condition: { urlFilter: '|' + HC_CONFIG.OAUTH.redirectUri, resourceTypes: ['main_frame'] }
-    }] : [];
+    let finalUrl;
+    const stopSizing = sizeSigninWindow(server.apiBase);
     try {
-      await chrome.declarativeNetRequest.updateSessionRules({ removeRuleIds, addRules });
+      finalUrl = await chrome.identity.launchWebAuthFlow({
+        url: `${server.apiBase}/oauth/authorize?${params}`,
+        interactive: true
+      });
     } catch (e) {
-      console.warn('[Hipcall] could not (un)block the redirect page:', e);
-    }
-  }
-
-  /**
-   * The sign-in window reached redirect_uri. Called from several listeners
-   * (webNavigation before/error — Hipcall gets there with a server redirect,
-   * which onBeforeNavigate does not report — and tabs.onUpdated); the first
-   * one wins.
-   */
-  let handlingRedirect = false;
-  async function onRedirect(details) {
-    if (details.frameId !== 0 || typeof details.url !== 'string' ||
-        !details.url.startsWith(HC_CONFIG.OAUTH.redirectUri) || handlingRedirect) return;
-    handlingRedirect = true;
-    let pending;
-    try {
-      ({ [PENDING_KEY]: pending } = await chrome.storage.session.get(PENDING_KEY));
-      if (!pending || (details.windowId != null && details.windowId !== pending.windowId)) return;
-      await chrome.storage.session.remove(PENDING_KEY);
+      // A sign-in window left open from before (e.g. the service worker restarted).
+      if (/only one web auth flow/i.test(String(e && e.message))) {
+        await focusSigninWindow();
+        throw new Error('SIGNIN_ALREADY_OPEN');
+      }
+      // Closed by the user, or the server did not redirect back (e.g. the
+      // redirect address is not registered: Hipcall shows its own error page).
+      throw new Error(/did not approve|cancel|closed/i.test(String(e && e.message)) ? 'SIGNIN_CANCELLED' : 'SIGNIN_ERROR: ' + (e && e.message));
     } finally {
-      handlingRedirect = false;
+      stopSizing();
     }
 
-    await blockRedirect(false);
-    chrome.windows.remove(pending.windowId).catch(() => {});
-
-
-    const url = new URL(details.url);
+    const url = new URL(finalUrl);
     const error = url.searchParams.get('error');
     const code = url.searchParams.get('code');
-    if (error) return finish(new Error(error === 'access_denied' ? 'SIGNIN_DENIED' : 'SIGNIN_ERROR: ' + error));
-    if (!code || url.searchParams.get('state') !== pending.state) return finish(new Error('SIGNIN_STATE_MISMATCH'));
-
-    try {
-      const server = await serverFor();
-      const token = await tokenRequest(server, {
-        grant_type: 'authorization_code',
-        code,
-        redirect_uri: HC_CONFIG.OAUTH.redirectUri,
-        client_id: server.clientId,
-        code_verifier: pending.verifier
-      });
-      const auth = { server: server.id, ...tokenFields(token) };
-      await setAuth(auth);
-      auth.user = await loadUser().catch(() => null);
-      await setAuth(auth);
-      finish(null, await status());
-    } catch (e) {
-      finish(e);
+    if (error) {
+      // Keep Hipcall's own explanation (error_description) for the message.
+      const why = url.searchParams.get('error_description') || '';
+      throw new Error((error === 'access_denied' ? 'SIGNIN_DENIED' : 'SIGNIN_ERROR: ' + error) + (why ? ' | ' + why : ''));
     }
-  }
+    if (!code || url.searchParams.get('state') !== state) throw new Error('SIGNIN_STATE_MISMATCH');
 
-  /** The user closed the sign-in window. */
-  async function onWindowClosed(windowId) {
-    const { [PENDING_KEY]: pending } = await chrome.storage.session.get(PENDING_KEY);
-    if (!pending || pending.windowId !== windowId) return;
-    await chrome.storage.session.remove(PENDING_KEY);
-    await blockRedirect(false);
-    finish(new Error('SIGNIN_CANCELLED'));
+    const token = await tokenRequest(server, {
+      grant_type: 'authorization_code',
+      code,
+      redirect_uri: redirect,
+      client_id: server.clientId,
+      code_verifier: verifier
+    });
+    const auth = { server: server.id, ...tokenFields(token) };
+    await setAuth(auth);
+    auth.user = await loadUser().catch(() => null);
+    await setAuth(auth);
+    return status();
   }
 
   async function logout() {
@@ -365,5 +390,5 @@ var HC_AUTH = (() => {
     return granted.includes(scope) || granted.includes(scope.split(':')[0]);
   }
 
-  return { status, login, logout, api, currentUser, onRedirect, onWindowClosed, randomString, challengeFor };
+  return { status, login, logout, api, currentUser, randomString, challengeFor };
 })();

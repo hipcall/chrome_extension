@@ -413,7 +413,7 @@
     "message": "Melden Sie sich mit Ihrem Hipcall-Konto an, um Ihre Aktivitäten zu sehen."
   },
   "activitiesEmpty": {
-    "message": "Noch keine Aktivitäten."
+    "message": "Noch keine Aktivitäten"
   },
   "activity": {
     "message": "Aktivität"
@@ -762,5 +762,54 @@
   },
   "findSavedAt": {
     "message": "(letzte Suche: $1 – zum Aktualisieren auf Suchen klicken)"
+  },
+  "settingsGeneral": {
+    "message": "Allgemein"
+  },
+  "showOnAllPages": {
+    "message": "Auf allen Seiten dieser Website anzeigen"
+  },
+  "pageListTitle": {
+    "message": "Seitenliste"
+  },
+  "addCompanyPortalHint": {
+    "message": "Öffnet die Seite „Neue Firma“ in Hipcall"
+  },
+  "errRedirectNotRegistered": {
+    "message": "Die Hipcall-Anmeldung ist nicht zur Erweiterung zurückgekehrt. Diese Adresse ist in Hipcall möglicherweise nicht registriert: $1"
+  },
+  "errClientNotPublic": {
+    "message": "Hipcall verlangt für diese App ein Client-Secret. Der Client der Erweiterung muss in Hipcall als öffentlicher Client (PKCE, ohne Secret) eingerichtet sein."
+  },
+  "signinAlreadyOpen": {
+    "message": "Das Anmeldefenster ist bereits geöffnet und wurde in den Vordergrund geholt. Fahren Sie dort fort oder schließen Sie es und versuchen Sie es erneut."
+  },
+  "actIntro": {
+    "message": "Hier sehen Sie Ihre letzten Anrufe, Notizen und anderen Aktivitäten in Hipcall."
+  },
+  "actEmptyText": {
+    "message": "Sie erscheinen hier, sobald Sie in Hipcall telefonieren oder Notizen hinzufügen."
+  },
+  "noAccessTitle": {
+    "message": "Sie haben keinen Zugriff darauf"
+  },
+  "noAccessText": {
+    "message": "Ihre Hipcall-Rolle erlaubt Ihnen nicht, dies zu sehen. Bitten Sie Ihre Hipcall-Administration um Zugriff."
+  },
+  "offlineTitle": {
+    "message": "Keine Verbindung"
+  },
+  "errorTitle": {
+    "message": "Etwas ist schiefgelaufen"
+  },
+  "retry": {
+    "message": "Erneut versuchen"
+  },
+  "notFoundTitle": {
+    "message": "Nicht in Hipcall"
+  },
+  "regionLocked": {
+    "message": "Melden Sie sich zuerst ab, um die Region zu ändern.",
+    "description": ""
   }
 }
